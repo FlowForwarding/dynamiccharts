@@ -79,7 +79,7 @@
 ## Customization options
 
 ![alt text][Illustration4]
-[Illustration4]: https://raw.github.com/FlowForwarding/dynamiccharts/master/cuatomization.png "NCI customized chart" 
+[Illustration4]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/cuatomization.png "NCI customized chart" 
 
 ```ObjectiveC
     NCISimpleChartView *chart = [[NCISimpleChartView alloc]

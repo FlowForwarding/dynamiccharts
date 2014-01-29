@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   Simple, zoom, dynamic and charts with ranges for iOS
                    DESC
   s.license      = {:type => 'Apache'}
+  s.authors      = {'FlowForwarding' => 'idyl@tut.by'}
   s.homepage     = 'https://github.com/FlowForwarding/dynamiccharts'
   s.platform     = :ios
   s.ios.deployment_target = '6.0'
@@ -15,6 +16,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'git@github.com:FlowForwarding/dynamiccharts.git', :tag => '1.0.0'}
 
   s.source_files = 'NCIChart/**/*.{h,m}'
-  s.ios.framework = 'CoreFoundation'
 
 end

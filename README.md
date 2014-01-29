@@ -11,7 +11,7 @@
 ## Simple
 
 ![alt text][Illustration]
-[Illustration]: https://raw.github.com/FlowForwarding/tapestry/master/src/ui/mobile/ios/Tapestry/NCIChart/docs/simple.png "NCI simple chart"
+[Illustration]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/simple.png "NCI simple chart"
 
 ```ObjectiveC
 #import "NCISimpleChartView.h"
@@ -32,7 +32,7 @@
 ## Ranges
 
 ![alt text][Illustration2]
-[Illustration2]: https://raw.github.com/FlowForwarding/tapestry/master/src/ui/mobile/ios/Tapestry/NCIChart/docs/ranges.png "NCI chart"
+[Illustration2]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/ranges.png "NCI chart"
 
 ```ObjectiveC
 #import "NCIChartView.h"
@@ -50,7 +50,7 @@
 ## Zoom
 
 ![alt text][IllustrationZoom]
-[IllustrationZoom]: https://raw.github.com/FlowForwarding/tapestry/master/src/ui/mobile/ios/Tapestry/NCIChart/docs/zoom.gif 
+[IllustrationZoom]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/zoom.gif 
 
 ```ObjectiveC
     NCIZoomChartView *chart = [[NCIZoomChartView alloc] initWithFrame:CGRectMake(0, 0, 300, 400)];
@@ -64,7 +64,7 @@
 ## Several lines
 
 ![alt text][Illustration3]
-[Illustration3]: https://raw.github.com/FlowForwarding/tapestry/master/src/ui/mobile/ios/Tapestry/NCIChart/docs/several_lines.png "NCI selveral chart"
+[Illustration3]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/several_lines.png "NCI selveral chart"
 
 ```ObjectiveC
 #import "NCIChartView.h"
@@ -79,7 +79,7 @@
 ## Customization options
 
 ![alt text][Illustration4]
-[Illustration4]: https://raw.github.com/FlowForwarding/tapestry/master/src/ui/mobile/ios/Tapestry/NCIChart/docs/cuatomization.png "NCI customized chart" 
+[Illustration4]: https://raw.github.com/FlowForwarding/dynamiccharts/master/cuatomization.png "NCI customized chart" 
 
 ```ObjectiveC
     NCISimpleChartView *chart = [[NCISimpleChartView alloc]

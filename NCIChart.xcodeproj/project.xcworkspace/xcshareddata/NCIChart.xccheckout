@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>44BF23F0-5243-4C2D-9DBA-3C32822044A1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NCIChart</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EC1F2ABB-64F7-41AC-9815-26FD6C7B9E01</key>
+		<string>ssh://github.com/FlowForwarding/tapestry.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>src/ui/mobile/ios/Tapestry/NCIChart/NCIChart.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EC1F2ABB-64F7-41AC-9815-26FD6C7B9E01</key>
+		<string>../../../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/FlowForwarding/tapestry.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EC1F2ABB-64F7-41AC-9815-26FD6C7B9E01</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EC1F2ABB-64F7-41AC-9815-26FD6C7B9E01</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tapestry</string>
+		</dict>
+	</array>
+</dict>
+</plist>

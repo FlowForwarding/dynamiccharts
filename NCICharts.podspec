@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.ios.deployment_target = '6.0'
   s.requires_arc = true
-  s.source       = { :git => 'git@github.com:FlowForwarding/dynamiccharts.git'}
+  s.source       = { :git => 'git@github.com:FlowForwarding/dynamiccharts.git', :tag => '1.0.0'}
 
   s.source_files = 'NCIChart/**/*.{h,m}'
   s.ios.framework = 'CoreFoundation'

@@ -83,7 +83,7 @@
 }
 
 - (void)setMinRangeVal:(double)minRangeVal{
-    self.topChart.maxRangeVal = minRangeVal;
+    self.topChart.minRangeVal = minRangeVal;
 }
 
 - (void)setMaxRangeVal:(double)maxRangeVal{

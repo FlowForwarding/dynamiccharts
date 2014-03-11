@@ -9,7 +9,7 @@
 #import "NCISimpleGridView.h"
 
 @interface NCISimpleGridView(){
-    NSMutableArray *pointsArray;
+
 }
 
 @end
@@ -21,7 +21,6 @@
     self = [self initWithFrame:CGRectZero];
     if (self){
         self.graph = ncigraph;
-        pointsArray = [[NSMutableArray alloc] init];
         [self setBgColor];
     }
     return self;
@@ -105,7 +104,6 @@
     for (UIView *view in self.subviews){
         [view removeFromSuperview];
     }
-    [pointsArray removeAllObjects];
     NSMutableArray *paths = [[NSMutableArray alloc] init];
     
     long lastMoveInd = [firstLast[0] integerValue] - 1;

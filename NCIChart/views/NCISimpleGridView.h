@@ -13,5 +13,6 @@
 
 @property(nonatomic, strong) NCISimpleGraphView *graph;
 - (id)initWithGraph:(NCISimpleGraphView *) ncigraph;
+- (void)setBgColor;
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "NCIChartView.h"
+#import "NCIBarChartView.h"
 
 @interface ViewController (){
-    NCISimpleChartView *simpleChart;
+    NCIBarChartView *simpleChart;
     
     float horisontalIndent;
     float verticalIndent;
@@ -42,7 +42,7 @@
     
     
     
-    simpleChart = [[NCISimpleChartView alloc] initWithFrame:CGRectZero
+    simpleChart = [[NCIBarChartView alloc] initWithFrame:CGRectZero
                                                  andOptions:@{nciIsFill: @(NO),
                                                               nciLineColors : @[[UIColor greenColor]],
                                                               nciLineWidths : @[@(2)],
@@ -110,7 +110,7 @@
 - (void)generateDemoData{
     float halfYearPeriod = 60*60*24*30*6;
     float demoDatePeriod = halfYearPeriod;
-    float numOfPoints = 40;
+    float numOfPoints = 15;
     float step = demoDatePeriod/(numOfPoints - 1);
     int trendMiddle = 6;
     int trendStepCounter = 0;
@@ -124,11 +124,11 @@
         int value = trendMiddle + arc4random() % 5;
         //NSDate *date = [[NSDate date] dateByAddingTimeInterval: (-demoDatePeriod + step*ind)];
         double time = [[NSDate date] timeIntervalSince1970] - demoDatePeriod + step*ind;
-        if (trendStepCounter > 4 && trendStepCounter < 7){
-            [simpleChart addPoint:time val: @[[NSNull null]]];
-        } else {
+//        if (trendStepCounter > 4 && trendStepCounter < 7){
+//            [simpleChart addPoint:time val: @[[NSNull null]]];
+//        } else {
             [simpleChart addPoint:time val: @[@(value)]];
-        }
+       // }
     }
     
     

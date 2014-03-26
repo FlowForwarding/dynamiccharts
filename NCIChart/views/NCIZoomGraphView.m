@@ -82,7 +82,6 @@ static float startMaxRangeVal;
     ((NCIZoomChartView *)self.chart).maxRangeVal = newMax;
 
     [self setNeedsLayout];
-    [self.chart layoutSelectedPoint];
 
 }
 
@@ -117,7 +116,6 @@ static float startMaxRangeVal;
     self.grid.frame = CGRectMake(gridScroll.contentOffset.x, 0, self.gridWidth, self.gridHeigth);
     
     [self setNeedsLayout];
-    [self.chart layoutSelectedPoint];    
 }
 
 - (void)layoutSubviews{
@@ -144,6 +142,7 @@ static float startMaxRangeVal;
         timeOffest = 0;
     gridScroll.contentOffset = CGPointMake(timeOffest * stepX, 0);
     self.grid.frame = CGRectMake(timeOffest * stepX, 0, self.gridWidth, self.gridHeigth);
+    [self.chart layoutSelectedPoint];
 }
 
 - (void)redrawXLabels{

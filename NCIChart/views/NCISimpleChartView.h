@@ -21,7 +21,7 @@
 @property (nonatomic)bool nciUseDateFormatter;
 @property (nonatomic)bool nciShowPoints;
 @property (nonatomic)bool hasYLabels;
-@property (nonatomic)bool nciIsFill;
+@property (nonatomic)NSMutableArray* nciIsFill;
 @property (nonatomic)NSArray* nciLineWidths;
 @property (nonatomic, strong)NSMutableArray* nciLineColors;
 

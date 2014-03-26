@@ -36,7 +36,7 @@
     
     _nciGridTopMargin = 0;
     _hasYLabels = YES;
-    _nciIsFill = YES;
+    _nciIsFill = [[NSMutableArray alloc] init];
     _topBottomGridSpace = 10;
     _nciGridLeftMargin = 50;
     _nciLineWidths = @[@0.3];
@@ -78,7 +78,7 @@
     if (self){
         [self defaultSetup];
         if ([opts objectForKey:nciIsFill])
-            _nciIsFill = [[opts objectForKey:nciIsFill] boolValue];
+            _nciIsFill = [opts objectForKey:nciIsFill];
         
         for (NSString* key in @[nciLineColors, nciXLabelsFont, nciYLabelsFont,
                                 nciSelPointFont, nciBoundaryVertical, nciBoundaryHorizontal,

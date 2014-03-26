@@ -133,7 +133,7 @@
             };
             CGPoint pointP = [_graph pointByValueInGrid:@[points[0], val]];
             if ([val isKindOfClass:[NSNull class]] ){
-                if (lastMoveInd != (ind -1) && self.graph.chart.nciIsFill){
+                if (lastMoveInd != (ind -1) && [self fillSeries:i]){
                     [path addLineToPoint:CGPointMake( path.currentPoint.x, self.frame.size.height)];
                     [path moveToPoint: pointP];
                 }
@@ -142,7 +142,7 @@
                 if (self.graph.chart.nciShowPoints)
                     [self createPoint:pointP num:i];
                 if (lastMoveInd == (ind -1)){
-                    if (self.graph.chart.nciIsFill){
+                    if ([self fillSeries:i]){
                         [path moveToPoint: CGPointMake(pointP.x, self.frame.size.height)];
                     } else {
                         [path moveToPoint:pointP];
@@ -156,7 +156,7 @@
     for (int i= 0; i < paths.count; i++){
         UIBezierPath *path = paths[i];
         UIColor *color = [self getColor:i];
-        if (self.graph.chart.nciIsFill && !path.empty){
+        if ([self fillSeries:i] && !path.empty){
             [[color colorWithAlphaComponent:0.1] setFill];
             if (path.currentPoint.x == path.currentPoint.x)
                 [path addLineToPoint:CGPointMake( path.currentPoint.x, self.frame.size.height)];
@@ -166,6 +166,13 @@
         [color setStroke];
         [path stroke];
     }
+}
+
+- (bool)fillSeries:(int)seriesNum{
+    if (self.graph.chart.nciIsFill.count <= seriesNum){
+        [self.graph.chart.nciIsFill addObject:@YES];
+    }
+    return [self.graph.chart.nciIsFill[seriesNum] boolValue];
 }
 
 - (void)createPoint:(CGPoint )point num:(int)num{

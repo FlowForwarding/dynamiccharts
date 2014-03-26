@@ -71,7 +71,7 @@
     
     NCISimpleChartView *chart = [[NCISimpleChartView alloc]
                                  initWithFrame:CGRectMake(0, 0, 400, 250)
-                                 andOptions: @{nciIsFill: [@(NO)],
+                                 andOptions: @{nciIsFill: [@(NO), @(NO), @(NO)],
                                                nciSelPointSizes: @[@5, @10, @5]}];
                                                
 ```
@@ -84,7 +84,7 @@
 ```ObjectiveC
     NCISimpleChartView *chart = [[NCISimpleChartView alloc]
                                  initWithFrame:CGRectMake(50, 30, 400, 250)
-                                 andOptions: @{nciIsFill: [@(NO)],
+                                 andOptions: @{nciIsFill: [@(NO), @(NO), @(NO)],
                                                nciLineColors: @[[UIColor orangeColor], [NSNull null]],
                                                nciLineWidths: @[@2, [NSNull null]],
                                                nciHasSelection: @YES,
@@ -182,7 +182,4 @@
         }
     });
 ```    
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/FlowForwarding/dynamiccharts/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

@@ -183,7 +183,8 @@
 
 - (void)setNciHasSelection:(bool)hasSelection{
     if (hasSelection){
-        _nciGridTopMargin = 20;
+        if (_nciGridTopMargin == 0)
+            _nciGridTopMargin = 20;
         _selectedLabel.hidden = NO;
         [self.graph.grid addGestureRecognizer:gridTapped];
         [self setupSelection];

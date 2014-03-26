@@ -13,6 +13,8 @@
 
 @property(nonatomic, strong) NCISimpleGraphView *graph;
 - (id)initWithGraph:(NCISimpleGraphView *) ncigraph;
+
 - (void)setBgColor;
+- (UIColor *)getColor:(int) i;
 
 @end

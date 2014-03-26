@@ -11,11 +11,6 @@
 
 @implementation NCIBarGridView
 
-- (void)drawRect:(CGRect)rect{
-    [self setBgColor];
-    [self drawGraphLine:[self getFirstLast]];
-}
-
 - (NSArray *)getFirstLast{
     return @[@(0), @(self.graph.chart.chartData.count)];
 }
@@ -30,8 +25,8 @@
         for (int i = 0; i< ((NSArray *)points[1]).count; i++){
             id val = points[1][i];
             CGPoint pointP = [self.graph pointByValueInGrid:@[points[0], val]];
-            UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(pointP.x , selfHeight - pointP.y, 6, pointP.y)];
-            bar.backgroundColor = [UIColor redColor];
+            UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(pointP.x - 10, selfHeight - pointP.y, 20, pointP.y)];
+            bar.backgroundColor = [self getColor:i];
             [self addSubview:bar];
         }
     }

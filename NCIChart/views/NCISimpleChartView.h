@@ -46,6 +46,7 @@
 @property (nonatomic, copy) void (^nciTapGridAction)(double, double, float, float);
 //in persentage
 @property (nonatomic)float topBottomGridSpace;
+@property (nonatomic)float leftRightGridSpace;
 
 @property (nonatomic, strong) NCILine* nciBoundaryVertical;
 @property (nonatomic, strong) NCILine* nciBoundaryHorizontal;

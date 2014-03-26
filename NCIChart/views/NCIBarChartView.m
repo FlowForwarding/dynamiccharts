@@ -12,6 +12,7 @@
 @implementation NCIBarChartView
 
 - (void)addSubviews{
+    self.leftRightGridSpace = 5;
     self.graph = [[NCIBarGraphView alloc] initWithChart:self];
     [self addSubview:self.graph];
 }

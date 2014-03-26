@@ -26,8 +26,6 @@
     return self;
 }
 
-
-
 - (void)setBgColor{
     if (self.graph.chart.nciGridColor){
         self.backgroundColor = self.graph.chart.nciGridColor;
@@ -63,14 +61,14 @@
     [self drawGraphLine:[self getFirstLast]];
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    
-    [self setUpLine:currentContext line:self.graph.chart.nciGridHorizontal];
-    for (UILabel *yLabel in _graph.yAxisLabels){
-        CGContextMoveToPoint(currentContext, yLabel.frame.origin.x, yLabel.frame.origin.y + self.graph.yLabelShift);
-        CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + self.graph.yLabelShift);
-    }
-    
-    CGContextStrokePath(currentContext);
+    [self setHorizontalGrid:currentContext];
+    [self setVerticalGrid:currentContext];
+    [self setBoundaryVertical:currentContext];
+    [self setBoundaryHorizontal:currentContext];
+}
+
+//pragma draw grid
+- (void)setVerticalGrid:(CGContextRef) currentContext{
     [self setUpLine:currentContext line:self.graph.chart.nciGridVertical];
     for (UILabel *xLabel in _graph.xAxisLabels){
         CGContextMoveToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
@@ -79,23 +77,36 @@
                                 + self.graph.chart.nciXLabelsDistance/2, 0);
     }
     CGContextStrokePath(currentContext);
-    
+}
+
+- (void)setHorizontalGrid:(CGContextRef) currentContext{
+    [self setUpLine:currentContext line:self.graph.chart.nciGridHorizontal];
+    for (UILabel *yLabel in _graph.yAxisLabels){
+        CGContextMoveToPoint(currentContext, yLabel.frame.origin.x, yLabel.frame.origin.y + self.graph.yLabelShift);
+        CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + self.graph.yLabelShift);
+    }
+    CGContextStrokePath(currentContext);
+}
+
+- (void)setBoundaryVertical:(CGContextRef ) currentContext{
     if (self.graph.chart.nciBoundaryVertical){
         [self setUpLine:currentContext line:self.graph.chart.nciBoundaryVertical];
         CGContextMoveToPoint(currentContext, 0, 0);
         CGContextAddLineToPoint(currentContext, 0, self.frame.size.height);
-
+        CGContextStrokePath(currentContext);
     }
-    CGContextStrokePath(currentContext);
+}
+
+- (void)setBoundaryHorizontal:(CGContextRef ) currentContext{
     if (self.graph.chart.nciBoundaryHorizontal){
         [self setUpLine:currentContext line:self.graph.chart.nciBoundaryHorizontal];
         CGContextMoveToPoint(currentContext,0, self.frame.size.height);
         CGContextAddLineToPoint(currentContext,self.frame.size.width, self.frame.size.height);
+        CGContextStrokePath(currentContext);
     }
-    CGContextStrokePath(currentContext);
-    
 }
 
+//@pragma draw series
 - (NSArray *)getFirstLast{
     return @[@(0), @(self.graph.chart.chartData.count)];
 }
@@ -164,6 +175,7 @@
     [self addSubview:pointView];
 }
 
+//@pragma series properties
 - (float )lineWidth:(int) i{
     float returnWidth;
     if (self.graph.chart.nciLineWidths &&
@@ -175,7 +187,6 @@
     }
     return returnWidth;
 }
-
 
 - (UIColor *)getColor:(int) i{
     if (self.graph.chart.nciLineColors.count > i && ![self.graph.chart.nciLineColors[i] isKindOfClass:[NSNull class]]){

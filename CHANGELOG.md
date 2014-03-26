@@ -5,3 +5,11 @@
 = 1.0.1 (2014-01-30)
 
  * Range selector chart right range setter correction
+
+= 1.0.2 (2014-03-26)
+
+ * Update nciIsFill property form bool to array of bools to control if graph line is filled for each series
+ 
+ * Fixed issue with calculating Y axis max and min values for multiple lines zoom chart
+
+ * Fixed shifting from time to time selected points on chart during fast scrolling 

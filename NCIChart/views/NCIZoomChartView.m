@@ -27,54 +27,57 @@
     long index;
     for(index = 1; index < self.chartData.count; index++){
         NSArray *point = self.chartData[index];
-        if ([point[1][0] isKindOfClass:[NSNull class]]){
-            continue;
-        }
-        NSArray * prevPoint = self.chartData[index - 1];
-        if ([prevPoint[1][0] isKindOfClass:[NSNull class]]){
-            prevPoint = @[prevPoint[0], point[1]];
-        }
         
-        NSArray * nextPoint;
-        if (self.chartData.count != (index + 1)){
-            nextPoint = self.chartData[index + 1];
-            if ([nextPoint[1][0] isKindOfClass:[NSNull class]]){
-                nextPoint = @[nextPoint[0], point[1]];
+        for (int serisNum = 0; serisNum < ((NSArray *)point[1]).count; serisNum++){
+            if ([point[1][serisNum] isKindOfClass:[NSNull class]]){
+                continue;
             }
-        } else {
-            nextPoint = point;
-        }
-        
-        float curMax = [prevPoint[1][0] floatValue];
-        float curMin = [prevPoint[1][0] floatValue];
-        if ([point[1][0] floatValue] > [prevPoint[1][0] floatValue]){
-            curMax = [point[1][0] floatValue];
-        } else {
-            curMin= [point[1][0] floatValue];
-        }
-        if ( curMax < [nextPoint[1][0] floatValue]){
-            curMax = [nextPoint[1][0] floatValue];
-        }
-        if ( curMin > [nextPoint[1][0] floatValue]){
-            curMin = [nextPoint[1][0] floatValue];
-        }
-        
-        if ( _minRangeVal <= [point[0] doubleValue] &&
-            ( minYVal == MAXFLOAT || _maxRangeVal  >= [point[0] doubleValue])){
+            NSArray * prevPoint = self.chartData[index - 1];
+            if ([prevPoint[1][serisNum] isKindOfClass:[NSNull class]]){
+                prevPoint = @[prevPoint[serisNum], point[1]];
+            }
             
-            if (firstDataIndex > (index - 1)){
-                firstDataIndex = (index - 1);
+            NSArray * nextPoint;
+            if (self.chartData.count != (index + 1)){
+                nextPoint = self.chartData[index + 1];
+                if ([nextPoint[1][serisNum] isKindOfClass:[NSNull class]]){
+                    nextPoint = @[nextPoint[0], point[1]];
+                }
+            } else {
+                nextPoint = point;
             }
-            if (lastChartIndex < (index + 1)){
-                lastChartIndex = (index + 1);
+            
+            float curMax = [prevPoint[1][serisNum] floatValue];
+            float curMin = [prevPoint[1][serisNum] floatValue];
+            if ([point[1][serisNum] floatValue] > [prevPoint[1][serisNum] floatValue]){
+                curMax = [point[1][serisNum] floatValue];
+            } else {
+                curMin= [point[1][serisNum] floatValue];
             }
-            if (curMin < minYVal)
-                minYVal = curMin;
-            if (curMax > maxYVal)
-                maxYVal = curMax;
+            if ( curMax < [nextPoint[1][serisNum] floatValue]){
+                curMax = [nextPoint[1][serisNum] floatValue];
+            }
+            if ( curMin > [nextPoint[1][serisNum] floatValue]){
+                curMin = [nextPoint[1][serisNum] floatValue];
+            }
+            
+            if ( _minRangeVal <= [point[0] doubleValue] &&
+                ( minYVal == MAXFLOAT || _maxRangeVal  >= [point[0] doubleValue])){
+                
+                if (firstDataIndex > (index - 1)){
+                    firstDataIndex = (index - 1);
+                }
+                if (lastChartIndex < (index + 1)){
+                    lastChartIndex = (index + 1);
+                }
+                if (curMin < minYVal)
+                    minYVal = curMin;
+                if (curMax > maxYVal)
+                    maxYVal = curMax;
+            }
         }
     }
-    //TODO if to narrow get MAXFLOAT, rethink logic above ^
+
     if (minYVal == MAXFLOAT)
         return @[@(0), @(1), @(0), @(self.chartData.count)];
     

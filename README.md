@@ -73,6 +73,10 @@
                                  initWithFrame:CGRectMake(0, 0, 400, 250)
                                  andOptions: @{nciIsFill: [@(NO), @(NO), @(NO)],
                                                nciSelPointSizes: @[@5, @10, @5]}];
+    int numOfPoints = 10;
+    for (int ind = 0; ind < numOfPoints; ind ++){
+        [chart addPoint:ind val:@[@(arc4random() % 5), @(arc4random() % 5), @(arc4random() % 5)]];
+    }                                               
                                                
 ```
 

@@ -102,7 +102,7 @@
     
     for(int i = 0; i<= (_gridWidth - self.chart.nciGridLeftMargin)/xLabelsDistance; i++){
         UILabel *label = [[UILabel alloc] initWithFrame:
-                          CGRectMake(self.chart.nciGridLeftMargin + xLabelsDistance *i,
+                          CGRectMake(xLabelsDistance *i,
                                      self.frame.size.height - self.chart.nciGridBottomMargin, xLabelsDistance,
                                      self.chart.nciGridBottomMargin)];
         label.textColor = self.chart.nciXLabelsColor;

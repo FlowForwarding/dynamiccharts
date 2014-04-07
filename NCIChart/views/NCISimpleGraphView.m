@@ -105,9 +105,7 @@
                           CGRectMake(self.chart.nciGridLeftMargin + xLabelsDistance *i,
                                      self.frame.size.height - self.chart.nciGridBottomMargin, xLabelsDistance,
                                      self.chart.nciGridBottomMargin)];
-        label.textColor = self.chart.nciXLabelsColor;
-        label.font =  self.chart.nciXLabelsFont;
-        double curVal = [self getArgumentByX: (self.chart.nciGridLeftMargin + xLabelsDistance *i - xLabelsDistance/2)];
+        double curVal = [self getArgumentByX: (xLabelsDistance *i + xLabelsDistance/2)];
         [self makeUpXLabel:label val:curVal];
     }
 }
@@ -124,6 +122,7 @@
 
 - (void)makeUpXLabel:(UILabel *)label val:(double) curVal{
     label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = self.chart.nciXLabelsColor;
     label.font = self.chart.nciXLabelsFont;
     if (self.chart.nciXLabelRenderer){
         label.text = self.chart.nciXLabelRenderer(curVal);

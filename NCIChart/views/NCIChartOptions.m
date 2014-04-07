@@ -18,8 +18,6 @@ NSString *const nciHasSelection = @"nciHasSelection";
 NSString *const nciSelPointColors = @"nciSelPointColors";
 NSString *const nciSelPointImages = @"nciSelPointImages";
 NSString *const nciSelPointSizes = @"nciSelPointSizes";
-NSString *const nciSelPointFont = @"nciSelPointFont";
-NSString *const nciSelPointFontColor = @"nciSelPointFontColor";
 
 NSString *const nciXLabelsFont = @"nciXLabelsFont";
 NSString *const nciXLabelsColor = @"nciXLabelsColor";

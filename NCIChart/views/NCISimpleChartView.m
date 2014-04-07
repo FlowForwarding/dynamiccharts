@@ -47,12 +47,10 @@
     self.nciHasSelection = YES;
     _nciXLabelsColor = [UIColor blackColor];
     _nciYLabelsColor = [UIColor blackColor];
-    _nciSelPointFontColor = [UIColor blackColor];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         _nciXLabelsFont = [UIFont italicSystemFontOfSize:14];
         _nciYLabelsFont = [UIFont systemFontOfSize:14];
-        _nciSelPointFont = [UIFont boldSystemFontOfSize:18];
         _nciXLabelsDistance = 200;
         _nciYLabelsDistance = 80;
         _nciSelPointSizes = @[@8];
@@ -60,7 +58,6 @@
     } else {
         _nciXLabelsFont = [UIFont italicSystemFontOfSize:10];
         _nciYLabelsFont = [UIFont systemFontOfSize:10];
-        _nciSelPointFont = [UIFont boldSystemFontOfSize:12];
         _nciXLabelsDistance = 100;
         _nciYLabelsDistance = 40;
         _nciSelPointSizes = @[@4];
@@ -81,10 +78,10 @@
             _nciIsFill = [opts objectForKey:nciIsFill];
         
         for (NSString* key in @[nciLineColors, nciXLabelsFont, nciYLabelsFont,
-                                nciSelPointFont, nciBoundaryVertical, nciBoundaryHorizontal,
+                                nciBoundaryVertical, nciBoundaryHorizontal,
                                 nciGridVertical, nciGridHorizontal, nciGridColor,
                                 nciXLabelsColor, nciYLabelsColor, nciLeftRangeImageName, nciRightRangeImageName,
-                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages, nciSelPointFontColor]){
+                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages]){
             if ([opts objectForKey:key]){
                 id object = [opts objectForKey:key];
                 if ([object isKindOfClass:[NSArray class]]){
@@ -172,8 +169,6 @@
     if (_selectedLabel || !self.graph.grid)
         return;
     _selectedLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    _selectedLabel.font = _nciSelPointFont;
-    _selectedLabel.textColor = _nciSelPointFontColor;
     _selectedLabel.textAlignment = NSTextAlignmentRight;
     _selectedLabel.numberOfLines = 0;
     [self addSubview:_selectedLabel];
@@ -262,7 +257,12 @@
             }
             
             if (self.nciSelPointTextRenderer){
-                _selectedLabel.text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
+                NSObject *text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
+                if ([text isKindOfClass:[NSAttributedString class]]){
+                    _selectedLabel.attributedText = (NSAttributedString *)text;
+                } else {
+                    _selectedLabel.text = (NSString *)text;
+                }
             } else {
                 NSMutableString *values = [[NSMutableString alloc] init];
                 for (id val in currentPoint[1]){

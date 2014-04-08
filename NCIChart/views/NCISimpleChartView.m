@@ -98,14 +98,7 @@
             _nciYLabelsDistance = [[opts objectForKey:nciYLabelsDistance] floatValue];
         if ([opts objectForKey:nciGridLeftMargin])
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
-        
-        //order of 2 next opts is important
-        if ([opts objectForKey:nciHasSelection]){
-            self.nciHasSelection = [[opts objectForKey:nciHasSelection] boolValue];
-        }
-        if ([opts objectForKey:nciGridTopMargin]){
-            _nciGridTopMargin = [[opts objectForKey:nciGridTopMargin] floatValue];
-        }
+    
     
         if ([opts objectForKey:nciGridBottomMargin]){
             _nciGridBottomMargin = [[opts objectForKey:nciGridBottomMargin] floatValue];
@@ -134,6 +127,13 @@
             _nciTapGridAction = [opts objectForKey:nciTapGridAction];
         }
         [self addSubviews];
+        //order of 2 next opts is important
+        if ([opts objectForKey:nciHasSelection]){
+            self.nciHasSelection = [[opts objectForKey:nciHasSelection] boolValue];
+        }
+        if ([opts objectForKey:nciGridTopMargin]){
+            _nciGridTopMargin = [[opts objectForKey:nciGridTopMargin] floatValue];
+        }
     }
     return self;
 }
@@ -171,12 +171,18 @@
     _selectedLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _selectedLabel.textAlignment = NSTextAlignmentRight;
     _selectedLabel.numberOfLines = 0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        _selectedLabel.font = [UIFont systemFontOfSize:14];
+    } else {
+        _selectedLabel.font = [UIFont systemFontOfSize:10];
+    }
     [self addSubview:_selectedLabel];
     [self.graph.grid addGestureRecognizer:gridTapped];
     selectedPoints = [[NSMutableArray alloc] init];
 }
 
 - (void)setNciHasSelection:(bool)hasSelection{
+    _nciHasSelection = hasSelection;
     if (hasSelection){
         if (_nciGridTopMargin == 0)
             _nciGridTopMargin = 20;
@@ -188,7 +194,6 @@
         _selectedLabel.hidden = YES;
         [self.graph.grid removeGestureRecognizer: gridTapped];
     }
-    _nciHasSelection = hasSelection;
 }
 
 - (void)gridTapped:(UITapGestureRecognizer *)recognizer{

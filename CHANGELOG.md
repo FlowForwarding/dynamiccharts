@@ -19,3 +19,13 @@
  * Fix for shifted X-labels on simple chart
  
  * New sapmle
+
+= 1.0.4 (2014-04-01)
+
+ * Option to use NSAttributedString for selected point label
+ 
+ * Fix issue for hiding/showing selection label
+ 
+ * Fix for shifted X-labels
+ 
+ 

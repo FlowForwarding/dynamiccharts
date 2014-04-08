@@ -29,8 +29,6 @@
 @property (nonatomic, strong)NSMutableArray* nciSelPointColors;
 @property (nonatomic, strong)NSMutableArray* nciSelPointImages;
 @property (nonatomic)NSArray* nciSelPointSizes;
-@property (nonatomic, strong)UIFont* nciSelPointFont;
-@property (nonatomic, strong)UIColor* nciSelPointFontColor;
 
 @property (nonatomic, strong)UIFont* nciXLabelsFont;
 @property (nonatomic, strong)UIColor* nciXLabelsColor;
@@ -42,7 +40,7 @@
 @property (nonatomic, copy) NSString* (^nciXLabelRenderer)(double);
 @property (nonatomic, copy) NSString* (^nciYLabelRenderer)(double);
 //callbacks
-@property (nonatomic, copy) NSString* (^nciSelPointTextRenderer)(double, NSArray *);
+@property (nonatomic, copy) NSAttributedString* (^nciSelPointTextRenderer)(double, NSArray *);
 @property (nonatomic, copy) void (^nciTapGridAction)(double, double, float, float);
 //in persentage
 @property (nonatomic)float topBottomGridSpace;

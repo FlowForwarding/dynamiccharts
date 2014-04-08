@@ -18,8 +18,6 @@ extern NSString *const nciHasSelection;
 extern NSString *const nciSelPointColors;
 extern NSString *const nciSelPointImages;
 extern NSString *const nciSelPointSizes;
-extern NSString *const nciSelPointFont;
-extern NSString *const nciSelPointFontColor;
 
 extern NSString *const nciXLabelsFont;
 extern NSString *const nciYLabelsFont;

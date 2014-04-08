@@ -8,9 +8,10 @@
 
 #import "ViewController.h"
 #import "NCIBarChartView.h"
+#import "NCIChartView.h"
 
 @interface ViewController (){
-    NCIBarChartView *simpleChart;
+    NCIZoomChartView *simpleChart;
     
     float horisontalIndent;
     float verticalIndent;
@@ -42,35 +43,35 @@
     
     
     
-    simpleChart = [[NCIBarChartView alloc] initWithFrame:CGRectZero
-                                                 andOptions:@{nciIsFill: @(NO),
-                                                              nciLineColors : @[[UIColor greenColor]],
-                                                              nciLineWidths : @[@(2)],
-                                                              nciSelPointImages : @[@"star"],
-                                                              nciSelPointSizes: @[@20],
-                                                              nciXLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                                              nciYLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                                              nciSelPointFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:14],
-                                                              nciYLabelsDistance: @(50),
-                                                              nciXLabelsDistance: @(80),
-                                                              nciXLabelRenderer:  ^(double argument){
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MMM-dd"];
-        return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:argument]]];
-    },
-                                                              nciYLabelRenderer: ^(double value){
-        return [NSString stringWithFormat:@"%.1fK", value];
-    },
-                                                              nciTapGridAction: ^(double argument, double value){
-        NSLog(@"custom bg tap test");
-    },
-                                                              nciSelPointTextRenderer: ^(double argument, NSArray* values){
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMM-dd HH:mm:ss"];
-        return [NSString stringWithFormat:@"Test: %@ %@", values[0],
-                [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:argument]]];
-    }
-                                                              }];
+    simpleChart = [[NCIZoomChartView alloc] initWithFrame:CGRectZero andOptions:@{nciHasSelection: @(YES)}];
+//                                                 andOptions:@{nciIsFill: @[@(NO)],
+//                                                              nciLineColors : @[[UIColor greenColor]],
+//                                                              nciLineWidths : @[@(2)],
+//                                                              nciSelPointImages : @[@"star"],
+//                                                              nciSelPointSizes: @[@20],
+//                                                              nciXLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
+//                                                              nciYLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
+//                                                              nciSelPointFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:14],
+//                                                              nciYLabelsDistance: @(50),
+//                                                              nciXLabelsDistance: @(80),
+//                                                              nciXLabelRenderer:  ^(double argument){
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"yyyy-MMM-dd"];
+//        return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:argument]]];
+//    },
+//                                                              nciYLabelRenderer: ^(double value){
+//        return [NSString stringWithFormat:@"%.1fK", value];
+//    },
+//                                                              nciTapGridAction: ^(double argument, double value){
+//        NSLog(@"custom bg tap test");
+//    },
+//                                                              nciSelPointTextRenderer: ^(double argument, NSArray* values){
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"MMM-dd HH:mm:ss"];
+//        return [NSString stringWithFormat:@"Test: %@ %@", values[0],
+//                [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:argument]]];
+//    }
+//                                                              }];
     
     [self.view addSubview: simpleChart];
     
@@ -81,9 +82,21 @@
                                                object:nil];
     isShowingLandscapeView = NO;
     
-    [self generateDemoData];
+    
+    int numOfPoints = 10;
+    for (int ind = 0; ind < numOfPoints; ind ++){
+        [simpleChart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
+//    chart.minRangeVal = 5;
+//    chart.maxRangeVal = 8;
+    
+    
+   // [self generateDemoData];
     
     [self layoutSubviews];
+    
+    
+    
     
 }
 

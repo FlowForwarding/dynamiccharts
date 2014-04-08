@@ -47,12 +47,10 @@
     self.nciHasSelection = YES;
     _nciXLabelsColor = [UIColor blackColor];
     _nciYLabelsColor = [UIColor blackColor];
-    _nciSelPointFontColor = [UIColor blackColor];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         _nciXLabelsFont = [UIFont italicSystemFontOfSize:14];
         _nciYLabelsFont = [UIFont systemFontOfSize:14];
-        _nciSelPointFont = [UIFont boldSystemFontOfSize:18];
         _nciXLabelsDistance = 200;
         _nciYLabelsDistance = 80;
         _nciSelPointSizes = @[@8];
@@ -60,7 +58,6 @@
     } else {
         _nciXLabelsFont = [UIFont italicSystemFontOfSize:10];
         _nciYLabelsFont = [UIFont systemFontOfSize:10];
-        _nciSelPointFont = [UIFont boldSystemFontOfSize:12];
         _nciXLabelsDistance = 100;
         _nciYLabelsDistance = 40;
         _nciSelPointSizes = @[@4];
@@ -81,10 +78,10 @@
             _nciIsFill = [opts objectForKey:nciIsFill];
         
         for (NSString* key in @[nciLineColors, nciXLabelsFont, nciYLabelsFont,
-                                nciSelPointFont, nciBoundaryVertical, nciBoundaryHorizontal,
+                                nciBoundaryVertical, nciBoundaryHorizontal,
                                 nciGridVertical, nciGridHorizontal, nciGridColor,
                                 nciXLabelsColor, nciYLabelsColor, nciLeftRangeImageName, nciRightRangeImageName,
-                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages, nciSelPointFontColor]){
+                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages]){
             if ([opts objectForKey:key]){
                 id object = [opts objectForKey:key];
                 if ([object isKindOfClass:[NSArray class]]){
@@ -101,14 +98,7 @@
             _nciYLabelsDistance = [[opts objectForKey:nciYLabelsDistance] floatValue];
         if ([opts objectForKey:nciGridLeftMargin])
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
-        
-        //order of 2 next opts is important
-        if ([opts objectForKey:nciHasSelection]){
-            self.nciHasSelection = [[opts objectForKey:nciHasSelection] boolValue];
-        }
-        if ([opts objectForKey:nciGridTopMargin]){
-            _nciGridTopMargin = [[opts objectForKey:nciGridTopMargin] floatValue];
-        }
+    
     
         if ([opts objectForKey:nciGridBottomMargin]){
             _nciGridBottomMargin = [[opts objectForKey:nciGridBottomMargin] floatValue];
@@ -137,6 +127,13 @@
             _nciTapGridAction = [opts objectForKey:nciTapGridAction];
         }
         [self addSubviews];
+        //order of 2 next opts is important
+        if ([opts objectForKey:nciHasSelection]){
+            self.nciHasSelection = [[opts objectForKey:nciHasSelection] boolValue];
+        }
+        if ([opts objectForKey:nciGridTopMargin]){
+            _nciGridTopMargin = [[opts objectForKey:nciGridTopMargin] floatValue];
+        }
     }
     return self;
 }
@@ -172,16 +169,20 @@
     if (_selectedLabel || !self.graph.grid)
         return;
     _selectedLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    _selectedLabel.font = _nciSelPointFont;
-    _selectedLabel.textColor = _nciSelPointFontColor;
     _selectedLabel.textAlignment = NSTextAlignmentRight;
     _selectedLabel.numberOfLines = 0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        _selectedLabel.font = [UIFont systemFontOfSize:14];
+    } else {
+        _selectedLabel.font = [UIFont systemFontOfSize:10];
+    }
     [self addSubview:_selectedLabel];
     [self.graph.grid addGestureRecognizer:gridTapped];
     selectedPoints = [[NSMutableArray alloc] init];
 }
 
 - (void)setNciHasSelection:(bool)hasSelection{
+    _nciHasSelection = hasSelection;
     if (hasSelection){
         if (_nciGridTopMargin == 0)
             _nciGridTopMargin = 20;
@@ -193,7 +194,6 @@
         _selectedLabel.hidden = YES;
         [self.graph.grid removeGestureRecognizer: gridTapped];
     }
-    _nciHasSelection = hasSelection;
 }
 
 - (void)gridTapped:(UITapGestureRecognizer *)recognizer{
@@ -262,7 +262,12 @@
             }
             
             if (self.nciSelPointTextRenderer){
-                _selectedLabel.text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
+                NSObject *text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
+                if ([text isKindOfClass:[NSAttributedString class]]){
+                    _selectedLabel.attributedText = (NSAttributedString *)text;
+                } else {
+                    _selectedLabel.text = (NSString *)text;
+                }
             } else {
                 NSMutableString *values = [[NSMutableString alloc] init];
                 for (id val in currentPoint[1]){

@@ -93,7 +93,7 @@ pod 'NCICharts', '~> 1.0.3'
 [Illustration4]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/cuatomization.png "NCI customized chart" 
 
 ```ObjectiveC
-    NCISimpleChartView *chart = [[NCISimpleChartView alloc]
+    NCISimpleChartView * chart = [[NCISimpleChartView alloc]
                                  initWithFrame:CGRectMake(50, 30, 400, 250)
                                  andOptions: @{nciIsFill: @[@(NO), @(NO), @(NO)],
                                                nciLineColors: @[[UIColor orangeColor], [NSNull null]],
@@ -101,13 +101,19 @@ pod 'NCICharts', '~> 1.0.3'
                                                nciHasSelection: @YES,
                                                nciSelPointColors: @[[UIColor redColor]],
                                                nciSelPointImages: @[[NSNull null], @"star"],
-//                                               nciSelPointTextRenderer: ^(double argument, NSArray* values){
-//        return [NSString stringWithFormat:@"Money:%.1f  for %.1f", value, argument];
-//    },
+                                               nciSelPointTextRenderer: ^(double argument, NSArray* values){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss"];
+        return [[NSAttributedString alloc] initWithString:
+                [NSString stringWithFormat:@"y: %.0f,%.0f  x:%@",
+                 [values[0] floatValue],
+                 [values[1] floatValue],
+                 [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970: argument]]]
+                                               attributes: @{NSForegroundColorAttributeName: [UIColor redColor],
+                                                             NSFontAttributeName: [UIFont fontWithName:@"MarkerFelt-Thin" size:12]}];
+    },
                                                
                                                nciSelPointSizes: @[@10, [NSNull null]],
-                                               nciSelPointFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                               nciSelPointFontColor : [UIColor redColor],
                                                nciXLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
                                                nciXLabelsColor: [UIColor blueColor],
                                                nciYLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
@@ -117,9 +123,9 @@ pod 'NCICharts', '~> 1.0.3'
                                                nciYLabelRenderer: ^(double value){
         return [NSString stringWithFormat:@"%.1f$", value];
     },
-//                                               nciTapGridAction: ^(double argument, double value, float xInGrid, float yInGrid){
-//        
-//    },
+                                               //                                               nciTapGridAction: ^(double argument, double value, float xInGrid, float yInGrid){
+                                               //
+                                               //    },
                                                nciShowPoints : @YES,
                                                nciUseDateFormatter: @YES,//nciXLabelRenderer
                                                nciBoundaryVertical: [[NCILine alloc] initWithWidth:1 color:[UIColor blackColor] andDashes:@[@2,@2]],

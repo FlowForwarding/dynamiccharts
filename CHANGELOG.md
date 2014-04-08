@@ -13,3 +13,9 @@
  * Fixed issue with calculating Y axis max and min values for multiple lines zoom chart
 
  * Fixed shifting from time to time selected points on chart during fast scrolling 
+ 
+= 1.0.3 (2014-04-01)
+ 
+ * Fix for shifted X-labels on simple chart
+ 
+ * New sapmle

@@ -1,5 +1,6 @@
 ### NCICharts: Linear charts and charts with range selectors for iOS
 
+1. [Instalation](#instalation)
 1. [Simple](#simple)
 1. [Ranges](#ranges)
 1. [Zoom](#zoom)
@@ -7,6 +8,12 @@
 1. [Customization options](#customization-options)
 1. [Ranges chart customization](#ranges-chart-customization)
 1. [Live updates](#live-updates)
+
+## Instalation
+
+```
+pod 'NCICharts', '~> 1.0.3'
+```
 
 ## Simple
 
@@ -88,7 +95,7 @@
 ```ObjectiveC
     NCISimpleChartView *chart = [[NCISimpleChartView alloc]
                                  initWithFrame:CGRectMake(50, 30, 400, 250)
-                                 andOptions: @{nciIsFill: [@(NO), @(NO), @(NO)],
+                                 andOptions: @{nciIsFill: @[@(NO), @(NO), @(NO)],
                                                nciLineColors: @[[UIColor orangeColor], [NSNull null]],
                                                nciLineWidths: @[@2, [NSNull null]],
                                                nciHasSelection: @YES,
@@ -129,7 +136,7 @@
     [self.view addSubview:chart];
     
     int numOfPoints = 10;
-    double dataPeriod = 1000*60*60*24*30;
+    double dataPeriod = 60*60*24*30;
     double step = dataPeriod/(numOfPoints - 1);
     for (int ind = 0; ind < numOfPoints; ind ++){
         //to use default date formatter for Y axis, provide arguments as  timeIntervalSince1970

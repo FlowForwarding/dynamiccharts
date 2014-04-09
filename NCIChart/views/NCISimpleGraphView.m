@@ -100,9 +100,10 @@
     float xLabelsDistance = self.chart.nciXLabelsDistance;
     [self formatDateForDistance:xLabelsDistance];
     
-    for(int i = 0; i<= (_gridWidth - self.chart.nciGridLeftMargin)/xLabelsDistance; i++){
+    for(int i = 0; i< (_gridWidth - xLabelsDistance/2)/xLabelsDistance; i++){
+        float xPos = self.chart.nciGridLeftMargin + xLabelsDistance *i;
         UILabel *label = [[UILabel alloc] initWithFrame:
-                          CGRectMake(xLabelsDistance *i,
+                          CGRectMake(xPos,
                                      self.frame.size.height - self.chart.nciGridBottomMargin, xLabelsDistance,
                                      self.chart.nciGridBottomMargin)];
         double curVal = [self getArgumentByX: (xLabelsDistance *i + xLabelsDistance/2)];

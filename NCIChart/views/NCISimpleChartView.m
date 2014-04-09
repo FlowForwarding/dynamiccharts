@@ -108,7 +108,7 @@
             _nciSelPointTextRenderer = [opts objectForKey:nciSelPointTextRenderer];
         }
         if ([opts objectForKey:nciUseDateFormatter]){
-            _nciUseDateFormatter = [opts objectForKey:nciUseDateFormatter];
+            _nciUseDateFormatter = [[opts objectForKey:nciUseDateFormatter] boolValue];
         } else {
             _nciUseDateFormatter = NO;
         }

@@ -25,8 +25,6 @@
 		2A6DDECA18647C0E0013D202 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A6DDEC818647C0E0013D202 /* InfoPlist.strings */; };
 		2A6DDECC18647C0E0013D202 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DDECB18647C0E0013D202 /* main.m */; };
 		2A6DDED018647C0E0013D202 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DDECF18647C0E0013D202 /* AppDelegate.m */; };
-		2A6DDED318647C0E0013D202 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A6DDED118647C0E0013D202 /* Main_iPhone.storyboard */; };
-		2A6DDED618647C0E0013D202 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A6DDED418647C0E0013D202 /* Main_iPad.storyboard */; };
 		2A6DDED918647C0E0013D202 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DDED818647C0E0013D202 /* ViewController.m */; };
 		2A6DDEDB18647C0E0013D202 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A6DDEDA18647C0E0013D202 /* Images.xcassets */; };
 		2A6DDEF8186481C50013D202 /* libNCIChart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1E1BD71863794D00009A3A /* libNCIChart.a */; };
@@ -94,8 +92,6 @@
 		2A6DDECD18647C0E0013D202 /* NCIChartConfigurations-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NCIChartConfigurations-Prefix.pch"; sourceTree = "<group>"; };
 		2A6DDECE18647C0E0013D202 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2A6DDECF18647C0E0013D202 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2A6DDED218647C0E0013D202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		2A6DDED518647C0E0013D202 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		2A6DDED718647C0E0013D202 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2A6DDED818647C0E0013D202 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2A6DDEDA18647C0E0013D202 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -246,8 +242,6 @@
 			children = (
 				2A6DDECE18647C0E0013D202 /* AppDelegate.h */,
 				2A6DDECF18647C0E0013D202 /* AppDelegate.m */,
-				2A6DDED118647C0E0013D202 /* Main_iPhone.storyboard */,
-				2A6DDED418647C0E0013D202 /* Main_iPad.storyboard */,
 				2A6DDED718647C0E0013D202 /* ViewController.h */,
 				2A6DDED818647C0E0013D202 /* ViewController.m */,
 				2A6DDEDA18647C0E0013D202 /* Images.xcassets */,
@@ -430,9 +424,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A6DDED618647C0E0013D202 /* Main_iPad.storyboard in Resources */,
 				2A6DDEDB18647C0E0013D202 /* Images.xcassets in Resources */,
-				2A6DDED318647C0E0013D202 /* Main_iPhone.storyboard in Resources */,
 				2A6DDECA18647C0E0013D202 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,22 +499,6 @@
 				2A6DDEC918647C0E0013D202 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2A6DDED118647C0E0013D202 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A6DDED218647C0E0013D202 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		2A6DDED418647C0E0013D202 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A6DDED518647C0E0013D202 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

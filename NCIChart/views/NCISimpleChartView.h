@@ -67,4 +67,6 @@
 - (void)layoutSelectedPoint;
 - (void)defaultSetup;
 
+- (void)simulateTapGrid:(double) xPos;
+
 @end

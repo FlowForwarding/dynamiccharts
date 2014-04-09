@@ -196,6 +196,11 @@
     }
 }
 
+- (void)simulateTapGrid:(double) xPos{
+    selectedPointArgument = [self.graph getArgumentByX:xPos];
+    [self layoutSelectedPoint];
+}
+
 - (void)gridTapped:(UITapGestureRecognizer *)recognizer{
     CGPoint location = [recognizer locationInView:self.graph.grid];
     selectedPointArgument = [self.graph getArgumentByX:location.x];

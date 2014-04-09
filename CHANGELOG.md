@@ -28,4 +28,10 @@
  
  * Fix for shifted X-labels
  
- 
+= 1.0.5 (2014-04-09) 
+
+ * API to set selected point programmatically
+
+ * Working test project
+
+ * Fix for shifted X-labels

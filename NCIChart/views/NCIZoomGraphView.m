@@ -98,9 +98,9 @@ static float startMaxRangeVal;
     if (self.chart.chartData.count == 0)
         return;
     NCIZoomChartView *zoomChart = (NCIZoomChartView *)self.chart;
-    float scaleIndex = [zoomChart getScaleIndex];
-    float timePeriod = [zoomChart getTimePeriod];
-    float rangesPeriod = [zoomChart getRangesPeriod];
+    float scaleIndex = [self getScaleIndex];
+    float timePeriod = [self getXValuesGap];
+    float rangesPeriod = [self getRangesPeriod];
     
     float offsetForRanges = scrollView.contentOffset.x;
     if (offsetForRanges < 0)
@@ -123,7 +123,7 @@ static float startMaxRangeVal;
     [super layoutSubviews];
     if (self.chart.chartData.count == 0)
         return;
-    float scaleIndex = [(NCIZoomChartView *)self.chart getScaleIndex];
+    float scaleIndex = [self getScaleIndex];
     float contentWidth = self.gridWidth* scaleIndex;
     float timeDiff = [[self.chart.chartData lastObject][0] doubleValue] - [self.chart.chartData[0][0] doubleValue];
     if (timeDiff == 0)
@@ -145,8 +145,109 @@ static float startMaxRangeVal;
     [self.chart layoutSelectedPoint];
 }
 
+- (NSArray *)getValsInRanges{
+    float minYVal = MAXFLOAT;
+    float maxYVal = -MAXFLOAT;
+    long firstDataIndex = self.chart.chartData.count;
+    long lastChartIndex = 0;
+    long index;
+    for(index = 1; index < self.chart.chartData.count; index++){
+        NSArray *point = self.chart.chartData[index];
+        
+        for (int serisNum = 0; serisNum < ((NSArray *)point[1]).count; serisNum++){
+            if ([point[1][serisNum] isKindOfClass:[NSNull class]]){
+                continue;
+            }
+            NSArray * prevPoint = self.chart.chartData[index - 1];
+            if ([prevPoint[1][serisNum] isKindOfClass:[NSNull class]]){
+                prevPoint = @[prevPoint[serisNum], point[1]];
+            }
+            
+            NSArray * nextPoint;
+            if (self.chart.chartData.count != (index + 1)){
+                nextPoint = self.chart.chartData[index + 1];
+                if ([nextPoint[1][serisNum] isKindOfClass:[NSNull class]]){
+                    nextPoint = @[nextPoint[0], point[1]];
+                }
+            } else {
+                nextPoint = point;
+            }
+            
+            float curMax = [prevPoint[1][serisNum] floatValue];
+            float curMin = [prevPoint[1][serisNum] floatValue];
+            if ([point[1][serisNum] floatValue] > [prevPoint[1][serisNum] floatValue]){
+                curMax = [point[1][serisNum] floatValue];
+            } else {
+                curMin= [point[1][serisNum] floatValue];
+            }
+            if ( curMax < [nextPoint[1][serisNum] floatValue]){
+                curMax = [nextPoint[1][serisNum] floatValue];
+            }
+            if ( curMin > [nextPoint[1][serisNum] floatValue]){
+                curMin = [nextPoint[1][serisNum] floatValue];
+            }
+            
+            if ( ((NCIZoomChartView *)self.chart).minRangeVal <= [point[0] doubleValue] &&
+                ( minYVal == MAXFLOAT || ((NCIZoomChartView *)self.chart).maxRangeVal  >= [point[0] doubleValue])){
+                
+                if (firstDataIndex > (index - 1)){
+                    firstDataIndex = (index - 1);
+                }
+                if (lastChartIndex < (index + 1)){
+                    lastChartIndex = (index + 1);
+                }
+                if (curMin < minYVal)
+                    minYVal = curMin;
+                if (curMax > maxYVal)
+                    maxYVal = curMax;
+            }
+        }
+    }
+    
+    if (minYVal == MAXFLOAT)
+        return @[@(0), @(1), @(0), @(self.chart.chartData.count)];
+    
+    float diff = maxYVal - minYVal;
+    if (diff == 0){
+        maxYVal = maxYVal + 1;
+        minYVal = minYVal - 1;
+    } else {
+        maxYVal = maxYVal + diff*self.chart.topBottomGridSpace/100;
+        minYVal = minYVal - diff*self.chart.topBottomGridSpace/100;
+    }
+    
+    if (lastChartIndex < self.chart.chartData.count)
+        lastChartIndex = lastChartIndex + 1;
+    
+    return @[@(minYVal),
+             @(maxYVal),
+             @(firstDataIndex),
+             @(lastChartIndex)];
+}
+
+- (double)getScaleIndex{
+    if ( ((NCIZoomChartView *)self.chart).minRangeVal !=  ((NCIZoomChartView *)self.chart).minRangeVal || ((NCIZoomChartView *)self.chart).maxRangeVal !=  ((NCIZoomChartView *)self.chart).maxRangeVal)
+        return 1;
+    double rangeDiff = [self getRangesPeriod];
+    if (rangeDiff == 0){
+        return  1;
+    } else {
+        return [self getXValuesGap]/rangeDiff;
+    }
+}
+
+-(double)getXValuesGap{
+    if (self.chart.chartData.count == 0)
+        return 0;
+    return [[self.chart.chartData lastObject][0] doubleValue] - [self.chart.chartData[0][0] doubleValue];
+}
+
+-(double)getRangesPeriod{
+    return  ((NCIZoomChartView *)self.chart).maxRangeVal -  ((NCIZoomChartView *)self.chart).minRangeVal;
+}
+
 - (void)redrawXLabels{
-    float scaleIndex = [(NCIZoomChartView *)self.chart getScaleIndex];
+    float scaleIndex = [self getScaleIndex];
     float xLabelsDistance = self.chart.nciXLabelsDistance;
     [self formatDateForDistance:xLabelsDistance/scaleIndex];
     
@@ -165,17 +266,17 @@ static float startMaxRangeVal;
 }
 
 - (double)getArgumentByX:(float) pointX{
-    float scaleIndex = [(NCIZoomChartView *)self.chart getScaleIndex];
+    float scaleIndex = [self getScaleIndex];
     return self.minXVal + (gridScroll.contentOffset.x + pointX)/scaleIndex/self.xStep;
 }
 
 - (float)getXByArgument:(double) arg{
-    float scaleIndex = [(NCIZoomChartView *)self.chart getScaleIndex];
+    float scaleIndex = [self getScaleIndex];
     return (arg - self.minXVal)*self.xStep * scaleIndex - gridScroll.contentOffset.x;
 }
 
 - (void)detectRanges{
-    NSArray *yVals = [(NCIZoomChartView *)self.chart getValsInRanges];
+    NSArray *yVals = [self getValsInRanges];
     self.minYVal = [yVals[0] floatValue];
     self.maxYVal = [yVals[1] floatValue];
     self.yStep = self.gridHeigth/(self.maxYVal - self.minYVal);

@@ -11,7 +11,7 @@
 #import "NCIChartView.h"
 
 @interface ViewController (){
-    NCISimpleChartView *simpleChart;
+    NCIChartView *simpleChart;
     
     float horisontalIndent;
     float verticalIndent;
@@ -38,7 +38,7 @@
     }
     
     
-    simpleChart = [[NCISimpleChartView alloc]
+    simpleChart = [[NCIChartView alloc]
                    initWithFrame:CGRectMake(50, 30, 400, 250)
                    andOptions: @{
                                  

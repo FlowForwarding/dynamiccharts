@@ -7,12 +7,12 @@
 //
 
 #import "NCIZoomGridView.h"
-#import "NCIZoomChartView.h"
+#import "NCIZoomGraphView.h"
 
 @implementation NCIZoomGridView
 
 - (NSArray *)getFirstLast{
-    NSArray *values = [((NCIZoomChartView *)self.graph.chart) getValsInRanges];
+    NSArray *values = [((NCIZoomGraphView *)self.graph) getValsInRanges];
     return @[values[2], values[3]];
 }
 

@@ -10,12 +10,6 @@
 
 @interface NCIZoomChartView : NCISimpleChartView
 
-- (NSArray *)getValsInRanges;
-
--(double)getScaleIndex;
--(double)getTimePeriod;
--(double)getRangesPeriod;
-
 @property(nonatomic)double minRangeVal;
 @property(nonatomic)double maxRangeVal;
 

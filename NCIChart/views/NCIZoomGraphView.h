@@ -10,5 +10,9 @@
 
 @interface NCIZoomGraphView : NCISimpleGraphView<UIScrollViewDelegate>
 
+- (NSArray *)getValsInRanges;
+-(double)getScaleIndex;
+-(double)getXValuesGap;
+-(double)getRangesPeriod;
 
 @end

@@ -128,6 +128,7 @@
 }
 
 - (void)addSubviews{
+    
     self.graph = [[NCISimpleGraphView alloc] initWithChart:self];
     [self addSubview:_graph];
     [self setupSelection];

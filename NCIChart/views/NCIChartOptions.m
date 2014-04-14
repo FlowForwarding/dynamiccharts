@@ -27,8 +27,8 @@ NSString *const nciYLabelsColor = @"nciYLabelsColor";
 NSString *const nciXLabelsDistance = @"nciXLabelsDistance";
 NSString *const nciYLabelsDistance = @"nciYLabelsDistance";
 
-NSString *const nciXLabelRenderer = @"xLabelRenderer";
-NSString *const nciYLabelRenderer = @"yLabelRenderer";
+NSString *const nciXLabelRenderer = @"nciXLabelRenderer";
+NSString *const nciYLabelRenderer = @"nciYLabelRenderer";
 NSString *const nciSelPointTextRenderer = @"nciSelPointTextRenderer";
 NSString *const nciTapGridAction = @"nciTapGridAction";
 

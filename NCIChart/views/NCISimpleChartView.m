@@ -81,7 +81,9 @@
                                 nciBoundaryVertical, nciBoundaryHorizontal,
                                 nciGridVertical, nciGridHorizontal, nciGridColor,
                                 nciXLabelsColor, nciYLabelsColor, nciLeftRangeImageName, nciRightRangeImageName,
-                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages]){
+                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
+                                nciSelPointTextRenderer, nciXLabelRenderer, nciYLabelRenderer,
+                                nciTapGridAction]){
             if ([opts objectForKey:key]){
                 id object = [opts objectForKey:key];
                 if ([object isKindOfClass:[NSArray class]]){
@@ -99,13 +101,8 @@
         if ([opts objectForKey:nciGridLeftMargin])
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
     
-    
         if ([opts objectForKey:nciGridBottomMargin]){
             _nciGridBottomMargin = [[opts objectForKey:nciGridBottomMargin] floatValue];
-        }
-
-        if ([opts objectForKey:nciSelPointTextRenderer]){
-            _nciSelPointTextRenderer = [opts objectForKey:nciSelPointTextRenderer];
         }
         if ([opts objectForKey:nciUseDateFormatter]){
             _nciUseDateFormatter = [[opts objectForKey:nciUseDateFormatter] boolValue];
@@ -117,15 +114,7 @@
         } else {
             _nciShowPoints = NO;
         }
-        if ([opts objectForKey:nciXLabelRenderer]){
-            _nciXLabelRenderer = [opts objectForKey:nciXLabelRenderer];
-        }
-        if ([opts objectForKey:nciYLabelRenderer]){
-            _nciYLabelRenderer = [opts objectForKey:nciYLabelRenderer];
-        }
-        if ([opts objectForKey:nciTapGridAction]){
-            _nciTapGridAction = [opts objectForKey:nciTapGridAction];
-        }
+
         [self addSubviews];
         //order of 2 next opts is important
         if ([opts objectForKey:nciHasSelection]){

@@ -8,7 +8,6 @@
 
 #import "NCIZoomGraphView.h"
 #import "NCIZoomGridView.h"
-#import "NCIZoomChartView.h"
 
 @interface NCIZoomGraphView(){
     UIScrollView *gridScroll;
@@ -58,9 +57,9 @@ static float startMaxRangeVal;
 
 - (void)startMoveWithPoint:(CGPoint) point1 andPoint:(CGPoint) point2{
     startFingersDiff = point1.x - point2.x;
-    startRangesDiff = ((NCIZoomChartView *)self.chart).maxRangeVal - ((NCIZoomChartView *)self.chart).minRangeVal;
-    startMinRangeVal = ((NCIZoomChartView *)self.chart).minRangeVal;
-    startMaxRangeVal = ((NCIZoomChartView *)self.chart).maxRangeVal;
+    startRangesDiff = self.chart.maxRangeVal - self.chart.minRangeVal;
+    startMinRangeVal = self.chart.minRangeVal;
+    startMaxRangeVal = self.chart.maxRangeVal;
 }
 
 - (void)moveRangesWithPoint:(CGPoint) point1 andPoint:(CGPoint) point2{
@@ -78,8 +77,8 @@ static float startMaxRangeVal;
     }
     if (newMin >= newMax || ((newMax - newMin) < 0.000005) )
         return;
-    ((NCIZoomChartView *)self.chart).minRangeVal = newMin;
-    ((NCIZoomChartView *)self.chart).maxRangeVal = newMax;
+    self.chart.minRangeVal = newMin;
+    self.chart.maxRangeVal = newMax;
 
     [self setNeedsLayout];
 
@@ -97,7 +96,7 @@ static float startMaxRangeVal;
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (self.chart.chartData.count == 0)
         return;
-    NCIZoomChartView *zoomChart = (NCIZoomChartView *)self.chart;
+
     float scaleIndex = [self getScaleIndex];
     float timePeriod = [self getXValuesGap];
     float rangesPeriod = [self getRangesPeriod];
@@ -110,8 +109,8 @@ static float startMaxRangeVal;
     
     double newMinRange = [self.chart.chartData[0][0] doubleValue] +
     timePeriod*(offsetForRanges/scrollView.frame.size.width/scaleIndex);
-    zoomChart.minRangeVal = newMinRange;
-    zoomChart.maxRangeVal = newMinRange + rangesPeriod;
+    self.chart.minRangeVal = newMinRange;
+    self.chart.maxRangeVal = newMinRange + rangesPeriod;
     
     self.grid.frame = CGRectMake(gridScroll.contentOffset.x, 0, self.gridWidth, self.gridHeigth);
     
@@ -133,11 +132,11 @@ static float startMaxRangeVal;
     gridScroll.frame = CGRectMake(self.chart.nciGridLeftMargin, 0, self.gridWidth, self.gridHeigth);
     gridScroll.contentSize = CGSizeMake(contentWidth, self.gridHeigth);
     
-    if (((NCIZoomChartView *)self.chart).minRangeVal != ((NCIZoomChartView *)self.chart).minRangeVal){
-        ((NCIZoomChartView *)self.chart).minRangeVal = [self.chart.chartData[0][0] doubleValue];
-        ((NCIZoomChartView *)self.chart).maxRangeVal = [[self.chart.chartData lastObject][0] doubleValue];
+    if (self.chart.minRangeVal != self.chart.minRangeVal){
+        self.chart.minRangeVal = [self.chart.chartData[0][0] doubleValue];
+        self.chart.maxRangeVal = [[self.chart.chartData lastObject][0] doubleValue];
     }
-    double timeOffest = ((NCIZoomChartView *)self.chart).minRangeVal  -  [self.chart.chartData[0][0] doubleValue];
+    double timeOffest = self.chart.minRangeVal  -  [self.chart.chartData[0][0] doubleValue];
     if (timeOffest < 0 || timeOffest != timeOffest)
         timeOffest = 0;
     gridScroll.contentOffset = CGPointMake(timeOffest * stepX, 0);
@@ -187,8 +186,8 @@ static float startMaxRangeVal;
                 curMin = [nextPoint[1][serisNum] floatValue];
             }
             
-            if ( ((NCIZoomChartView *)self.chart).minRangeVal <= [point[0] doubleValue] &&
-                ( minYVal == MAXFLOAT || ((NCIZoomChartView *)self.chart).maxRangeVal  >= [point[0] doubleValue])){
+            if ( self.chart.minRangeVal <= [point[0] doubleValue] &&
+                ( minYVal == MAXFLOAT || self.chart.maxRangeVal  >= [point[0] doubleValue])){
                 
                 if (firstDataIndex > (index - 1)){
                     firstDataIndex = (index - 1);
@@ -226,7 +225,7 @@ static float startMaxRangeVal;
 }
 
 - (double)getScaleIndex{
-    if ( ((NCIZoomChartView *)self.chart).minRangeVal !=  ((NCIZoomChartView *)self.chart).minRangeVal || ((NCIZoomChartView *)self.chart).maxRangeVal !=  ((NCIZoomChartView *)self.chart).maxRangeVal)
+    if ( self.chart.minRangeVal !=  self.chart.minRangeVal || self.chart.maxRangeVal !=  self.chart.maxRangeVal)
         return 1;
     double rangeDiff = [self getRangesPeriod];
     if (rangeDiff == 0){
@@ -243,7 +242,7 @@ static float startMaxRangeVal;
 }
 
 -(double)getRangesPeriod{
-    return  ((NCIZoomChartView *)self.chart).maxRangeVal -  ((NCIZoomChartView *)self.chart).minRangeVal;
+    return  self.chart.maxRangeVal - self.chart.minRangeVal;
 }
 
 - (void)redrawXLabels{

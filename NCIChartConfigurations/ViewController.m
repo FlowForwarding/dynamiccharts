@@ -11,7 +11,7 @@
 #import "NCIChartView.h"
 
 @interface ViewController (){
-    NCIChartView *simpleChart;
+    NCISimpleChartView *simpleChart;
     
     float horisontalIndent;
     float verticalIndent;
@@ -37,8 +37,13 @@
         verticalIndent = 20;
     }
     
+    UIScrollView *pages = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
+    pages.contentSize = CGSizeMake(self.view.frame.size.height * 2, self.view.frame.size.width);
+    pages.pagingEnabled = YES;
+    pages.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:pages];
     
-    simpleChart = [[NCIChartView alloc]
+    simpleChart = [[NCISimpleChartView alloc]
                    initWithFrame:CGRectMake(50, 30, 400, 250)
                    andOptions: @{
                                  
@@ -86,13 +91,18 @@
                                  }];
     
     simpleChart.backgroundColor = [[UIColor brownColor] colorWithAlphaComponent:0.2];
-    [self.view addSubview:simpleChart];
+    [pages addSubview:simpleChart];
     
     
-    //    int numOfPoints = 10;
-    //    for (int ind = 0; ind < numOfPoints; ind ++){
-    //        [simpleChart addPoint:ind val:@[@(arc4random() % 5)]];
-    //    }
+    NCISimpleChartView *zoomingChart =  [[NCISimpleChartView alloc] initWithFrame:
+                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciIsZooming: @YES}];
+    
+    [pages addSubview:zoomingChart];
+    
+    int numOfPoints = 10;
+    for (int ind = 0; ind < numOfPoints; ind ++){
+        [zoomingChart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
     ////  chart.minRangeVal = 5;
     //    chart.maxRangeVal = 8;
     

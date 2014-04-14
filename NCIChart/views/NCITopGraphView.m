@@ -30,14 +30,14 @@
         if ([sender numberOfTouches] == 2) {
             CGPoint point1 = [(UIPinchGestureRecognizer *)sender locationOfTouch:0 inView:self];
             CGPoint point2 = [(UIPinchGestureRecognizer *)sender locationOfTouch:1 inView:self];
-            [((NCITopChartView *)self.chart).nciChart.btmChart startMoveWithPoint:point1 andPoint:point2];
+            [((NCIChartView *)((NCITopChartView *)self.chart).nciChart).btmChart startMoveWithPoint:point1 andPoint:point2];
         }
     }
     if ([(UIPinchGestureRecognizer *)sender state] == UIGestureRecognizerStateChanged) {
         if ([sender numberOfTouches] == 2) {
             CGPoint point1 = [(UIPinchGestureRecognizer *)sender locationOfTouch:0 inView:self];
             CGPoint point2 = [(UIPinchGestureRecognizer *)sender locationOfTouch:1 inView:self];
-            [((NCITopChartView *)self.chart).nciChart.btmChart moveReverseRangesWithPoint:point1 andPoint:point2];
+            [((NCIChartView *)((NCITopChartView *)self.chart).nciChart).btmChart moveReverseRangesWithPoint:point1 andPoint:point2];
         }
     }
     
@@ -46,7 +46,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [super scrollViewDidScroll:scrollView];
-    [((NCITopChartView *)self.chart).nciChart.btmChart redrawRanges];
+    [((NCIChartView *)((NCITopChartView *)self.chart).nciChart).btmChart redrawRanges];
 }
 
 

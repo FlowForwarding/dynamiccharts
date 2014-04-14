@@ -8,6 +8,7 @@
 
 #import "NCISimpleGraphView.h"
 #import "NCISimpleGridView.h"
+#import "NCISimpleChartView.h"
 
 @interface NCISimpleGraphView(){
     

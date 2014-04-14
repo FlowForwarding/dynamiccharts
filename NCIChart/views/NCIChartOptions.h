@@ -51,5 +51,7 @@ extern NSString *const nciGridBottomMargin;
 extern NSString *const nciLeftRangeImageName;
 extern NSString *const nciRightRangeImageName;
 
+extern NSString *const nciIsZooming;
+
 
 @end

@@ -13,7 +13,7 @@
 @interface NCIChartView(){
     float btmChartHeigth;
     float chartsSpace;
-    NSDictionary *topOptions;
+    NSMutableDictionary *topOptions;
     NSDictionary *bottomOptions;
 }
 
@@ -34,7 +34,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         if ([opts objectForKey:nciTopGraphOptions]){
-            topOptions = [opts objectForKey:nciTopGraphOptions];
+            topOptions = [[NSMutableDictionary alloc] initWithDictionary: [opts objectForKey:nciTopGraphOptions]];
         }
         if ([opts objectForKey:nciBottomGraphOptions]){
             bottomOptions = [opts objectForKey:nciBottomGraphOptions];
@@ -59,6 +59,7 @@
 }
 
 - (void)addGraps{
+    [topOptions setObject:@YES forKey:nciIsZooming];
     _topChart = [[NCITopChartView alloc] initWithFrame:CGRectZero andOptions:topOptions];
     _topChart.chartData = self.chartData;
     _topChart.nciChart = self;

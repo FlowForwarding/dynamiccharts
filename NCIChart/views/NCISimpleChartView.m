@@ -8,6 +8,7 @@
 
 #import "NCISimpleChartView.h"
 #import "NCISimpleGridView.h"
+#import "NCIZoomGraphView.h"
 
 @interface NCISimpleChartView(){
     NSDateFormatter* dateFormatter;
@@ -31,6 +32,8 @@
 }
 
 - (void)defaultSetup{
+    _minRangeVal = NAN;
+    _maxRangeVal = NAN;
     gridTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gridTapped:)];
     gridTapped.numberOfTapsRequired = 1;
     
@@ -100,10 +103,13 @@
             _nciYLabelsDistance = [[opts objectForKey:nciYLabelsDistance] floatValue];
         if ([opts objectForKey:nciGridLeftMargin])
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
-    
         if ([opts objectForKey:nciGridBottomMargin]){
             _nciGridBottomMargin = [[opts objectForKey:nciGridBottomMargin] floatValue];
         }
+        if ([opts objectForKey:nciIsZooming]){
+            _nciIsZooming = [[opts objectForKey:nciIsZooming] floatValue];
+        }
+        
         if ([opts objectForKey:nciUseDateFormatter]){
             _nciUseDateFormatter = [[opts objectForKey:nciUseDateFormatter] boolValue];
         } else {
@@ -128,8 +134,11 @@
 }
 
 - (void)addSubviews{
-    
-    self.graph = [[NCISimpleGraphView alloc] initWithChart:self];
+    if (self.nciIsZooming){
+        self.graph = [[NCIZoomGraphView alloc] initWithChart:self];
+    } else {
+        self.graph = [[NCISimpleGraphView alloc] initWithChart:self];
+    }
     [self addSubview:_graph];
     [self setupSelection];
 }

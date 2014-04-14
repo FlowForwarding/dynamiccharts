@@ -51,4 +51,6 @@ NSString *const nciBottomChartHeight = @"nciBottomChartHeight";
 NSString *const nciLeftRangeImageName = @"nciLeftRangeImageName";
 NSString *const nciRightRangeImageName = @"nciRightRangeImageName";
 
+extern NSString *const nciIsZooming = @"nciIsZooming";
+
 @end

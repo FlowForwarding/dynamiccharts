@@ -17,10 +17,7 @@
 
 @implementation NCITopChartView
 
-
 - (void)addSubviews{
-    self.minRangeVal = NAN;
-    self.maxRangeVal = NAN;
     self.graph = [[NCITopGraphView alloc] initWithChart:self];
     [self addSubview:self.graph];
 }

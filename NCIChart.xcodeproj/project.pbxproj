@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A16040818FC240900FC3166 /* NCIZoomChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A16040718FC240900FC3166 /* NCIZoomChartView.m */; };
 		2A1E1BDB1863794D00009A3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1E1BDA1863794D00009A3A /* Foundation.framework */; };
 		2A1E1BE91863794D00009A3A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1E1BE81863794D00009A3A /* XCTest.framework */; };
 		2A1E1BEA1863794D00009A3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1E1BDA1863794D00009A3A /* Foundation.framework */; };
@@ -65,8 +64,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2A16040618FC240900FC3166 /* NCIZoomChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIZoomChartView.h; sourceTree = "<group>"; };
-		2A16040718FC240900FC3166 /* NCIZoomChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIZoomChartView.m; sourceTree = "<group>"; };
 		2A1E1BD71863794D00009A3A /* libNCIChart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNCIChart.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1E1BDA1863794D00009A3A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2A1E1BDE1863794D00009A3A /* NCIChart-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NCIChart-Prefix.pch"; sourceTree = "<group>"; };
@@ -294,8 +291,6 @@
 		2AA3AC5A18CF1FFA00AD114E /* zoom */ = {
 			isa = PBXGroup;
 			children = (
-				2A16040618FC240900FC3166 /* NCIZoomChartView.h */,
-				2A16040718FC240900FC3166 /* NCIZoomChartView.m */,
 				2A2902B018966FE400661079 /* NCIZoomGraphView.h */,
 				2A2902B118966FE400661079 /* NCIZoomGraphView.m */,
 				2A2902B31896706A00661079 /* NCIZoomGridView.h */,
@@ -446,7 +441,6 @@
 				2A6DDF1B1866C4320013D202 /* NCISimpleGridView.m in Sources */,
 				2AA3AC6118CF22FC00AD114E /* NCIBarGraphView.m in Sources */,
 				2A6DDF1E1866CEB20013D202 /* NCIChartView.m in Sources */,
-				2A16040818FC240900FC3166 /* NCIZoomChartView.m in Sources */,
 				2A6DDF071864C4870013D202 /* NCISimpleGraphView.m in Sources */,
 				2A2902B51896706A00661079 /* NCIZoomGridView.m in Sources */,
 				2A55A1F918675A1E00088F2F /* NCITopGraphView.m in Sources */,

@@ -6,14 +6,13 @@
 //  Copyright (c) 2013 FlowForwarding.Org. All rights reserved.
 //
 
-#import "NCIBtmChartView.h"
+#import "NCIBtmGraphView.h"
 #import "NCIHandspikeView.h"
 #import "NCISimpleGraphView.h"
 #import "NCISimpleGridView.h"
 #import "NCIChartView.h"
-#import "NCITopChartView.h"
 
-@interface NCIBtmChartView(){
+@interface NCIBtmGraphView(){
     NCIHandspikeView *handspikeLeft;
     NCIHandspikeView *handspikeRight;
     UIView *rightAmputation;
@@ -28,7 +27,7 @@
 
 @end
 
-@implementation NCIBtmChartView
+@implementation NCIBtmGraphView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -79,12 +78,12 @@
     if (self.nciChart.topChart.minRangeVal !=  self.nciChart.topChart.minRangeVal)
         return;
     
-    float gridHeigth =  self.graph.grid.frame.size.height;
-    _xHandspikeLeft = [self.graph getXByArgument: self.nciChart.topChart.minRangeVal] + self.graph.chart.nciGridLeftMargin;
-    _xHandspikeRight = [self.graph getXByArgument: self.nciChart.topChart.maxRangeVal] + self.graph.chart.nciGridLeftMargin;
+    float gridHeigth =  self.grid.frame.size.height;
+    _xHandspikeLeft = [self getXByArgument: self.nciChart.topChart.minRangeVal] + self.chart.nciGridLeftMargin;
+    _xHandspikeRight = [self getXByArgument: self.nciChart.topChart.maxRangeVal] + self.chart.nciGridLeftMargin;
     
     handspikeLeft.frame = CGRectMake(_xHandspikeLeft - handspikeLeft.frame.size.width/2, 0, handspikeLeft.frame.size.width, gridHeigth);
-    leftAmputation.frame = CGRectMake(self.graph.chart.nciGridLeftMargin, 0, _xHandspikeLeft - self.graph.chart.nciGridLeftMargin, gridHeigth);
+    leftAmputation.frame = CGRectMake(self.chart.nciGridLeftMargin, 0, _xHandspikeLeft - self.chart.nciGridLeftMargin, gridHeigth);
     
     handspikeRight.frame = CGRectMake(_xHandspikeRight  - handspikeRight.frame.size.width/2, 0, handspikeRight.frame.size.width, gridHeigth);
     rightAmputation.frame = CGRectMake(_xHandspikeRight, 0,
@@ -103,7 +102,7 @@ static float startRightRange = -1;
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     __block UITouch *touch1;
-    __weak NCIBtmChartView *weakSelf = self;
+    __weak NCIBtmGraphView *weakSelf = self;
     
     [[event allTouches] enumerateObjectsUsingBlock:^(UITouch  *touch, BOOL *stop) {
         CGPoint location = [touch locationInView:weakSelf];
@@ -145,7 +144,7 @@ static float startRightRange = -1;
     __block float newLeft = -1;
     __block float newRight = -1;
     
-    __weak NCIBtmChartView* weakSelf = self;
+    __weak NCIBtmGraphView* weakSelf = self;
     //here we set up new min and max ranges values for chart
     [[event allTouches] enumerateObjectsUsingBlock:^(UITouch  *touch, BOOL *stop) {
         CGPoint location = [touch locationInView:weakSelf];
@@ -177,7 +176,7 @@ static float startRightRange = -1;
 
 - (void)moveRangesFollowingNewLeft:(double)newLeft newRight:(double)newRight {
     
-    if (!( (newLeft != -1 ) && ((newLeft - self.graph.chart.nciGridLeftMargin) > 0))){
+    if (!( (newLeft != -1 ) && ((newLeft - self.chart.nciGridLeftMargin) > 0))){
         newLeft = _xHandspikeLeft;
     };
     
@@ -188,8 +187,8 @@ static float startRightRange = -1;
     if ((newLeft != -1 && newRight != -1) && (newRight - newLeft) < minRangesDistance)
         return;
     
-    self.nciChart.topChart.minRangeVal = [self.graph getArgumentByX:newLeft - self.graph.chart.nciGridLeftMargin];
-    self.nciChart.topChart.maxRangeVal = [self.graph getArgumentByX:newRight - self.graph.chart.nciGridLeftMargin];
+    self.nciChart.topChart.minRangeVal = [self getArgumentByX:newLeft - self.chart.nciGridLeftMargin];
+    self.nciChart.topChart.maxRangeVal = [self getArgumentByX:newRight - self.chart.nciGridLeftMargin];
 
     [self.nciChart.topChart.graph setNeedsLayout];
     [self.nciChart.topChart.graph.grid setNeedsDisplay];

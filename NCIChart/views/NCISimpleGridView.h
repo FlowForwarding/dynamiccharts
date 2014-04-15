@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NCISimpleGraphView.h"
+#import "NCITopGraphView.h"
 
 @interface NCISimpleGridView : UIView
 
-@property(nonatomic, strong) NCISimpleGraphView *graph;
+@property(nonatomic, strong) NCITopGraphView *graph;
 - (id)initWithGraph:(NCISimpleGraphView *) ncigraph;
 
 - (void)setBgColor;

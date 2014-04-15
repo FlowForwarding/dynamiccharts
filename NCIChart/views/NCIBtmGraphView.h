@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NCISimpleChartView.h"
+#import "NCISimpleGraphView.h"
 @class NCIChartView;
 
-@interface NCIBtmChartView : NCISimpleChartView
+@interface NCIBtmGraphView : NCISimpleGraphView
 
 - (void)redrawRanges;
 - (void)startMoveWithPoint:(CGPoint) point1 andPoint:(CGPoint) point2;

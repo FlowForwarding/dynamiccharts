@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "NCISimpleChartView.h"
-#import "NCITopChartView.h"
-#import "NCIBtmChartView.h"
 
 @interface NCIChartView : NCISimpleChartView
 
-@property(nonatomic, strong) NCITopChartView *topChart;
-@property(nonatomic, strong) NCIBtmChartView *btmChart;
+@property(nonatomic, strong) NCISimpleChartView *topChart;
+@property(nonatomic, strong) NCISimpleChartView *btmChart;
 @property(nonatomic)double minRangeVal;
 @property(nonatomic)double maxRangeVal;
 

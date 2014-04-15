@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "NCIBarChartView.h"
+#import "NCIBarGraphView.h"
 #import "NCIChartView.h"
 #import "NCIZoomGraphView.h"
 
@@ -39,7 +39,7 @@
     }
     
     UIScrollView *pages = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
-    pages.contentSize = CGSizeMake(self.view.frame.size.height * 2, self.view.frame.size.width);
+    pages.contentSize = CGSizeMake(self.view.frame.size.height * 4, self.view.frame.size.width);
     pages.pagingEnabled = YES;
     pages.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:pages];
@@ -103,6 +103,24 @@
     int numOfPoints = 10;
     for (int ind = 0; ind < numOfPoints; ind ++){
         [zoomingChart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
+    
+    NCIChartView *nciChart =  [[NCIChartView alloc] initWithFrame:
+                                         CGRectMake(2*self.view.frame.size.height + 50, 30, 400, 250)];
+    
+    [pages addSubview:nciChart];
+    
+    for (int ind = 0; ind < 10; ind ++){
+        [nciChart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
+    
+    NCISimpleChartView *barChart =  [[NCISimpleChartView alloc] initWithFrame:
+                               CGRectMake(3*self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciGraphRenderer: [NCIBarGraphView class]}];
+    
+    [pages addSubview:barChart];
+    
+    for (int ind = 0; ind < 10; ind ++){
+        [barChart addPoint:ind val:@[@(arc4random() % 5)]];
     }
     ////  chart.minRangeVal = 5;
     //    chart.maxRangeVal = 8;

@@ -7,15 +7,14 @@
 //
 
 #import "NCIChartView.h"
-#import "NCITopChartView.h"
-#import "NCIBtmChartView.h"
-#import "NCIZoomGraphView.h"
+#import "NCIBtmGraphView.h"
+#import "NCITopGraphView.h"
 
 @interface NCIChartView(){
     float btmChartHeigth;
     float chartsSpace;
     NSMutableDictionary *topOptions;
-    NSDictionary *bottomOptions;
+    NSMutableDictionary *bottomOptions;
 }
 
 @end
@@ -26,6 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        topOptions = [[NSMutableDictionary alloc] init];
+        bottomOptions = [[NSMutableDictionary alloc] init];
         [self addGraps];
     }
     return self;
@@ -36,9 +37,13 @@
     if (self) {
         if ([opts objectForKey:nciTopGraphOptions]){
             topOptions = [[NSMutableDictionary alloc] initWithDictionary: [opts objectForKey:nciTopGraphOptions]];
+        } else {
+            topOptions = [[NSMutableDictionary alloc] init];
         }
         if ([opts objectForKey:nciBottomGraphOptions]){
-            bottomOptions = [opts objectForKey:nciBottomGraphOptions];
+            bottomOptions = [[NSMutableDictionary alloc] initWithDictionary: [opts objectForKey:nciBottomGraphOptions]];
+        } else {
+            bottomOptions = [[NSMutableDictionary alloc] init];
         }
         if ([opts objectForKey:nciBottomChartHeight]){
             btmChartHeigth = [[opts objectForKey:nciBottomChartHeight] floatValue];
@@ -60,16 +65,17 @@
 }
 
 - (void)addGraps{
-    [topOptions setObject:[[NCIZoomGraphView alloc] init] forKey:nciGraphRenderer];
-    _topChart = [[NCITopChartView alloc] initWithFrame:CGRectZero andOptions:topOptions];
+    [topOptions setObject:[NCITopGraphView class] forKey:nciGraphRenderer];
+    _topChart = [[NCISimpleChartView alloc] initWithFrame:CGRectZero andOptions:topOptions];
+    ((NCITopGraphView *)_topChart.graph).nciChart = self;
     _topChart.chartData = self.chartData;
-    _topChart.nciChart = self;
     _topChart.nciHasSelection = YES;
-    _btmChart = [[NCIBtmChartView alloc] initWithFrame:CGRectZero andOptions:bottomOptions];
+    [bottomOptions setObject:[NCIBtmGraphView class] forKey:nciGraphRenderer];
+    _btmChart = [[NCISimpleChartView alloc] initWithFrame:CGRectZero andOptions:bottomOptions];
+    ((NCIBtmGraphView *)_btmChart.graph).nciChart = self;
     _btmChart.chartData = self.chartData;
     _btmChart.nciHasSelection = NO;
     _btmChart.hasYLabels = NO;
-    _btmChart.nciChart = self;
     [self addSubview:_topChart];
     [self addSubview:_btmChart];
 }

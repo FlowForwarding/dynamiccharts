@@ -10,9 +10,9 @@
 
 @interface NCILine : NSObject
 
--(id)initWithWidth:(float)w color:(UIColor *)c andDashes:(NSArray *)dashes;
+- (id)initWithOptions:(NSDictionary *)options;
 
-+ (void)setUpLine:(CGContextRef) currentContext line:(NCILine*)line;
+- (void)setUpLine:(CGContextRef) currentContext;
 
 @property(nonatomic)float width;
 @property(nonatomic, strong)UIColor* color;

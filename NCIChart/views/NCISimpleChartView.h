@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NCIChartOptions.h"
 #import "NCILine.h"
+#import "NCIAxis.h"
 
 @class NCISimpleGraphView;
 
@@ -16,8 +17,10 @@
 
 @property (nonatomic, strong)NCISimpleGraphView *graph;
 @property (nonatomic, strong)NSMutableArray *chartData;
-@property (nonatomic, strong)UILabel *selectedLabel;
+@property (nonatomic, strong)NCIAxis *xAxis;
+@property (nonatomic, strong)NCIAxis *yAxis;
 
+@property (nonatomic, strong)UILabel *selectedLabel;
 @property (nonatomic)bool nciUseDateFormatter;
 @property (nonatomic)bool nciShowPoints;
 @property (nonatomic)bool hasYLabels;
@@ -46,8 +49,6 @@
 @property (nonatomic)float topBottomGridSpace;
 @property (nonatomic)float leftRightGridSpace;
 
-@property (nonatomic, strong) NCILine* nciBoundaryVertical;
-@property (nonatomic, strong) NCILine* nciBoundaryHorizontal;
 @property (nonatomic, strong) NCILine* nciGridVertical;
 @property (nonatomic, strong) NCILine* nciGridHorizontal;
 @property (nonatomic, strong) UIColor* nciGridColor;

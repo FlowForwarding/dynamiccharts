@@ -35,8 +35,6 @@ NSString *const nciTapGridAction = @"nciTapGridAction";
 NSString *const nciShowPoints = @"nciShowPoints";
 NSString *const nciUseDateFormatter = @"nciUseDateFormatter";
 
-NSString *const nciBoundaryVertical = @"nciBoundaryVertical";
-NSString *const nciBoundaryHorizontal = @"nciBoundaryHorizontal";
 NSString *const nciGridVertical = @"nciGridVertical";
 NSString *const nciGridHorizontal = @"nciGridHorizontal";
 NSString *const nciGridColor = @"nciGridColor";
@@ -53,5 +51,12 @@ NSString *const nciLeftRangeImageName = @"nciLeftRangeImageName";
 NSString *const nciRightRangeImageName = @"nciRightRangeImageName";
 
 NSString *const nciGraphRenderer = @"nciGraphRenderer";
+
+NSString *const nciXAxis = @"nciXAxis";
+NSString *const nciYAxis = @"nciYAxis";
+NSString *const nciInvertedLabes = @"nciInvertedLabes";
+NSString *const nciLineColor = @"nciLineColor";
+NSString *const nciLineWidth = @"nciLineWidth";
+NSString *const nciLineDashes = @"nciLineDashes";
 
 @end

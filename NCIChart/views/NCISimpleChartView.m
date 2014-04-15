@@ -38,7 +38,7 @@
     gridTapped.numberOfTapsRequired = 1;
     
     _nciGridTopMargin = 50;
-    _nciGridRightMargin = 50;
+    _nciGridRightMargin = 30;
     _hasYLabels = YES;
     _nciIsFill = [[NSMutableArray alloc] init];
     _topBottomGridSpace = 10;
@@ -82,8 +82,8 @@
             _nciIsFill = [opts objectForKey:nciIsFill];
         
         for (NSString* key in @[nciLineColors, nciXLabelsFont, nciYLabelsFont,
-                                nciBoundaryVertical, nciBoundaryHorizontal,
-                                nciGridVertical, nciGridHorizontal, nciGridColor,
+                               // nciBoundaryVertical, nciBoundaryHorizontal,
+                                nciGridColor,
                                 nciXLabelsColor, nciYLabelsColor, nciLeftRangeImageName, nciRightRangeImageName,
                                 nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
                                 nciSelPointTextRenderer, nciXLabelRenderer, nciYLabelRenderer,
@@ -97,6 +97,11 @@
                 }
             }
         }
+        
+        _xAxis = [[NCIAxis alloc] initWithOptions:[opts objectForKey:nciXAxis]];
+        _yAxis = [[NCIAxis alloc] initWithOptions:[opts objectForKey:nciYAxis]];
+        _nciGridVertical = [[NCILine alloc] initWithOptions:[opts objectForKey:nciGridVertical]];
+        _nciGridHorizontal = [[NCILine alloc]  initWithOptions:[opts objectForKey:nciGridHorizontal]];
         
         if ([opts objectForKey:nciGraphRenderer]){
             Class rendererClass = (Class)[opts objectForKey: nciGraphRenderer];

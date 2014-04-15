@@ -7,38 +7,48 @@
 //
 
 #import "NCILine.h"
+#import "NCIChartOptions.h"
 
 @implementation NCILine
 
--(id)initWithWidth:(float)w color:(UIColor *)c andDashes:(NSArray *)dashes{
+- (id)initWithOptions:(NSDictionary *)options{
     self = [self init];
     if (self){
-        _width = w;
-        _color = c;
-        _dashes = dashes;
+        if ([options objectForKey:nciLineColor]){
+            self.color = [options objectForKey:nciLineColor];
+        } else {
+            self.color = [UIColor blackColor];
+        }
+        
+        if ([options objectForKey:nciLineWidth]){
+            self.width = [[options objectForKey:nciLineWidth] floatValue];
+        } else {
+            self.width = 0.3;
+        }
+        
+        if ([options objectForKey:nciLineDashes]){
+            self.dashes = [options objectForKey:nciLineDashes];
+        } else {
+            self.dashes = @[ @1, @1 ];
+        }
     }
     return self;
 }
 
-+ (void)setUpLine:(CGContextRef) currentContext line:(NCILine*)line{
-    CGContextSetLineWidth(currentContext, 0.3);
-    [[UIColor blackColor] setStroke];
-    CGFloat dashes[] = { 1, 1 };
-    CGContextSetLineDash(currentContext, 0.0,  dashes , 2 );
-    if (line){
-        if (line.width)
-            CGContextSetLineWidth(currentContext, line.width);
-        if (line.color)
-            [line.color setStroke];
-        if (line.dashes && line.dashes.count == 2
-            && [line.dashes[0] integerValue]
-            && [line.dashes[1] integerValue]){
-            CGFloat dashes[] = { [line.dashes[0] integerValue], [line.dashes[1] integerValue]};
-            CGContextSetLineDash(currentContext, 0.0, dashes, 2 );
-        } else {
-            CGContextSetLineDash(currentContext, 0, NULL, 0);
-        }
+- (void)setUpLine:(CGContextRef) currentContext{
+    if (_width)
+        CGContextSetLineWidth(currentContext, _width);
+    if (_color)
+        [_color setStroke];
+    if (_dashes && _dashes.count == 2
+        && [_dashes[0] integerValue]
+        && [_dashes[1] integerValue]){
+        CGFloat dashes[] = { [_dashes[0] integerValue], [_dashes[1] integerValue]};
+        CGContextSetLineDash(currentContext, 0.0, dashes, 2 );
+    } else {
+        CGContextSetLineDash(currentContext, 0, NULL, 0);
     }
+    
 }
 
 @end

@@ -39,8 +39,6 @@ extern NSString *const nciBottomChartHeight;
 extern NSString *const nciShowPoints;
 extern NSString *const nciUseDateFormatter;
 
-extern NSString *const nciBoundaryVertical;
-extern NSString *const nciBoundaryHorizontal;
 extern NSString *const nciGridVertical;
 extern NSString *const nciGridHorizontal;
 extern NSString *const nciGridColor;
@@ -53,6 +51,13 @@ extern NSString *const nciLeftRangeImageName;
 extern NSString *const nciRightRangeImageName;
 
 extern NSString *const nciGraphRenderer;
+
+extern NSString *const nciXAxis;
+extern NSString *const nciYAxis;
+extern NSString *const nciInvertedLabes;
+extern NSString *const nciLineColor;
+extern NSString *const nciLineWidth;
+extern NSString *const nciLineDashes;
 
 
 @end

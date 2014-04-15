@@ -48,7 +48,7 @@
 
 //pragma draw grid
 - (void)setVerticalGrid:(CGContextRef) currentContext{
-    [NCILine setUpLine:currentContext line:self.graph.chart.nciGridVertical];
+    [self.graph.chart.nciGridVertical setUpLine:currentContext];
     for (UILabel *xLabel in _graph.xAxisLabels){
         CGContextMoveToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
                              + self.graph.chart.nciXLabelsDistance/2, xLabel.frame.origin.y);
@@ -59,7 +59,7 @@
 }
 
 - (void)setHorizontalGrid:(CGContextRef) currentContext{
-    [NCILine setUpLine:currentContext line:self.graph.chart.nciGridHorizontal];
+    [self.graph.chart.nciGridHorizontal setUpLine:currentContext];
     for (UILabel *yLabel in _graph.yAxisLabels){
         CGContextMoveToPoint(currentContext, yLabel.frame.origin.x, yLabel.frame.origin.y + self.graph.yLabelShift);
         CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + self.graph.yLabelShift);
@@ -68,8 +68,8 @@
 }
 
 - (void)setBoundaryVertical:(CGContextRef ) currentContext{
-    if (self.graph.chart.nciBoundaryVertical){
-        [NCILine setUpLine:currentContext line:self.graph.chart.nciBoundaryVertical];
+    if (self.graph.chart.xAxis){
+        [self.graph.chart.xAxis setUpLine:currentContext];
         CGContextMoveToPoint(currentContext, 0, 0);
         CGContextAddLineToPoint(currentContext, 0, self.frame.size.height);
         CGContextStrokePath(currentContext);
@@ -77,8 +77,8 @@
 }
 
 - (void)setBoundaryHorizontal:(CGContextRef ) currentContext{
-    if (self.graph.chart.nciBoundaryHorizontal){
-        [NCILine setUpLine:currentContext line:self.graph.chart.nciBoundaryHorizontal];
+    if (self.graph.chart.yAxis){
+        [self.graph.chart.yAxis setUpLine:currentContext];
         CGContextMoveToPoint(currentContext,0, self.frame.size.height);
         CGContextAddLineToPoint(currentContext,self.frame.size.width, self.frame.size.height);
         CGContextStrokePath(currentContext);

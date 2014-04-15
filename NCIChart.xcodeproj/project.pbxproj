@@ -37,6 +37,7 @@
 		2AA3AC6418CF231C00AD114E /* NCIBarGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA3AC6318CF231C00AD114E /* NCIBarGridView.m */; };
 		2AA5BA59186C511800222760 /* NCIChartOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5BA58186C511800222760 /* NCIChartOptions.m */; };
 		2ACAD5C21887081600F4832E /* NCILine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACAD5C11887081600F4832E /* NCILine.m */; };
+		2ACF186218FD4B2400633964 /* NCIAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACF186118FD4B2400633964 /* NCIAxis.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		2AA5BA58186C511800222760 /* NCIChartOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIChartOptions.m; sourceTree = "<group>"; };
 		2ACAD5C01887081600F4832E /* NCILine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCILine.h; sourceTree = "<group>"; };
 		2ACAD5C11887081600F4832E /* NCILine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCILine.m; sourceTree = "<group>"; };
+		2ACF186018FD4B2400633964 /* NCIAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIAxis.h; sourceTree = "<group>"; };
+		2ACF186118FD4B2400633964 /* NCIAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIAxis.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +227,8 @@
 				2AA5BA58186C511800222760 /* NCIChartOptions.m */,
 				2ACAD5C01887081600F4832E /* NCILine.h */,
 				2ACAD5C11887081600F4832E /* NCILine.m */,
+				2ACF186018FD4B2400633964 /* NCIAxis.h */,
+				2ACF186118FD4B2400633964 /* NCIAxis.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -435,6 +440,7 @@
 				2A2902B218966FE400661079 /* NCIZoomGraphView.m in Sources */,
 				2A6DDF211866D9230013D202 /* NCIBtmGraphView.m in Sources */,
 				2AA3AC6418CF231C00AD114E /* NCIBarGridView.m in Sources */,
+				2ACF186218FD4B2400633964 /* NCIAxis.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

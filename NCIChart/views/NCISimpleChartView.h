@@ -52,6 +52,7 @@
 @property (nonatomic, strong) NCILine* nciGridHorizontal;
 @property (nonatomic, strong) UIColor* nciGridColor;
 @property (nonatomic) float nciGridLeftMargin;
+@property (nonatomic) float nciGridRightMargin;
 @property (nonatomic) float nciGridTopMargin;
 @property (nonatomic) float nciGridBottomMargin;
 

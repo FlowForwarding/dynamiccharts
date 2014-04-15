@@ -87,7 +87,7 @@
     
     handspikeRight.frame = CGRectMake(_xHandspikeRight  - handspikeRight.frame.size.width/2, 0, handspikeRight.frame.size.width, gridHeigth);
     rightAmputation.frame = CGRectMake(_xHandspikeRight, 0,
-                                       self.frame.size.width - _xHandspikeRight, gridHeigth);
+                                       self.frame.size.width - _xHandspikeRight - self.chart.nciGridRightMargin, gridHeigth);
 
     
 }

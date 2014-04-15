@@ -11,10 +11,6 @@
 
 @implementation NCIBarGridView
 
-- (NSArray *)getFirstLast{
-    return @[@(0), @(self.graph.chart.chartData.count)];
-}
-
 - (void)drawGraphLine:(NSArray *)firstLast{
     for (UIView *subView in self.subviews){
         [subView removeFromSuperview];

@@ -41,6 +41,7 @@ NSString *const nciGridVertical = @"nciGridVertical";
 NSString *const nciGridHorizontal = @"nciGridHorizontal";
 NSString *const nciGridColor = @"nciGridColor";
 NSString *const nciGridLeftMargin = @"nciGridLeftMargin";
+NSString *const nciGridRightMargin = @"nciGridRightMargin";
 NSString *const nciGridTopMargin = @"nciGridTopMargin";
 NSString *const nciGridBottomMargin = @"nciGridBottomMargin";
 

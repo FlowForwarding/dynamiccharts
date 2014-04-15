@@ -251,7 +251,7 @@ static float startMaxRangeVal;
     [self formatDateForDistance:xLabelsDistance/scaleIndex];
     
     float shift = gridScroll.contentOffset.x - xLabelsDistance*((int)gridScroll.contentOffset.x / (int)xLabelsDistance);
-    for(int i = 0; i<= self.gridWidth/xLabelsDistance + 1; i++){
+    for(int i = 0; i<= self.gridWidth/xLabelsDistance; i++){
         float xVal = self.chart.nciGridLeftMargin + xLabelsDistance *i - shift;
         if ((xVal - self.chart.nciGridLeftMargin) >= 0 && (xVal < self.frame.size.width) ){
             UILabel *label = [[UILabel alloc] initWithFrame:

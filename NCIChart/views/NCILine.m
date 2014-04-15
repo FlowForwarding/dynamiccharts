@@ -20,4 +20,25 @@
     return self;
 }
 
++ (void)setUpLine:(CGContextRef) currentContext line:(NCILine*)line{
+    CGContextSetLineWidth(currentContext, 0.3);
+    [[UIColor blackColor] setStroke];
+    CGFloat dashes[] = { 1, 1 };
+    CGContextSetLineDash(currentContext, 0.0,  dashes , 2 );
+    if (line){
+        if (line.width)
+            CGContextSetLineWidth(currentContext, line.width);
+        if (line.color)
+            [line.color setStroke];
+        if (line.dashes && line.dashes.count == 2
+            && [line.dashes[0] integerValue]
+            && [line.dashes[1] integerValue]){
+            CGFloat dashes[] = { [line.dashes[0] integerValue], [line.dashes[1] integerValue]};
+            CGContextSetLineDash(currentContext, 0.0, dashes, 2 );
+        } else {
+            CGContextSetLineDash(currentContext, 0, NULL, 0);
+        }
+    }
+}
+
 @end

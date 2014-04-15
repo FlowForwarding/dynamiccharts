@@ -37,7 +37,8 @@
     gridTapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gridTapped:)];
     gridTapped.numberOfTapsRequired = 1;
     
-    _nciGridTopMargin = 0;
+    _nciGridTopMargin = 50;
+    _nciGridRightMargin = 50;
     _hasYLabels = YES;
     _nciIsFill = [[NSMutableArray alloc] init];
     _topBottomGridSpace = 10;
@@ -109,6 +110,8 @@
             _nciYLabelsDistance = [[opts objectForKey:nciYLabelsDistance] floatValue];
         if ([opts objectForKey:nciGridLeftMargin])
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
+        if ([opts objectForKey:nciGridRightMargin])
+            _nciGridRightMargin = [[opts objectForKey:nciGridRightMargin] floatValue];
         if ([opts objectForKey:nciGridBottomMargin]){
             _nciGridBottomMargin = [[opts objectForKey:nciGridBottomMargin] floatValue];
         }

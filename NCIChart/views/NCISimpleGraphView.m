@@ -52,7 +52,7 @@
     [_xAxisLabels removeAllObjects];
     
     _gridHeigth = self.frame.size.height- self.chart.nciGridBottomMargin;
-    _gridWidth = self.frame.size.width - self.chart.nciGridLeftMargin;
+    _gridWidth = self.frame.size.width - self.chart.nciGridLeftMargin - self.chart.nciGridRightMargin;
     float yLabelsDistance = self.chart.nciYLabelsDistance;
     
     if (_chart.chartData.count > 0){

@@ -12,6 +12,8 @@
 
 -(id)initWithWidth:(float)w color:(UIColor *)c andDashes:(NSArray *)dashes;
 
++ (void)setUpLine:(CGContextRef) currentContext line:(NCILine*)line;
+
 @property(nonatomic)float width;
 @property(nonatomic, strong)UIColor* color;
 @property(nonatomic, strong)NSArray* dashes;

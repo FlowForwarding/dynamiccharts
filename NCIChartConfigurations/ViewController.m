@@ -120,7 +120,7 @@
     [pages addSubview:barChart];
     
     for (int ind = 0; ind < 10; ind ++){
-        [barChart addPoint:ind val:@[@(arc4random() % 5)]];
+        [barChart addPoint:ind val:@[@(-arc4random() % 5)]];
     }
     ////  chart.minRangeVal = 5;
     //    chart.maxRangeVal = 8;

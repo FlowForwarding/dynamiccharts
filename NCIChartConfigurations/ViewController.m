@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "NCIBarChartView.h"
 #import "NCIChartView.h"
+#import "NCIZoomGraphView.h"
 
 @interface ViewController (){
     NCISimpleChartView *simpleChart;
@@ -95,7 +96,7 @@
     
     
     NCISimpleChartView *zoomingChart =  [[NCISimpleChartView alloc] initWithFrame:
-                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciIsZooming: @YES}];
+                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciGraphRenderer: [NCIZoomGraphView class]}];
     
     [pages addSubview:zoomingChart];
     

@@ -58,8 +58,6 @@
 @property (nonatomic, copy) NSString* nciLeftRangeImageName;
 @property (nonatomic, copy) NSString* nciRightRangeImageName;
 
-@property(nonatomic)double nciIsZooming;
-
 @property(nonatomic)double minRangeVal;
 @property(nonatomic)double maxRangeVal;
 

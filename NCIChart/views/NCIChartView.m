@@ -9,6 +9,7 @@
 #import "NCIChartView.h"
 #import "NCITopChartView.h"
 #import "NCIBtmChartView.h"
+#import "NCIZoomGraphView.h"
 
 @interface NCIChartView(){
     float btmChartHeigth;
@@ -59,7 +60,7 @@
 }
 
 - (void)addGraps{
-    [topOptions setObject:@YES forKey:nciIsZooming];
+    [topOptions setObject:[[NCIZoomGraphView alloc] init] forKey:nciGraphRenderer];
     _topChart = [[NCITopChartView alloc] initWithFrame:CGRectZero andOptions:topOptions];
     _topChart.chartData = self.chartData;
     _topChart.nciChart = self;

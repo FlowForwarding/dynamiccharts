@@ -96,6 +96,12 @@
                 }
             }
         }
+        
+        if ([opts objectForKey:nciGraphRenderer]){
+            Class rendererClass = (Class)[opts objectForKey: nciGraphRenderer];
+            self.graph = [[rendererClass alloc] initWithChart:self];
+            self.graph.chart = self;
+        }
     
         if ([opts objectForKey:nciXLabelsDistance])
             _nciXLabelsDistance = [[opts objectForKey:nciXLabelsDistance] floatValue];
@@ -105,9 +111,6 @@
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
         if ([opts objectForKey:nciGridBottomMargin]){
             _nciGridBottomMargin = [[opts objectForKey:nciGridBottomMargin] floatValue];
-        }
-        if ([opts objectForKey:nciIsZooming]){
-            _nciIsZooming = [[opts objectForKey:nciIsZooming] floatValue];
         }
         
         if ([opts objectForKey:nciUseDateFormatter]){
@@ -134,9 +137,7 @@
 }
 
 - (void)addSubviews{
-    if (self.nciIsZooming){
-        self.graph = [[NCIZoomGraphView alloc] initWithChart:self];
-    } else {
+    if (!self.graph ){
         self.graph = [[NCISimpleGraphView alloc] initWithChart:self];
     }
     [self addSubview:_graph];

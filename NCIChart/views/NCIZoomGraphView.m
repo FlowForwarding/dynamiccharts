@@ -235,16 +235,15 @@ static float startMaxRangeVal;
     }
 }
 
--(double)getXValuesGap{
+- (double)getXValuesGap{
     if (self.chart.chartData.count == 0)
         return 0;
     return [[self.chart.chartData lastObject][0] doubleValue] - [self.chart.chartData[0][0] doubleValue];
 }
 
--(double)getRangesPeriod{
+- (double)getRangesPeriod{
     return  self.chart.maxRangeVal - self.chart.minRangeVal;
 }
-
 
 - (double)getArgumentByX:(float) pointX{
     float scaleIndex = [self getScaleIndex];

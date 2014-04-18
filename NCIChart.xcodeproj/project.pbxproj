@@ -373,9 +373,6 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = FlowForwarding.Org;
 				TargetAttributes = {
-					2A1E1BE61863794D00009A3A = {
-						TestTargetID = 2A6DDEC018647C0E0013D202;
-					};
 					2A6DDEC018647C0E0013D202 = {
 						DevelopmentTeam = G6Q4LXCQY7;
 					};
@@ -594,7 +591,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NCIChartConfigurations.app/NCIChartConfigurations";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -608,7 +604,6 @@
 				);
 				INFOPLIST_FILE = "NCIChartTests/NCIChartTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -617,7 +612,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NCIChartConfigurations.app/NCIChartConfigurations";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -627,7 +621,6 @@
 				GCC_PREFIX_HEADER = "NCIChart/NCIChart-Prefix.pch";
 				INFOPLIST_FILE = "NCIChartTests/NCIChartTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

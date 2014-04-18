@@ -9,20 +9,26 @@
 #import "NCIAxis.h"
 #import "NCIChartOptions.h"
 #import "NCISimpleGraphView.h"
+#import "NCISimpleGridView.h"
 
+
+//TODO make 2 objects for NCIXAxis and NCIYAxis
 @interface NCIAxis()
 
-@property(nonatomic)bool xPos;
-@property(nonatomic)bool yPos;
 @property(nonatomic)bool invertedLabes;
 @property(nonatomic, strong)UIFont* labelsFont;
 @property(nonatomic, strong)UIColor* labelsColor;
 @property (nonatomic, copy) NSString* (^labelRenderer)(double);
 @property (nonatomic)bool nciUseDateFormatter;
 @property(nonatomic)float labelsDistance;
+@property(nonatomic)float nciAxisShift;
+
+@property(nonatomic)float labelWidth;
+@property(nonatomic)float labelHeight;
 
 @property(nonatomic, strong) NSDateFormatter *dateFormatter;
-@property(nonatomic) float step;
+@property(nonatomic) double dimention;
+@property(nonatomic) double step;
 
 @end
 
@@ -30,6 +36,7 @@
 
 - (id)initWithOptions:(NSDictionary *)options{
     if (self = [super initWithOptions:options]){
+        _nciAxisShift = NAN;
         _dateFormatter = [[NSDateFormatter alloc] init];
         _labels = [[NSMutableArray alloc] init];
         
@@ -58,6 +65,10 @@
             _labelsColor = [UIColor blackColor];
         }
         
+        
+        if ([options objectForKey:nciAxisShift])
+            _nciAxisShift = [[options objectForKey:nciAxisShift] floatValue];
+        
         if ([options objectForKey:nciLabelsDistance]){
             _labelsDistance = [[options objectForKey:nciLabelsDistance] floatValue];
         } else {
@@ -71,22 +82,24 @@
     return self;
 }
 
-- (void)redrawYLabels:(float)length{
-    for (UILabel *label in _labels){
-        [label removeFromSuperview];
-    }
-    [_labels removeAllObjects];
-    
-    for(int i = 0; i<= length/_labelsDistance; i++){
-        UILabel *label = [[UILabel alloc] initWithFrame:
-                          CGRectMake(0, length - i*_labelsDistance - _labelsDistance/2, self.chart.nciGridLeftMargin, _labelsDistance)];
-        double curVal = [self.chart.graph getValByY: ( _labelsDistance*i)];
-        label.textAlignment = NSTextAlignmentRight;
-        [self makeUpLabel:label val:curVal];
+- (void)setChart:(NCISimpleChartView *)chart{
+    _chart = chart;
+    if (self.vertical){
+        _labelHeight = _labelsDistance;
+        if (_nciAxisShift == _nciAxisShift){
+            _labelWidth = _nciAxisShift;
+        } else {
+            _labelWidth = self.chart.nciGridLeftMargin;
+        }
+    } else {
+        _labelHeight =  self.chart.nciGridBottomMargin;
+        _labelWidth =  _labelsDistance;
     }
 }
 
-- (void)redrawXLabels:(float)length min:(double)min max:(double)max{
+- (void)redrawLabels:(float)length min:(double)min max:(double)max{
+    
+    _dimention = length;
     for (UILabel *label in _labels){
         [label removeFromSuperview];
     }
@@ -94,27 +107,48 @@
      _step = length/(max - min);
      [self formatDateForDistance];
     
-    for(int i = 0; i< (length - _labelsDistance/2)/_labelsDistance; i++){
-        float xPos = self.chart.nciGridLeftMargin + _labelsDistance *i;
-        UILabel *label = [[UILabel alloc] initWithFrame:
-                          CGRectMake(xPos,
-                                     self.chart.graph.frame.size.height - self.chart.nciGridBottomMargin, _labelsDistance,
-                                     self.chart.nciGridBottomMargin)];
-        double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance/2)];
-        label.textAlignment = NSTextAlignmentCenter;
-        [self makeUpLabel:label val:curVal];
+    if (self.vertical){
+        for(int i = 0; i<= length/_labelsDistance; i++){
+            float yPos = length - i*_labelsDistance - _labelsDistance/2;
+            double curVal = [self.chart.graph getValByY: _labelsDistance*i];
+            if (_invertedLabes){
+                UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(_nciAxisShift, yPos, _labelWidth, _labelHeight)];
+                label.textAlignment = NSTextAlignmentLeft;
+                [self makeUpLabel:label val:curVal];
+            } else {
+                UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, yPos, _labelWidth, _labelHeight)];
+                label.textAlignment = NSTextAlignmentRight;
+                [self makeUpLabel:label val:curVal];
+            }
+        }
+    } else {
+        for(int i = 0; i< (length - _labelsDistance/2)/_labelsDistance; i++){
+            float xPos = self.chart.nciGridLeftMargin + _labelsDistance *i;
+            float yPos = (_nciAxisShift != _nciAxisShift) ? self.chart.graph.frame.size.height - _labelHeight : _nciAxisShift;
+            UILabel *label = [[UILabel alloc] initWithFrame:
+                              CGRectMake(xPos, yPos, _labelWidth, _labelHeight)];
+            double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance/2)];
+            label.textAlignment = NSTextAlignmentCenter;
+            [self makeUpLabel:label val:curVal];
+        }
     }
+    
 }
 
 - (void)makeUpLabel:(UILabel *)label val:(double) curVal{
     label.textColor = _labelsColor;
     label.font = _labelsFont;
     if (_labelRenderer){
-        label.text = _labelRenderer(curVal);
+        NSObject *value =  _labelRenderer(curVal);
+        if ([[value class] isSubclassOfClass:[NSAttributedString class]]){
+            label.attributedText = (NSAttributedString *)value;
+        } else {
+            label.text = (NSString *)value;
+        }
     } else if (self.nciUseDateFormatter){
         label.text = [_dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:curVal]];
     } else {
-        label.text =   [NSString stringWithFormat:@"%0.1f", curVal];
+        label.text = [NSString stringWithFormat:@"%0.1f", curVal];
     }
     [self.labels addObject:label];
     [self.chart.graph addSubview:label];
@@ -131,6 +165,21 @@
     }
 }
 
-
+- (void)drawBoundary:(CGContextRef ) currentContext{
+    [self setUpLine:currentContext];
+    if (_vertical){
+        if (_nciAxisShift != _nciAxisShift)
+            _nciAxisShift = self.chart.nciGridLeftMargin;
+        CGContextMoveToPoint(currentContext, _nciAxisShift, 0);
+        CGContextAddLineToPoint(currentContext, _nciAxisShift, _dimention);
+        CGContextStrokePath(currentContext);
+    } else {
+        if (_nciAxisShift != _nciAxisShift)
+            _nciAxisShift = self.chart.graph.grid.frame.size.height;
+        CGContextMoveToPoint(currentContext, self.chart.nciGridLeftMargin, _nciAxisShift);
+        CGContextAddLineToPoint(currentContext, _dimention + self.chart.nciGridLeftMargin, _nciAxisShift);
+        CGContextStrokePath(currentContext);
+    }
+}
 
 @end

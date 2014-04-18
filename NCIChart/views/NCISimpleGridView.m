@@ -42,8 +42,6 @@
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     [self setHorizontalGrid:currentContext];
     [self setVerticalGrid:currentContext];
-    [self setBoundaryVertical:currentContext];
-    [self setBoundaryHorizontal:currentContext];
 }
 
 //pragma draw grid
@@ -55,7 +53,7 @@
     }
     for (UILabel *xLabel in _graph.chart.xAxis.labels){
         CGContextMoveToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
-                             + labelWidth/2, xLabel.frame.origin.y);
+                             + labelWidth/2, _graph.chart.graph.frame.size.height);
         CGContextAddLineToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
                                 + labelWidth/2, 0);
     }
@@ -69,28 +67,10 @@
         labelHeight = ((UILabel *)_graph.chart.yAxis.labels[0]).frame.size.height;
     }
     for (UILabel *yLabel in _graph.chart.yAxis.labels){
-        CGContextMoveToPoint(currentContext, yLabel.frame.origin.x, yLabel.frame.origin.y + labelHeight/2);
+        CGContextMoveToPoint(currentContext, 0, yLabel.frame.origin.y + labelHeight/2);
         CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + labelHeight/2);
     }
     CGContextStrokePath(currentContext);
-}
-
-- (void)setBoundaryVertical:(CGContextRef ) currentContext{
-    if (self.graph.chart.xAxis){
-        [self.graph.chart.xAxis setUpLine:currentContext];
-        CGContextMoveToPoint(currentContext, 0, 0);
-        CGContextAddLineToPoint(currentContext, 0, self.frame.size.height);
-        CGContextStrokePath(currentContext);
-    }
-}
-
-- (void)setBoundaryHorizontal:(CGContextRef ) currentContext{
-    if (self.graph.chart.yAxis){
-        [self.graph.chart.yAxis setUpLine:currentContext];
-        CGContextMoveToPoint(currentContext,0, self.frame.size.height);
-        CGContextAddLineToPoint(currentContext,self.frame.size.width, self.frame.size.height);
-        CGContextStrokePath(currentContext);
-    }
 }
 
 //@pragma draw series

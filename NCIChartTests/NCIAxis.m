@@ -1,18 +1,20 @@
 //
-//  NCIChartTests.m
-//  NCIChartTests
+//  NCIAxis.m
+//  NCIChart
 //
-//  Created by Ira on 12/19/13.
-//  Copyright (c) 2013 FlowForwarding.Org. All rights reserved.
+//  Created by Ira on 4/18/14.
+//  Copyright (c) 2014 FlowForwarding.Org. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface NCIChartTests : XCTestCase
+@interface NCIAxis : XCTestCase{
+    
+}
 
 @end
 
-@implementation NCIChartTests
+@implementation NCIAxis
 
 - (void)setUp
 {
@@ -26,5 +28,9 @@
     [super tearDown];
 }
 
+- (void)testExample
+{
+    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+}
 
 @end

@@ -89,6 +89,7 @@
         _xAxis = [[NCIAxis alloc] initWithOptions:[opts objectForKey:nciXAxis]];
         _xAxis.chart = self;
         _yAxis = [[NCIAxis alloc] initWithOptions:[opts objectForKey:nciYAxis]];
+        _yAxis.vertical = @YES;
         _yAxis.chart = self;
         _nciGridVertical = [[NCILine alloc] initWithOptions:[opts objectForKey:nciGridVertical]];
         _nciGridHorizontal = [[NCILine alloc]  initWithOptions:[opts objectForKey:nciGridHorizontal]];

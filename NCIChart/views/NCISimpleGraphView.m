@@ -39,7 +39,6 @@
 }
 
 - (void)layoutSubviews{
-    
     _gridHeigth = self.frame.size.height - self.chart.nciGridBottomMargin;
     _gridWidth = self.frame.size.width - self.chart.nciGridLeftMargin - self.chart.nciGridRightMargin;
     
@@ -51,40 +50,48 @@
             _maxXVal = _maxXVal + 1;
         }
         [self detectRanges];
-        [self.chart.yAxis redrawYLabels:_gridHeigth];
+        _yStep = _gridHeigth/(_maxYVal - _minYVal);
+        [self.chart.yAxis redrawLabels:_gridHeigth min:_minYVal max:_maxYVal];
         _xStep = _gridWidth/(_maxXVal - _minXVal);
-        [self.chart.xAxis redrawXLabels:_gridWidth min:_minXVal max:_maxXVal];
+        [self.chart.xAxis redrawLabels:_gridWidth min:_minXVal max:_maxXVal];
     }
     _grid.frame = CGRectMake(self.chart.nciGridLeftMargin, 0, _gridWidth, _gridHeigth);
    [_grid setNeedsDisplay];
+}
+
+- (void)drawRect:(CGRect)rect{
+
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    [self.chart.yAxis drawBoundary:currentContext];
+    [self.chart.xAxis drawBoundary:currentContext];
 }
 
 - (void)detectRanges{
     NSArray *yVals = [_chart getBoundaryValues];
     _minYVal = [yVals[0] floatValue];
     _maxYVal = [yVals[1] floatValue];
-    _yStep = _gridHeigth/(_maxYVal - _minYVal);
 }
 
 - (double)getArgumentByX:(float) pointX{
     return (_minXVal + (pointX)/_xStep);
 }
 
-- (float )getValByY:(float) pointY{
-    return _minYVal + (pointY)/_yStep;
-}
 //TODO for points
 - (CGPoint)pointByValueInGrid:(NSArray *)data{
     double argument = [data[0] doubleValue];
     if ([data[1] isKindOfClass:[NSNull class]] )
         return CGPointMake(NAN, NAN);
-    float yVal = self.frame.size.height - (([data[1] floatValue] - _minYVal)*_yStep) - self.chart.nciGridBottomMargin;
+    float yVal = _gridHeigth - (([data[1] floatValue] - _minYVal)*_yStep);
     float xVal = [self getXByArgument: argument];
     return CGPointMake(xVal, yVal);
 }
 
 - (float)getXByArgument:(double )arg{
     return (arg  - _minXVal)*_xStep;
+}
+
+- (float )getValByY:(float) pointY{
+    return _minYVal + (pointY)/_yStep;
 }
 
 @end

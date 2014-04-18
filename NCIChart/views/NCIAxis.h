@@ -14,10 +14,10 @@
 @interface NCIAxis : NCILine
 
 - (id)initWithOptions:(NSDictionary *)options;
-- (void)redrawXLabels:(float)length min:(double)min max:(double)max;
-- (void)redrawYLabels:(float)length;
+- (void)redrawLabels:(float)length min:(double)min max:(double)max;
+- (void)drawBoundary:(CGContextRef ) currentContext;
 
-
+@property(nonatomic)bool vertical;
 @property(nonatomic, strong) NSMutableArray *labels;
 @property(nonatomic, strong)NCISimpleChartView* chart;
 

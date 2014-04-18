@@ -88,7 +88,10 @@
                                              nciLabelsColor: [UIColor brownColor],
                                              nciLabelsDistance: @30,
                                              nciLabelRenderer: ^(double value){
-        return [NSString stringWithFormat:@"%.1f$", value];
+        
+        return [[NSAttributedString alloc] initWithString: [NSString stringWithFormat:@"%.1f$", value]
+                                               attributes:@{NSForegroundColorAttributeName: [UIColor brownColor],
+                                                            NSFontAttributeName: [UIFont fontWithName:@"MarkerFelt-Thin" size:12]}];
     },
                                              },
                                  nciGridVertical: @{nciLineColor: [UIColor purpleColor],
@@ -127,7 +130,17 @@
     }
     
     NCISimpleChartView *barChart =  [[NCISimpleChartView alloc] initWithFrame:
-                               CGRectMake(3*self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciGraphRenderer: [NCIBarGraphView class]}];
+                               CGRectMake(3*self.view.frame.size.height + 50, 30, 400, 250)
+                                                                   andOptions:@{nciGraphRenderer: [NCIBarGraphView class],
+                                                                                nciYAxis: @{
+                                                                                        nciAxisShift: @370,
+                                                                                        nciInvertedLabes: @YES
+                                                                                        },
+                                                                                nciXAxis: @{
+                                                                                        nciAxisShift : @40
+                                                                                }
+                                                                    }
+                                     ];
     
     [pages addSubview:barChart];
     

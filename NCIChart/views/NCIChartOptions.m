@@ -53,5 +53,6 @@ NSString *const nciInvertedLabes = @"nciInvertedLabes";
 NSString *const nciLineColor = @"nciLineColor";
 NSString *const nciLineWidth = @"nciLineWidth";
 NSString *const nciLineDashes = @"nciLineDashes";
+NSString *const nciAxisShift = @"nciAxisShift";
 
 @end

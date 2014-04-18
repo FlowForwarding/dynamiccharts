@@ -9,11 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "NCILine.h"
 
+@class NCISimpleChartView;
+
 @interface NCIAxis : NCILine
 
 - (id)initWithOptions:(NSDictionary *)options;
-@property(nonatomic)bool xPos;
-@property(nonatomic)bool yPos;
-@property(nonatomic)bool invertedLabes;
+- (void)redrawXLabels:(float)length min:(double)min max:(double)max;
+- (void)redrawYLabels:(float)length;
+
+
+@property(nonatomic, strong) NSMutableArray *labels;
+@property(nonatomic, strong)NCISimpleChartView* chart;
+
 
 @end

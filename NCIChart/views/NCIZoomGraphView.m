@@ -245,24 +245,6 @@ static float startMaxRangeVal;
     return  self.chart.maxRangeVal - self.chart.minRangeVal;
 }
 
-- (void)redrawXLabels{
-    float scaleIndex = [self getScaleIndex];
-    float xLabelsDistance = self.chart.nciXLabelsDistance;
-    [self formatDateForDistance:xLabelsDistance/scaleIndex];
-    
-    float shift = gridScroll.contentOffset.x - xLabelsDistance*((int)gridScroll.contentOffset.x / (int)xLabelsDistance);
-    for(int i = 0; i<= self.gridWidth/xLabelsDistance; i++){
-        float xVal = self.chart.nciGridLeftMargin + xLabelsDistance *i - shift;
-        if ((xVal - self.chart.nciGridLeftMargin) >= 0 && (xVal < self.frame.size.width) ){
-            UILabel *label = [[UILabel alloc] initWithFrame:
-                              CGRectMake(xVal - xLabelsDistance/2,
-                                         self.frame.size.height - self.chart.nciGridBottomMargin , xLabelsDistance ,
-                                         self.chart.nciGridBottomMargin)];
-            double curVal = [self getArgumentByX: xVal -  self.chart.nciGridLeftMargin];
-            [self makeUpXLabel:label val:curVal];
-        }
-    }
-}
 
 - (double)getArgumentByX:(float) pointX{
     float scaleIndex = [self getScaleIndex];

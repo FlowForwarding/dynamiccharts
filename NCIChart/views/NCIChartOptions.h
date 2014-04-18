@@ -19,16 +19,11 @@ extern NSString *const nciSelPointColors;
 extern NSString *const nciSelPointImages;
 extern NSString *const nciSelPointSizes;
 
-extern NSString *const nciXLabelsFont;
-extern NSString *const nciYLabelsFont;
-extern NSString *const nciXLabelsColor;
-extern NSString *const nciYLabelsColor;
+extern NSString *const nciLabelsFont;
+extern NSString *const nciLabelsColor;
+extern NSString *const nciLabelsDistance;
 
-extern NSString *const nciXLabelsDistance;
-extern NSString *const nciYLabelsDistance;
-
-extern NSString *const nciXLabelRenderer;
-extern NSString *const nciYLabelRenderer;
+extern NSString *const nciLabelRenderer;
 extern NSString *const nciSelPointTextRenderer;
 extern NSString *const nciTapGridAction;
 

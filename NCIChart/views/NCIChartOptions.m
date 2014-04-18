@@ -19,16 +19,11 @@ NSString *const nciSelPointColors = @"nciSelPointColors";
 NSString *const nciSelPointImages = @"nciSelPointImages";
 NSString *const nciSelPointSizes = @"nciSelPointSizes";
 
-NSString *const nciXLabelsFont = @"nciXLabelsFont";
-NSString *const nciXLabelsColor = @"nciXLabelsColor";
-NSString *const nciYLabelsFont = @"nciYLabelsFont";
-NSString *const nciYLabelsColor = @"nciYLabelsColor";
+NSString *const nciLabelsFont = @"nciLabelsFont";
+NSString *const nciLabelsColor = @"nciLabelsColor";
+NSString *const nciLabelsDistance = @"nciLabelsDistance";
 
-NSString *const nciXLabelsDistance = @"nciXLabelsDistance";
-NSString *const nciYLabelsDistance = @"nciYLabelsDistance";
-
-NSString *const nciXLabelRenderer = @"nciXLabelRenderer";
-NSString *const nciYLabelRenderer = @"nciYLabelRenderer";
+NSString *const nciLabelRenderer = @"nciLabelRenderer";
 NSString *const nciSelPointTextRenderer = @"nciSelPointTextRenderer";
 NSString *const nciTapGridAction = @"nciTapGridAction";
 

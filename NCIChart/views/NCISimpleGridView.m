@@ -49,20 +49,28 @@
 //pragma draw grid
 - (void)setVerticalGrid:(CGContextRef) currentContext{
     [self.graph.chart.nciGridVertical setUpLine:currentContext];
-    for (UILabel *xLabel in _graph.xAxisLabels){
+    float labelWidth = 0;
+    if (_graph.chart.xAxis.labels.count > 0){
+         labelWidth = ((UILabel *)_graph.chart.xAxis.labels[0]).frame.size.width;
+    }
+    for (UILabel *xLabel in _graph.chart.xAxis.labels){
         CGContextMoveToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
-                             + self.graph.chart.nciXLabelsDistance/2, xLabel.frame.origin.y);
+                             + labelWidth/2, xLabel.frame.origin.y);
         CGContextAddLineToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
-                                + self.graph.chart.nciXLabelsDistance/2, 0);
+                                + labelWidth/2, 0);
     }
     CGContextStrokePath(currentContext);
 }
 
 - (void)setHorizontalGrid:(CGContextRef) currentContext{
     [self.graph.chart.nciGridHorizontal setUpLine:currentContext];
-    for (UILabel *yLabel in _graph.yAxisLabels){
-        CGContextMoveToPoint(currentContext, yLabel.frame.origin.x, yLabel.frame.origin.y + self.graph.yLabelShift);
-        CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + self.graph.yLabelShift);
+    float labelHeight = 0;
+    if (_graph.chart.yAxis.labels.count > 0){
+        labelHeight = ((UILabel *)_graph.chart.yAxis.labels[0]).frame.size.height;
+    }
+    for (UILabel *yLabel in _graph.chart.yAxis.labels){
+        CGContextMoveToPoint(currentContext, yLabel.frame.origin.x, yLabel.frame.origin.y + labelHeight/2);
+        CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + labelHeight/2);
     }
     CGContextStrokePath(currentContext);
 }

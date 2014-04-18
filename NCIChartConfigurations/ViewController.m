@@ -67,15 +67,7 @@
     },
                                  
                                  nciSelPointSizes: @[@10, [NSNull null]],
-                                 nciXLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                 nciXLabelsColor: [UIColor blueColor],
-                                 nciYLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                 nciYLabelsColor: [UIColor brownColor],
-                                 nciXLabelsDistance: @150,
-                                 nciYLabelsDistance: @30,
-                                 nciYLabelRenderer: ^(double value){
-        return [NSString stringWithFormat:@"%.1f$", value];
-    },
+                                 
                                  //                                               nciTapGridAction: ^(double argument, double value, float xInGrid, float yInGrid){
                                  //
                                  //    },
@@ -83,13 +75,25 @@
                                  nciUseDateFormatter: @YES,//nciXLabelRenderer
                                  nciXAxis: @{nciLineColor: [UIColor redColor],
                                              nciLineDashes: @[],
-                                             nciLineWidth: @2},
+                                             nciLineWidth: @2,
+                                             nciLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
+                                             nciLabelsColor: [UIColor blueColor],
+                                             nciLabelsDistance: @150,
+                                             nciUseDateFormatter: @YES
+                                             },
                                  nciYAxis: @{nciLineColor: [UIColor blackColor],
                                              nciLineDashes: @[@2,@2],
-                                             nciLineWidth: @1},
+                                             nciLineWidth: @1,
+                                             nciLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
+                                             nciLabelsColor: [UIColor brownColor],
+                                             nciLabelsDistance: @30,
+                                             nciLabelRenderer: ^(double value){
+        return [NSString stringWithFormat:@"%.1f$", value];
+    },
+                                             },
                                  nciGridVertical: @{nciLineColor: [UIColor purpleColor],
                                                     nciLineDashes: @[],
-                                                  nciLineWidth: @1},
+                                                    nciLineWidth: @1},
                                  nciGridHorizontal: @{nciLineColor: [UIColor greenColor],
                                                       nciLineDashes: @[@2,@2],
                                                       nciLineWidth: @2},

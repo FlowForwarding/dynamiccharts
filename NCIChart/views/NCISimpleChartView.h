@@ -23,7 +23,6 @@
 @property (nonatomic, strong)UILabel *selectedLabel;
 @property (nonatomic)bool nciUseDateFormatter;
 @property (nonatomic)bool nciShowPoints;
-@property (nonatomic)bool hasYLabels;
 @property (nonatomic)NSMutableArray* nciIsFill;
 @property (nonatomic)NSArray* nciLineWidths;
 @property (nonatomic, strong)NSMutableArray* nciLineColors;
@@ -33,15 +32,6 @@
 @property (nonatomic, strong)NSMutableArray* nciSelPointImages;
 @property (nonatomic)NSArray* nciSelPointSizes;
 
-@property (nonatomic, strong)UIFont* nciXLabelsFont;
-@property (nonatomic, strong)UIColor* nciXLabelsColor;
-@property (nonatomic, strong)UIFont* nciYLabelsFont;
-@property (nonatomic, strong)UIColor* nciYLabelsColor;
-@property (nonatomic) float nciXLabelsDistance;
-@property (nonatomic) float nciYLabelsDistance;
-
-@property (nonatomic, copy) NSString* (^nciXLabelRenderer)(double);
-@property (nonatomic, copy) NSString* (^nciYLabelRenderer)(double);
 //callbacks
 @property (nonatomic, copy) NSAttributedString* (^nciSelPointTextRenderer)(double, NSArray *);
 @property (nonatomic, copy) void (^nciTapGridAction)(double, double, float, float);

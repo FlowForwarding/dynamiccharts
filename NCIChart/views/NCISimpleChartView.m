@@ -39,7 +39,6 @@
     
     _nciGridTopMargin = 50;
     _nciGridRightMargin = 30;
-    _hasYLabels = YES;
     _nciIsFill = [[NSMutableArray alloc] init];
     _topBottomGridSpace = 10;
     _nciGridLeftMargin = 50;
@@ -49,21 +48,11 @@
     selectedPointArgument = NAN;
     
     self.nciHasSelection = YES;
-    _nciXLabelsColor = [UIColor blackColor];
-    _nciYLabelsColor = [UIColor blackColor];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-        _nciXLabelsFont = [UIFont italicSystemFontOfSize:14];
-        _nciYLabelsFont = [UIFont systemFontOfSize:14];
-        _nciXLabelsDistance = 200;
-        _nciYLabelsDistance = 80;
         _nciSelPointSizes = @[@8];
         _nciGridBottomMargin = 40;
     } else {
-        _nciXLabelsFont = [UIFont italicSystemFontOfSize:10];
-        _nciYLabelsFont = [UIFont systemFontOfSize:10];
-        _nciXLabelsDistance = 100;
-        _nciYLabelsDistance = 40;
         _nciSelPointSizes = @[@4];
         _nciGridBottomMargin = 20;
     }
@@ -81,12 +70,11 @@
         if ([opts objectForKey:nciIsFill])
             _nciIsFill = [opts objectForKey:nciIsFill];
         
-        for (NSString* key in @[nciLineColors, nciXLabelsFont, nciYLabelsFont,
-                               // nciBoundaryVertical, nciBoundaryHorizontal,
+        for (NSString* key in @[nciLineColors,
                                 nciGridColor,
-                                nciXLabelsColor, nciYLabelsColor, nciLeftRangeImageName, nciRightRangeImageName,
+                                nciLeftRangeImageName, nciRightRangeImageName,
                                 nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
-                                nciSelPointTextRenderer, nciXLabelRenderer, nciYLabelRenderer,
+                                nciSelPointTextRenderer,
                                 nciTapGridAction]){
             if ([opts objectForKey:key]){
                 id object = [opts objectForKey:key];
@@ -99,7 +87,9 @@
         }
         
         _xAxis = [[NCIAxis alloc] initWithOptions:[opts objectForKey:nciXAxis]];
+        _xAxis.chart = self;
         _yAxis = [[NCIAxis alloc] initWithOptions:[opts objectForKey:nciYAxis]];
+        _yAxis.chart = self;
         _nciGridVertical = [[NCILine alloc] initWithOptions:[opts objectForKey:nciGridVertical]];
         _nciGridHorizontal = [[NCILine alloc]  initWithOptions:[opts objectForKey:nciGridHorizontal]];
         
@@ -109,10 +99,6 @@
             self.graph.chart = self;
         }
     
-        if ([opts objectForKey:nciXLabelsDistance])
-            _nciXLabelsDistance = [[opts objectForKey:nciXLabelsDistance] floatValue];
-        if ([opts objectForKey:nciYLabelsDistance])
-            _nciYLabelsDistance = [[opts objectForKey:nciYLabelsDistance] floatValue];
         if ([opts objectForKey:nciGridLeftMargin])
             _nciGridLeftMargin = [[opts objectForKey:nciGridLeftMargin] floatValue];
         if ([opts objectForKey:nciGridRightMargin])

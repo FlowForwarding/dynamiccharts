@@ -39,8 +39,8 @@
 }
 
 - (void)layoutSubviews{
-    _gridHeigth = self.frame.size.height - self.chart.nciGridBottomMargin;
-    _gridWidth = self.frame.size.width - self.chart.nciGridLeftMargin - self.chart.nciGridRightMargin;
+    _gridHeigth = self.frame.size.height;
+    _gridWidth = self.frame.size.width;
     
     if (_chart.chartData.count > 0){
         _minXVal = [_chart.chartData[0][0] doubleValue];
@@ -55,7 +55,7 @@
         _xStep = _gridWidth/(_maxXVal - _minXVal);
         [self.chart.xAxis redrawLabels:_gridWidth min:_minXVal max:_maxXVal];
     }
-    _grid.frame = CGRectMake(self.chart.nciGridLeftMargin, 0, _gridWidth, _gridHeigth);
+    _grid.frame = CGRectMake(0, 0, _gridWidth, _gridHeigth);
    [_grid setNeedsDisplay];
 }
 

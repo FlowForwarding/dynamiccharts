@@ -129,7 +129,7 @@ static float startMaxRangeVal;
         timeDiff = 1000*60*2;
     
     float stepX = contentWidth/timeDiff;
-    gridScroll.frame = CGRectMake(self.chart.nciGridLeftMargin, 0, self.gridWidth, self.gridHeigth);
+    gridScroll.frame = CGRectMake(0, 0, self.gridWidth, self.gridHeigth);
     gridScroll.contentSize = CGSizeMake(contentWidth, self.gridHeigth);
     
     if (self.chart.minRangeVal != self.chart.minRangeVal){

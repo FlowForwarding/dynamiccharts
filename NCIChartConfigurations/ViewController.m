@@ -137,6 +137,7 @@
                                                                                         nciInvertedLabes: @YES
                                                                                         },
                                                                                 nciXAxis: @{
+                                                                                        nciLineColor: [UIColor greenColor],
                                                                                         nciAxisShift : @40
                                                                                 }
                                                                     }

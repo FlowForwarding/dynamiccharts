@@ -67,8 +67,8 @@
         labelHeight = ((UILabel *)_graph.chart.yAxis.labels[0]).frame.size.height;
     }
     for (UILabel *yLabel in _graph.chart.yAxis.labels){
-        CGContextMoveToPoint(currentContext, 0, yLabel.frame.origin.y + labelHeight/2);
-        CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + labelHeight/2);
+        CGContextMoveToPoint(currentContext, 0, yLabel.frame.origin.y + labelHeight/2 - self.graph.chart.nciGridTopMargin);
+        CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + labelHeight/2 - self.graph.chart.nciGridTopMargin);
     }
     CGContextStrokePath(currentContext);
 }

@@ -295,12 +295,9 @@
 }
 
 - (void)layoutSubviews{
-    if (_nciHasSelection){
-        _graph.frame = CGRectMake(0, _nciGridTopMargin, self.bounds.size.width, self.bounds.size.height - _nciGridTopMargin);
-    } else {
-        _graph.frame = self.bounds;
-    }
-    [_graph layoutSubviews];
+    _graph.frame = CGRectMake(_nciGridLeftMargin, _nciGridTopMargin, self.bounds.size.width - _nciGridLeftMargin - _nciGridRightMargin,
+                              self.bounds.size.height - _nciGridTopMargin - _nciGridBottomMargin);
+    //[_graph layoutSubviews];
     if (_nciHasSelection){
         _selectedLabel.frame = CGRectMake(0, 0, self.bounds.size.width, _nciGridTopMargin);;
         [self layoutSelectedPoint];

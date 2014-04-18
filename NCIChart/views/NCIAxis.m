@@ -109,7 +109,7 @@
     
     if (self.vertical){
         for(int i = 0; i<= length/_labelsDistance; i++){
-            float yPos = length - i*_labelsDistance - _labelsDistance/2;
+            float yPos = length - i*_labelsDistance - _labelsDistance/2 + self.chart.nciGridTopMargin;
             double curVal = [self.chart.graph getValByY: _labelsDistance*i];
             if (_invertedLabes){
                 UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(_nciAxisShift, yPos, _labelWidth, _labelHeight)];
@@ -124,7 +124,9 @@
     } else {
         for(int i = 0; i< (length - _labelsDistance/2)/_labelsDistance; i++){
             float xPos = self.chart.nciGridLeftMargin + _labelsDistance *i;
-            float yPos = (_nciAxisShift != _nciAxisShift) ? self.chart.graph.frame.size.height - _labelHeight : _nciAxisShift;
+            float yPos = (_nciAxisShift != _nciAxisShift) ?
+                self.chart.graph.frame.size.height + self.chart.nciGridTopMargin :
+                _nciAxisShift + self.chart.nciGridTopMargin;
             UILabel *label = [[UILabel alloc] initWithFrame:
                               CGRectMake(xPos, yPos, _labelWidth, _labelHeight)];
             double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance/2)];
@@ -151,7 +153,7 @@
         label.text = [NSString stringWithFormat:@"%0.1f", curVal];
     }
     [self.labels addObject:label];
-    [self.chart.graph addSubview:label];
+    [self.chart addSubview:label];
     
 }
 
@@ -168,16 +170,14 @@
 - (void)drawBoundary:(CGContextRef ) currentContext{
     [self setUpLine:currentContext];
     if (_vertical){
-        if (_nciAxisShift != _nciAxisShift)
-            _nciAxisShift = self.chart.nciGridLeftMargin;
-        CGContextMoveToPoint(currentContext, _nciAxisShift, 0);
-        CGContextAddLineToPoint(currentContext, _nciAxisShift, _dimention);
+        CGContextMoveToPoint(currentContext, 0, 0);
+        CGContextAddLineToPoint(currentContext, 0, _dimention);
         CGContextStrokePath(currentContext);
     } else {
         if (_nciAxisShift != _nciAxisShift)
             _nciAxisShift = self.chart.graph.grid.frame.size.height;
-        CGContextMoveToPoint(currentContext, self.chart.nciGridLeftMargin, _nciAxisShift);
-        CGContextAddLineToPoint(currentContext, _dimention + self.chart.nciGridLeftMargin, _nciAxisShift);
+        CGContextMoveToPoint(currentContext, 0, _nciAxisShift);
+        CGContextAddLineToPoint(currentContext, _dimention, _nciAxisShift);
         CGContextStrokePath(currentContext);
     }
 }

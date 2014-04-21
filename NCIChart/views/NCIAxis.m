@@ -111,15 +111,17 @@
         for(int i = 0; i<= length/_labelsDistance; i++){
             float yPos = length - i*_labelsDistance - _labelsDistance/2 + self.chart.nciGridTopMargin;
             double curVal = [self.chart.graph getValByY: _labelsDistance*i];
+            UILabel *label;
             if (_invertedLabes){
-                UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(_nciAxisShift, yPos, _labelWidth, _labelHeight)];
+                label = [[UILabel alloc] initWithFrame:
+                                  CGRectMake(_nciAxisShift + self.chart.nciGridLeftMargin + 4,
+                                                                            yPos, _labelWidth, _labelHeight)];
                 label.textAlignment = NSTextAlignmentLeft;
-                [self makeUpLabel:label val:curVal];
             } else {
-                UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, yPos, _labelWidth, _labelHeight)];
+                label = [[UILabel alloc] initWithFrame: CGRectMake(0, yPos, _labelWidth - 4, _labelHeight)];
                 label.textAlignment = NSTextAlignmentRight;
-                [self makeUpLabel:label val:curVal];
             }
+            [self makeUpLabel:label val:curVal];
         }
     } else {
         for(int i = 0; i< (length - _labelsDistance/2)/_labelsDistance; i++){
@@ -127,8 +129,14 @@
             float yPos = (_nciAxisShift != _nciAxisShift) ?
                 self.chart.graph.frame.size.height + self.chart.nciGridTopMargin :
                 _nciAxisShift + self.chart.nciGridTopMargin;
-            UILabel *label = [[UILabel alloc] initWithFrame:
-                              CGRectMake(xPos, yPos, _labelWidth, _labelHeight)];
+            UILabel *label;
+            if (_invertedLabes){
+                label = [[UILabel alloc] initWithFrame:
+                         CGRectMake(xPos, yPos - _labelHeight, _labelWidth, _labelHeight)];
+            } else {
+                label = [[UILabel alloc] initWithFrame:
+                         CGRectMake(xPos, yPos, _labelWidth, _labelHeight)];
+            }
             double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance/2)];
             label.textAlignment = NSTextAlignmentCenter;
             [self makeUpLabel:label val:curVal];
@@ -170,8 +178,10 @@
 - (void)drawBoundary:(CGContextRef ) currentContext{
     [self setUpLine:currentContext];
     if (_vertical){
-        CGContextMoveToPoint(currentContext, 0, 0);
-        CGContextAddLineToPoint(currentContext, 0, _dimention);
+        if (_nciAxisShift != _nciAxisShift)
+            _nciAxisShift = 0;
+        CGContextMoveToPoint(currentContext, _nciAxisShift, 0);
+        CGContextAddLineToPoint(currentContext, _nciAxisShift, _dimention);
         CGContextStrokePath(currentContext);
     } else {
         if (_nciAxisShift != _nciAxisShift)

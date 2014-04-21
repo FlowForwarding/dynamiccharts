@@ -224,7 +224,6 @@
                         (selectedPointArgument - [prevPoint[0]doubleValue])){
                         pointInGrid = [self.graph pointByValueInGrid:@[prevPoint[0], prevPoint[1][j]]];
                         currentPoint = prevPoint;
-                        val = currentPoint[1][j];
                     } else {
                         currentPoint = point;
                     }

@@ -133,12 +133,15 @@
                                CGRectMake(3*self.view.frame.size.height + 50, 30, 400, 250)
                                                                    andOptions:@{nciGraphRenderer: [NCIBarGraphView class],
                                                                                 nciYAxis: @{
-                                                                                        nciAxisShift: @370,
-                                                                                        nciInvertedLabes: @YES
+                                                                                        nciAxisShift: @320,
+                                                                                        nciInvertedLabes: @YES,
+                                                                                        nciLineDashes: @[]
                                                                                         },
                                                                                 nciXAxis: @{
                                                                                         nciLineColor: [UIColor greenColor],
-                                                                                        nciAxisShift : @40
+                                                                                        nciAxisShift : @40,
+                                                                                        nciInvertedLabes: @YES,
+                                                                                        nciLineDashes: @[]
                                                                                 }
                                                                     }
                                      ];

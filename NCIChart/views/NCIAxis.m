@@ -105,7 +105,9 @@
     }
      [_labels removeAllObjects];
      _step = length/(max - min);
-     [self formatDateForDistance];
+    float leftScollOffset = length * ([self.chart.graph getArgumentByX:0] - [self.chart.chartData[0][0] doubleValue])/(max - min);
+    float startXPos =  (leftScollOffset - ((int)(leftScollOffset /_labelsDistance)) *_labelsDistance) - _labelsDistance/2;
+    [self formatDateForDistance];
     
     if (self.vertical){
         for(int i = 0; i<= length/_labelsDistance; i++){
@@ -124,8 +126,10 @@
             [self makeUpLabel:label val:curVal];
         }
     } else {
-        for(int i = 0; i< (length - _labelsDistance/2)/_labelsDistance; i++){
-            float xPos = self.chart.nciGridLeftMargin + _labelsDistance *i;
+        for(int i = 0; i< length/_labelsDistance; i++){
+            float xPos = startXPos + self.chart.nciGridLeftMargin + _labelsDistance *i;
+            if (xPos > (length + self.chart.nciGridLeftMargin - _labelsDistance/2))
+                continue;
             float yPos = (_nciAxisShift != _nciAxisShift) ?
                 self.chart.graph.frame.size.height + self.chart.nciGridTopMargin :
                 _nciAxisShift + self.chart.nciGridTopMargin;

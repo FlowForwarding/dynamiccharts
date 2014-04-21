@@ -37,7 +37,7 @@
 - (void)drawRect:(CGRect)rect
 {
     [self setBgColor];
-    [self drawGraphLine:[self getFirstLast]];
+    [self drawGraphLine:[self.graph getFirstLast]];
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     [self setHorizontalGrid:currentContext];
@@ -73,10 +73,6 @@
     CGContextStrokePath(currentContext);
 }
 
-//@pragma draw series
-- (NSArray *)getFirstLast{
-    return @[@(0), @(self.graph.chart.chartData.count)];
-}
 
 - (void)drawGraphLine:(NSArray *)firstLast{
     for (UIView *view in self.subviews){

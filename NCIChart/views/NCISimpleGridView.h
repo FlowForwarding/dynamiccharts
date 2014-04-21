@@ -12,9 +12,8 @@
 @interface NCISimpleGridView : UIView
 
 @property(nonatomic, strong) NCISimpleGraphView *graph;
-- (id)initWithGraph:(NCISimpleGraphView *) ncigraph;
 
-- (void)setBgColor;
+- (id)initWithGraph:(NCISimpleGraphView *) ncigraph;
 - (UIColor *)getColor:(int) i;
 
 @end

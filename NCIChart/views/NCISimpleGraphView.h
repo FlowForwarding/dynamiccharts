@@ -34,5 +34,7 @@
 - (float )getValByY:(float) pointY;
 - (CGPoint)pointByValueInGrid:(NSArray *)data;
 - (float)getXByArgument:(double) arg;
+- (NSArray *)getFirstLast;
+
 
 @end

@@ -15,6 +15,7 @@ extern NSString *const nciLineColors;
 extern NSString *const nciLineWidths;
 
 extern NSString *const nciHasSelection;
+extern NSString *const nciHasHorizontalGrid;
 extern NSString *const nciSelPointColors;
 extern NSString *const nciSelPointImages;
 extern NSString *const nciSelPointSizes;

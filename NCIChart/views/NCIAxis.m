@@ -110,6 +110,8 @@
     [self formatDateForDistance];
     
     if (self.vertical){
+        if (!self.chart.nciHasHorizontalGrid)
+            return;
         for(int i = 0; i<= length/_labelsDistance; i++){
             float yPos = length - i*_labelsDistance - _labelsDistance/2 + self.chart.nciGridTopMargin;
             double curVal = [self.chart.graph getValByY: _labelsDistance*i];

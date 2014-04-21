@@ -15,7 +15,6 @@
 		2A1E1BF51863794D00009A3A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A1E1BF31863794D00009A3A /* InfoPlist.strings */; };
 		2A1E1BF71863794D00009A3A /* NCIChartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1E1BF61863794D00009A3A /* NCIChartTests.m */; };
 		2A2902B218966FE400661079 /* NCIZoomGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2902B118966FE400661079 /* NCIZoomGraphView.m */; };
-		2A2902B51896706A00661079 /* NCIZoomGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2902B41896706A00661079 /* NCIZoomGridView.m */; };
 		2A55A1F918675A1E00088F2F /* NCITopGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A55A1F818675A1E00088F2F /* NCITopGraphView.m */; };
 		2A6DDE0418637A1D0013D202 /* NCIHandspikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6DDDFD18637A1D0013D202 /* NCIHandspikeView.m */; };
 		2A6DDEC218647C0E0013D202 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1E1BDA1863794D00009A3A /* Foundation.framework */; };
@@ -74,8 +73,6 @@
 		2A1E1BF61863794D00009A3A /* NCIChartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCIChartTests.m; sourceTree = "<group>"; };
 		2A2902B018966FE400661079 /* NCIZoomGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIZoomGraphView.h; sourceTree = "<group>"; };
 		2A2902B118966FE400661079 /* NCIZoomGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIZoomGraphView.m; sourceTree = "<group>"; };
-		2A2902B31896706A00661079 /* NCIZoomGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIZoomGridView.h; sourceTree = "<group>"; };
-		2A2902B41896706A00661079 /* NCIZoomGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIZoomGridView.m; sourceTree = "<group>"; };
 		2A55A1F718675A1E00088F2F /* NCITopGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCITopGraphView.h; sourceTree = "<group>"; };
 		2A55A1F818675A1E00088F2F /* NCITopGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCITopGraphView.m; sourceTree = "<group>"; };
 		2A6DDDFC18637A1D0013D202 /* NCIHandspikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIHandspikeView.h; sourceTree = "<group>"; };
@@ -290,8 +287,6 @@
 			children = (
 				2A2902B018966FE400661079 /* NCIZoomGraphView.h */,
 				2A2902B118966FE400661079 /* NCIZoomGraphView.m */,
-				2A2902B31896706A00661079 /* NCIZoomGridView.h */,
-				2A2902B41896706A00661079 /* NCIZoomGridView.m */,
 			);
 			name = zoom;
 			sourceTree = "<group>";
@@ -432,7 +427,6 @@
 				2AA3AC6118CF22FC00AD114E /* NCIBarGraphView.m in Sources */,
 				2A6DDF1E1866CEB20013D202 /* NCIChartView.m in Sources */,
 				2A6DDF071864C4870013D202 /* NCISimpleGraphView.m in Sources */,
-				2A2902B51896706A00661079 /* NCIZoomGridView.m in Sources */,
 				2A55A1F918675A1E00088F2F /* NCITopGraphView.m in Sources */,
 				2A2902B218966FE400661079 /* NCIZoomGraphView.m in Sources */,
 				2A6DDF211866D9230013D202 /* NCIBtmGraphView.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "NCIZoomGraphView.h"
-#import "NCIZoomGridView.h"
+#import "NCISimpleGridView.h"
 
 @interface NCIZoomGraphView(){
     UIScrollView *gridScroll;
@@ -89,7 +89,7 @@ static float startMaxRangeVal;
     [gridScroll setShowsVerticalScrollIndicator:NO];
     [self addSubview:gridScroll];
     gridScroll.delegate = self;
-    self.grid = [[NCIZoomGridView alloc] initWithGraph:self];
+    self.grid = [[NCISimpleGridView alloc] initWithGraph:self];
     [gridScroll addSubview:self.grid];
 }
 
@@ -261,5 +261,11 @@ static float startMaxRangeVal;
     self.maxYVal = [yVals[1] floatValue];
     self.yStep = self.gridHeigth/(self.maxYVal - self.minYVal);
 }
+
+- (NSArray *)getFirstLast{
+    NSArray *values = [self getValsInRanges];
+    return @[values[2], values[3]];
+}
+
 
 @end

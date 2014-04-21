@@ -39,6 +39,7 @@
     
     _nciGridTopMargin = 50;
     _nciGridRightMargin = 30;
+    _nciHasHorizontalGrid = YES;
     _nciIsFill = [[NSMutableArray alloc] init];
     _topBottomGridSpace = 10;
     _nciGridLeftMargin = 50;
@@ -117,6 +118,10 @@
             _nciShowPoints = [[opts objectForKey:nciShowPoints] boolValue];
         } else {
             _nciShowPoints = NO;
+        }
+        
+        if ([opts objectForKey:nciHasHorizontalGrid]){
+            self.nciHasHorizontalGrid = [[opts objectForKey:nciHasHorizontalGrid] boolValue];
         }
 
         [self addSubviews];

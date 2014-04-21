@@ -75,6 +75,7 @@
     ((NCIBtmGraphView *)_btmChart.graph).nciChart = self;
     _btmChart.chartData = self.chartData;
     _btmChart.nciHasSelection = NO;
+    _btmChart.nciHasHorizontalGrid = NO;
     [self addSubview:_topChart];
     [self addSubview:_btmChart];
 }

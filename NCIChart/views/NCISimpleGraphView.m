@@ -94,4 +94,9 @@
     return _minYVal + (pointY)/_yStep;
 }
 
+
+- (NSArray *)getFirstLast{
+    return @[@(0), @(self.chart.chartData.count)];
+}
+
 @end

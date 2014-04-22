@@ -59,13 +59,6 @@
    [_grid setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect{
-
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    [self.chart.yAxis drawBoundary:currentContext];
-    [self.chart.xAxis drawBoundary:currentContext];
-}
-
 - (void)detectRanges{
     NSArray *yVals = [_chart getBoundaryValues];
     _minYVal = [yVals[0] floatValue];

@@ -87,7 +87,7 @@
     if (self.vertical){
         _labelHeight = _labelsDistance;
         if (_nciAxisShift == _nciAxisShift){
-            _labelWidth = _nciAxisShift;
+            _labelWidth = _nciAxisShift + self.chart.nciGridLeftMargin;
         } else {
             _labelWidth = self.chart.nciGridLeftMargin;
         }
@@ -184,8 +184,9 @@
 - (void)drawBoundary:(CGContextRef ) currentContext{
     [self setUpLine:currentContext];
     if (_vertical){
-        if (_nciAxisShift != _nciAxisShift)
-            _nciAxisShift = 0;
+        if (_nciAxisShift != _nciAxisShift){
+             _nciAxisShift = 0;
+        }
         CGContextMoveToPoint(currentContext, _nciAxisShift, 0);
         CGContextAddLineToPoint(currentContext, _nciAxisShift, _dimention);
         CGContextStrokePath(currentContext);

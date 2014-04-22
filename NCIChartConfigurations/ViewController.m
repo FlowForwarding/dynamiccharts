@@ -79,7 +79,7 @@
                                              nciLineWidth: @2,
                                              nciLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
                                              nciLabelsColor: [UIColor blueColor],
-                                             nciLabelsDistance: @150,
+                                             nciLabelsDistance: @120,
                                              nciUseDateFormatter: @YES
                                              },
                                  nciYAxis: @{nciLineColor: [UIColor blackColor],
@@ -101,19 +101,32 @@
                                  nciGridHorizontal: @{nciLineColor: [UIColor greenColor],
                                                       nciLineDashes: @[@2,@2],
                                                       nciLineWidth: @2},
-                                 nciGridColor: [[UIColor yellowColor] colorWithAlphaComponent:0.2],
+                                 nciGridColor: [[UIColor magentaColor] colorWithAlphaComponent:0.1],
                                  nciGridLeftMargin: @50,
                                  nciGridTopMargin: @50,
                                  nciGridBottomMargin: @40
                                  }];
     
-    simpleChart.backgroundColor = [[UIColor brownColor] colorWithAlphaComponent:0.2];
+    simpleChart.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.2];
     [pages addSubview:simpleChart];
     
     
     NCISimpleChartView *zoomingChart =  [[NCISimpleChartView alloc] initWithFrame:
-                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciGraphRenderer: [NCIZoomGraphView class],
-                                                                                                                 nciIsSmooth: @[@YES]}];
+                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250)
+                                                                       andOptions:@{nciGraphRenderer: [NCIZoomGraphView class],
+                                                                                    nciIsSmooth: @[@YES],
+                                                                                    nciYAxis: @{
+                                                                                            nciAxisShift: @320,
+                                                                                            nciInvertedLabes: @YES,
+                                                                                            nciLineDashes: @[],
+                                                                                            nciLineWidth: @2
+                                                                                            },
+                                                                                    nciXAxis: @{
+                                                                                            nciLineColor: [UIColor greenColor],
+                                                                                            nciLineWidth: @2,
+                                                                                            nciAxisShift : @90,
+                                                                                            nciInvertedLabes: @YES
+                                                                                            }}];
     
     [pages addSubview:zoomingChart];
     
@@ -126,6 +139,8 @@
                                          CGRectMake(2*self.view.frame.size.height + 50, 30, 400, 250)];
     
     [pages addSubview:nciChart];
+    nciChart.minRangeVal = 5;
+    nciChart.maxRangeVal = 8;
     
 
     for (int ind = 0; ind < 50; ind ++){

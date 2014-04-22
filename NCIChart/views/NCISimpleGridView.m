@@ -37,9 +37,12 @@
 - (void)drawRect:(CGRect)rect
 {
     [self setBgColor];
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    [self.graph.chart.yAxis drawBoundary:currentContext];
+    [self.graph.chart.xAxis drawBoundary:currentContext];
+    
     [self drawGraphLine:[self.graph getFirstLast]];
     
-    CGContextRef currentContext = UIGraphicsGetCurrentContext();
     [self setHorizontalGrid:currentContext];
     [self setVerticalGrid:currentContext];
 }

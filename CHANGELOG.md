@@ -35,3 +35,11 @@
  * Working test project
 
  * Fix for shifted X-labels
+
+= 2.0.0
+
+ * API improvements
+
+ * Smooth(bezier) line support
+
+ * More axis cutomizataions(move axis and their labels)

@@ -11,6 +11,7 @@
 @implementation NCIChartOptions
 
 NSString *const nciIsFill = @"nciIsFill";
+NSString *const nciIsSmooth = @"nciIsSmooth";
 NSString *const nciLineColors = @"nciLineColors";
 NSString *const nciLineWidths = @"nciLineWidths";
 

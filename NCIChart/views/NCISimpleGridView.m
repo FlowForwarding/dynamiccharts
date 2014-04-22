@@ -51,7 +51,10 @@
     if (_graph.chart.xAxis.labels.count > 0){
          labelWidth = ((UILabel *)_graph.chart.xAxis.labels[0]).frame.size.width;
     }
-    for (UILabel *xLabel in _graph.chart.xAxis.labels){
+    for (int i=0; i < _graph.chart.xAxis.labels.count; i++){
+        UILabel *xLabel = _graph.chart.xAxis.labels[i];
+        if (xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin + labelWidth/2 == 0)
+            continue;
         CGContextMoveToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
                              + labelWidth/2, _graph.chart.graph.frame.size.height);
         CGContextAddLineToPoint(currentContext, xLabel.frame.origin.x - _graph.chart.nciGridLeftMargin
@@ -66,13 +69,13 @@
     if (_graph.chart.yAxis.labels.count > 0){
         labelHeight = ((UILabel *)_graph.chart.yAxis.labels[0]).frame.size.height;
     }
-    for (UILabel *yLabel in _graph.chart.yAxis.labels){
+      for (int i=1; i < _graph.chart.yAxis.labels.count; i++){
+        UILabel *yLabel = _graph.chart.yAxis.labels[i];
         CGContextMoveToPoint(currentContext, 0, yLabel.frame.origin.y + labelHeight/2 - self.graph.chart.nciGridTopMargin);
         CGContextAddLineToPoint(currentContext, self.frame.size.width, yLabel.frame.origin.y + labelHeight/2 - self.graph.chart.nciGridTopMargin);
     }
     CGContextStrokePath(currentContext);
 }
-
 
 - (void)drawGraphLine:(NSArray *)firstLast{
     for (UIView *view in self.subviews){
@@ -111,7 +114,35 @@
                         [path moveToPoint:pointP];
                     }
                 }
-                [path addLineToPoint:pointP];
+                
+                if ([self smoothSeries:i]){
+                    CGPoint nextPoint = (ind >= (_graph.chart.chartData.count -1)) ? pointP :
+                    [_graph pointByValueInGrid:@[_graph.chart.chartData[ind +1][0], _graph.chart.chartData[ind +1][1][i]]];
+                    
+                    CGPoint prevPoint = (ind < 1) ? pointP :
+                    [_graph pointByValueInGrid:@[_graph.chart.chartData[ind -1][0], _graph.chart.chartData[ind -1][1][i]]];
+                    
+                    float y;
+                    if (nextPoint.y > pointP.y){
+                        y = (pointP.y  +nextPoint.y)/2 - abs(pointP.y - nextPoint.y)/2;
+                    } else {
+                        y = (pointP.y  +nextPoint.y)/2  + abs(pointP.y - nextPoint.y)/2;
+                    }
+                    CGPoint nextControlPoint = CGPointMake( pointP.x + (pointP.x - nextPoint.x)/2, y);
+                    
+                    if (prevPoint.y < pointP.y){
+                        y = (pointP.y  +prevPoint.y)/2  - abs(pointP.y - prevPoint.y)/2;
+                    } else {
+                        y = (pointP.y  +prevPoint.y)/2  + abs(pointP.y - prevPoint.y)/2;
+                    }
+                    CGPoint prevControlPoint  = CGPointMake(prevPoint.x + (pointP.x - prevPoint.x)/2,  y);
+                    
+                    [path addCurveToPoint:pointP controlPoint1:prevControlPoint controlPoint2:nextControlPoint];
+                    
+                } else {
+                    [path addLineToPoint:pointP];
+                }
+
             }
         }
     }
@@ -129,6 +160,13 @@
         [color setStroke];
         [path stroke];
     }
+}
+
+- (bool)smoothSeries:(int)seriesNum{
+    if (self.graph.chart.nciIsSmooth.count <= seriesNum){
+        [self.graph.chart.nciIsSmooth addObject:@NO];
+    }
+    return [self.graph.chart.nciIsSmooth[seriesNum] boolValue];
 }
 
 - (bool)fillSeries:(int)seriesNum{

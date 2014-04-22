@@ -24,6 +24,7 @@
 @property (nonatomic)bool nciUseDateFormatter;
 @property (nonatomic)bool nciShowPoints;
 @property (nonatomic)NSMutableArray* nciIsFill;
+@property (nonatomic)NSMutableArray* nciIsSmooth;
 @property (nonatomic)NSArray* nciLineWidths;
 @property (nonatomic, strong)NSMutableArray* nciLineColors;
 

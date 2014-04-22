@@ -48,7 +48,8 @@
                    initWithFrame:CGRectMake(50, 30, 400, 250)
                    andOptions: @{
                                  
-                                 nciIsFill: @[@(NO), @(NO), @(NO)],
+                                 nciIsFill: @[@(NO), @(NO)],
+                                 nciIsSmooth: @[@(NO), @(YES)],
                                  nciLineColors: @[[UIColor orangeColor], [NSNull null]],
                                  nciLineWidths: @[@2, [NSNull null]],
                                  nciHasSelection: @YES,
@@ -111,7 +112,8 @@
     
     
     NCISimpleChartView *zoomingChart =  [[NCISimpleChartView alloc] initWithFrame:
-                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciGraphRenderer: [NCIZoomGraphView class]}];
+                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:@{nciGraphRenderer: [NCIZoomGraphView class],
+                                                                                                                 nciIsSmooth: @[@YES]}];
     
     [pages addSubview:zoomingChart];
     
@@ -125,8 +127,13 @@
     
     [pages addSubview:nciChart];
     
-    for (int ind = 0; ind < 10; ind ++){
-        [nciChart addPoint:ind val:@[@(arc4random() % 5)]];
+
+    for (int ind = 0; ind < 50; ind ++){
+        if (ind % 5 == 0){
+            [nciChart addPoint:ind val:@[[NSNull null]]];
+        } else {
+            [nciChart addPoint:ind val:@[@(arc4random() % 5)]];
+        }
     }
     
     NCISimpleChartView *barChart =  [[NCISimpleChartView alloc] initWithFrame:

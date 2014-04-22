@@ -41,6 +41,7 @@
     _nciGridRightMargin = 30;
     _nciHasHorizontalGrid = YES;
     _nciIsFill = [[NSMutableArray alloc] init];
+    _nciIsSmooth = [[NSMutableArray alloc] init];
     _topBottomGridSpace = 10;
     _nciGridLeftMargin = 50;
     _nciLineWidths = @[@0.3];
@@ -68,11 +69,9 @@
     self = [super initWithFrame:frame];
     if (self){
         [self defaultSetup];
-        if ([opts objectForKey:nciIsFill])
-            _nciIsFill = [opts objectForKey:nciIsFill];
         
         for (NSString* key in @[nciLineColors,
-                                nciGridColor,
+                                nciGridColor, nciIsFill, nciIsSmooth,
                                 nciLeftRangeImageName, nciRightRangeImageName,
                                 nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
                                 nciSelPointTextRenderer,

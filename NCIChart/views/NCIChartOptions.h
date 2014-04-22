@@ -11,6 +11,7 @@
 @interface NCIChartOptions : NSObject
 
 extern NSString *const nciIsFill;
+extern NSString *const nciIsSmooth;
 extern NSString *const nciLineColors;
 extern NSString *const nciLineWidths;
 

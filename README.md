@@ -11,7 +11,7 @@
 ## Instalation
 
 ```
-pod 'NCICharts', '~> 1.0.3'
+pod 'NCICharts', '~> 1.0.5'
 ```
 
 ## Simple

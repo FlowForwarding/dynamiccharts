@@ -72,7 +72,7 @@
                                  //                                               nciTapGridAction: ^(double argument, double value, float xInGrid, float yInGrid){
                                  //
                                  //    },
-                                 nciShowPoints : @YES,
+                                 nciShowPoints : @NO,
                                  nciUseDateFormatter: @YES,//nciXLabelRenderer
                                  nciXAxis: @{nciLineColor: [UIColor redColor],
                                              nciLineDashes: @[],

@@ -25,7 +25,6 @@ NSString *const nciLabelsFont = @"nciLabelsFont";
 NSString *const nciLabelsColor = @"nciLabelsColor";
 NSString *const nciLabelsDistance = @"nciLabelsDistance";
 
-NSString *const nciLabelRenderer = @"nciLabelRenderer";
 NSString *const nciSelPointTextRenderer = @"nciSelPointTextRenderer";
 NSString *const nciTapGridAction = @"nciTapGridAction";
 
@@ -52,6 +51,7 @@ NSString *const nciGraphRenderer = @"nciGraphRenderer";
 NSString *const nciXAxis = @"nciXAxis";
 NSString *const nciYAxis = @"nciYAxis";
 NSString *const nciInvertedLabes = @"nciInvertedLabes";
+NSString *const nciLabelRenderer = @"nciLabelRenderer";
 NSString *const nciLineColor = @"nciLineColor";
 NSString *const nciLineWidth = @"nciLineWidth";
 NSString *const nciLineDashes = @"nciLineDashes";

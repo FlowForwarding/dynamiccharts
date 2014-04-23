@@ -16,13 +16,13 @@ extern NSString *const nciLineColors;
 extern NSString *const nciLineWidths;
 
 extern NSString *const nciHasSelection;
-extern NSString *const nciHasHorizontalGrid;
+extern NSString *const nciSelPointTextRenderer;
+
 extern NSString *const nciSelPointColors;
 extern NSString *const nciSelPointImages;
 extern NSString *const nciSelPointSizes;
 
-extern NSString *const nciLabelRenderer;
-extern NSString *const nciSelPointTextRenderer;
+extern NSString *const nciHasHorizontalGrid;
 extern NSString *const nciTapGridAction;
 
 extern NSString *const nciTopGraphOptions;
@@ -47,6 +47,7 @@ extern NSString *const nciGraphRenderer;
 
 extern NSString *const nciXAxis;
 extern NSString *const nciYAxis;
+extern NSString *const nciLabelRenderer;
 extern NSString *const nciInvertedLabes;
 extern NSString *const nciLineColor;
 extern NSString *const nciLineWidth;

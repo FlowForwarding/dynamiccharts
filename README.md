@@ -2,8 +2,8 @@
 
 1. [Instalation](#instalation)
 1. [Simple](#simple)
+1. [Zoom smooth line and axis customization](#zoom-smooth-line-and-axis-customization)
 1. [Ranges](#ranges)
-1. [Zoom, smooth line and axis customization](#zoom)
 1. [Customization options](#customization-options)
 1. [Ranges chart customization](#ranges-chart-customization)
 1. [Live updates](#live-updates)
@@ -11,7 +11,7 @@
 ## Instalation
 
 ```
-pod 'NCICharts', '~> 1.0.5'
+pod 'NCICharts'
 ```
 
 ## Simple
@@ -35,25 +35,7 @@ pod 'NCICharts', '~> 1.0.5'
     }
 ``` 
 
-## Ranges
-
-![alt text][Illustration2]
-[Illustration2]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/ranges.png "NCI chart"
-
-```ObjectiveC
-#import "NCIChartView.h"
-
-    NCIChartView *chart = [[NCIChartView alloc] initWithFrame:CGRectMake(0, 0, 300, 400)];
-    [self.view addSubview:chart];
-    int numOfPoints = 10;
-    for (int ind = 0; ind < numOfPoints; ind ++){
-        [chart addPoint:ind val:@[@(arc4random() % 5)]];
-    }
-    chart.minRangeVal = 5;
-    chart.maxRangeVal = 8; 
-```
-
-## Zoom
+## Zoom smooth line and axis customization
 
 ![alt text][IllustrationZoom]
 [IllustrationZoom]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/zoom.gif 
@@ -82,6 +64,24 @@ pod 'NCICharts', '~> 1.0.5'
     for (int ind = 0; ind < numOfPoints; ind ++){
         [zoomingChart addPoint:ind val:@[@(arc4random() % 5)]];
     }
+```
+
+## Ranges
+
+![alt text][Illustration2]
+[Illustration2]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/ranges.png "NCI chart"
+
+```ObjectiveC
+#import "NCIChartView.h"
+
+    NCIChartView *chart = [[NCIChartView alloc] initWithFrame:CGRectMake(0, 0, 300, 400)];
+    [self.view addSubview:chart];
+    int numOfPoints = 10;
+    for (int ind = 0; ind < numOfPoints; ind ++){
+        [chart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
+    chart.minRangeVal = 5;
+    chart.maxRangeVal = 8; 
 ```
 
 ## Customization options

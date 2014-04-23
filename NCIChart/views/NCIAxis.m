@@ -105,8 +105,9 @@
     }
      [_labels removeAllObjects];
      _step = length/(max - min);
-    float leftScollOffset = length * ([self.chart.graph getArgumentByX:0] - [self.chart.chartData[0][0] doubleValue])/(max - min);
-    float startXPos =  (leftScollOffset - ((int)(leftScollOffset /_labelsDistance)) *_labelsDistance) - _labelsDistance/2;
+    float leftScollOffset =  ([self.chart.graph getArgumentByX:0] - [self.chart.chartData[0][0] doubleValue])*length/
+    ([self.chart.graph getArgumentByX:length] - [self.chart.graph getArgumentByX:0]);
+    float startXPos = _labelsDistance/2 - (leftScollOffset - _labelsDistance *(int)(leftScollOffset /_labelsDistance));
     [self formatDateForDistance];
     
     if (self.vertical){

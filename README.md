@@ -3,8 +3,7 @@
 1. [Instalation](#instalation)
 1. [Simple](#simple)
 1. [Ranges](#ranges)
-1. [Zoom](#zoom)
-1. [Several lines](#several-lines)
+1. [Zoom, smooth line and axis customization](#zoom)
 1. [Customization options](#customization-options)
 1. [Ranges chart customization](#ranges-chart-customization)
 1. [Live updates](#live-updates)
@@ -60,31 +59,29 @@ pod 'NCICharts', '~> 1.0.3'
 [IllustrationZoom]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/zoom.gif 
 
 ```ObjectiveC
-    NCIZoomChartView *chart = [[NCIZoomChartView alloc] initWithFrame:CGRectMake(0, 0, 300, 400)];
-    [self.view addSubview:chart];
-    int numOfPoints = 10;
-    for (int ind = 0; ind < numOfPoints; ind ++){
-        [chart addPoint:ind val:@[@(arc4random() % 5)]];
-    }
-```
-
-## Several lines
-
-![alt text][Illustration3]
-[Illustration3]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/several_lines.png "NCI selveral chart"
-
-```ObjectiveC
-#import "NCIChartView.h"
+    NCISimpleChartView *zoomingChart =  [[NCISimpleChartView alloc] initWithFrame:
+                                         CGRectMake(self.view.frame.size.height + 50, 30, 400, 250)
+                                                                       andOptions:@{nciGraphRenderer: [NCIZoomGraphView class],
+                                                                                    nciIsSmooth: @[@YES],
+                                                                                    nciYAxis: @{
+                                                                                            nciAxisShift: @320,
+                                                                                            nciInvertedLabes: @YES,
+                                                                                            nciLineDashes: @[],
+                                                                                            nciLineWidth: @2
+                                                                                            },
+                                                                                    nciXAxis: @{
+                                                                                            nciLineColor: [UIColor greenColor],
+                                                                                            nciLineWidth: @2,
+                                                                                            nciAxisShift : @90,
+                                                                                            nciInvertedLabes: @YES
+                                                                                            }}];
     
-    NCISimpleChartView *chart = [[NCISimpleChartView alloc]
-                                 initWithFrame:CGRectMake(0, 0, 400, 250)
-                                 andOptions: @{nciIsFill: [@(NO), @(NO), @(NO)],
-                                               nciSelPointSizes: @[@5, @10, @5]}];
+    [pages addSubview:zoomingChart];
+    
     int numOfPoints = 10;
     for (int ind = 0; ind < numOfPoints; ind ++){
-        [chart addPoint:ind val:@[@(arc4random() % 5), @(arc4random() % 5), @(arc4random() % 5)]];
-    }                                               
-                                               
+        [zoomingChart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
 ```
 
 ## Customization options
@@ -93,15 +90,18 @@ pod 'NCICharts', '~> 1.0.3'
 [Illustration4]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/cuatomization.png "NCI customized chart" 
 
 ```ObjectiveC
-    NCISimpleChartView * chart = [[NCISimpleChartView alloc]
-                                 initWithFrame:CGRectMake(50, 30, 400, 250)
-                                 andOptions: @{nciIsFill: @[@(NO), @(NO), @(NO)],
-                                               nciLineColors: @[[UIColor orangeColor], [NSNull null]],
-                                               nciLineWidths: @[@2, [NSNull null]],
-                                               nciHasSelection: @YES,
-                                               nciSelPointColors: @[[UIColor redColor]],
-                                               nciSelPointImages: @[[NSNull null], @"star"],
-                                               nciSelPointTextRenderer: ^(double argument, NSArray* values){
+    NCISimpleChartView *simpleChart = [[NCISimpleChartView alloc]
+                   initWithFrame:CGRectMake(50, 30, 400, 250)
+                   andOptions: @{
+                                 
+                                 nciIsFill: @[@(NO), @(NO)],
+                                 nciIsSmooth: @[@(NO), @(YES)],
+                                 nciLineColors: @[[UIColor orangeColor], [NSNull null]],
+                                 nciLineWidths: @[@2, [NSNull null]],
+                                 nciHasSelection: @YES,
+                                 nciSelPointColors: @[[UIColor redColor]],
+                                 nciSelPointImages: @[[NSNull null], @"star"],
+                                 nciSelPointTextRenderer: ^(double argument, NSArray* values){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MMM-dd HH:mm:ss"];
         return [[NSAttributedString alloc] initWithString:
@@ -112,34 +112,48 @@ pod 'NCICharts', '~> 1.0.3'
                                                attributes: @{NSForegroundColorAttributeName: [UIColor redColor],
                                                              NSFontAttributeName: [UIFont fontWithName:@"MarkerFelt-Thin" size:12]}];
     },
-                                               
-                                               nciSelPointSizes: @[@10, [NSNull null]],
-                                               nciXLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                               nciXLabelsColor: [UIColor blueColor],
-                                               nciYLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
-                                               nciYLabelsColor: [UIColor brownColor],
-                                               nciXLabelsDistance: @150,
-                                               nciYLabelsDistance: @30,
-                                               nciYLabelRenderer: ^(double value){
-        return [NSString stringWithFormat:@"%.1f$", value];
+                                 
+                                 nciSelPointSizes: @[@10, [NSNull null]],
+                                 
+                                 //                                               nciTapGridAction: ^(double argument, double value, float xInGrid, float yInGrid){
+                                 //
+                                 //    },
+                                 nciShowPoints : @YES,
+                                 nciUseDateFormatter: @YES,//nciXLabelRenderer
+                                 nciXAxis: @{nciLineColor: [UIColor redColor],
+                                             nciLineDashes: @[],
+                                             nciLineWidth: @2,
+                                             nciLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
+                                             nciLabelsColor: [UIColor blueColor],
+                                             nciLabelsDistance: @120,
+                                             nciUseDateFormatter: @YES
+                                             },
+                                 nciYAxis: @{nciLineColor: [UIColor blackColor],
+                                             nciLineDashes: @[@2,@2],
+                                             nciLineWidth: @1,
+                                             nciLabelsFont: [UIFont fontWithName:@"MarkerFelt-Thin" size:12],
+                                             nciLabelsColor: [UIColor brownColor],
+                                             nciLabelsDistance: @30,
+                                             nciLabelRenderer: ^(double value){
+        
+        return [[NSAttributedString alloc] initWithString: [NSString stringWithFormat:@"%.1f$", value]
+                                               attributes:@{NSForegroundColorAttributeName: [UIColor brownColor],
+                                                            NSFontAttributeName: [UIFont fontWithName:@"MarkerFelt-Thin" size:12]}];
     },
-                                               //                                               nciTapGridAction: ^(double argument, double value, float xInGrid, float yInGrid){
-                                               //
-                                               //    },
-                                               nciShowPoints : @YES,
-                                               nciUseDateFormatter: @YES,//nciXLabelRenderer
-                                               nciBoundaryVertical: [[NCILine alloc] initWithWidth:1 color:[UIColor blackColor] andDashes:@[@2,@2]],
-                                               nciBoundaryHorizontal: [[NCILine alloc] initWithWidth:2 color:[UIColor redColor] andDashes:nil],
-                                               nciGridVertical: [[NCILine alloc] initWithWidth:1 color:[UIColor purpleColor] andDashes:nil],
-                                               nciGridHorizontal: [[NCILine alloc] initWithWidth:2 color:[UIColor greenColor] andDashes:@[@2,@2]],
-                                               nciGridColor: [[UIColor yellowColor] colorWithAlphaComponent:0.2],
-                                               nciGridLeftMargin: @50,
-                                               nciGridTopMargin: @50,
-                                               nciGridBottomMargin: @40
-                                               }];
+                                             },
+                                 nciGridVertical: @{nciLineColor: [UIColor purpleColor],
+                                                    nciLineDashes: @[],
+                                                    nciLineWidth: @1},
+                                 nciGridHorizontal: @{nciLineColor: [UIColor greenColor],
+                                                      nciLineDashes: @[@2,@2],
+                                                      nciLineWidth: @2},
+                                 nciGridColor: [[UIColor magentaColor] colorWithAlphaComponent:0.1],
+                                 nciGridLeftMargin: @50,
+                                 nciGridTopMargin: @50,
+                                 nciGridBottomMargin: @40
+                                 }];
     
-    chart.backgroundColor = [[UIColor brownColor] colorWithAlphaComponent:0.2];
-    [self.view addSubview:chart];
+    simpleChart.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.2];
     
     int numOfPoints = 10;
     double dataPeriod = 60*60*24*30;
@@ -147,7 +161,7 @@ pod 'NCICharts', '~> 1.0.3'
     for (int ind = 0; ind < numOfPoints; ind ++){
         //to use default date formatter for Y axis, provide arguments as  timeIntervalSince1970
         //and set nciXLabelRenderer option to YES
-        [chart addPoint:[[NSDate dateWithTimeIntervalSinceNow: -dataPeriod + step *ind] timeIntervalSince1970] val:@[@(arc4random() % 5),
+        [simpleChart addPoint:[[NSDate dateWithTimeIntervalSinceNow: -dataPeriod + step *ind] timeIntervalSince1970] val:@[@(arc4random() % 5),
                                   @(arc4random() % 5)]];
     }            
 

@@ -43,3 +43,9 @@
  * Smooth(bezier) line support
 
  * More axis cutomizataions(move axis and their labels)
+
+= 2.0.1
+
+ *Fix x-axis labels
+ 
+ *Add customization option for decreasing axis

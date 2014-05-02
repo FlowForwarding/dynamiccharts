@@ -183,7 +183,8 @@
                                                CGRectMake(4*self.view.frame.size.height + 50, 30, 400, 250) andOptions:
                                                @{
                                                  nciGraphRenderer: [NCIZoomGraphView class],
-                                                // nciIsFill: @[@(NO)],
+                                                 nciLineWidths: @[@2],
+                                                 nciIsFill: @[@(NO)],
                                                  nciYAxis: @{
                                                          nciAxisDecreasing: @YES,
                                                          nciAxisShift : @320,
@@ -196,7 +197,7 @@
                                                          }
                                                  }];
     
-   // nciChartDecreasing.topBottomGridSpace = 0;
+    nciChartDecreasing.topBottomGridSpace = 0;
     
     [pages addSubview:nciChartDecreasing];
     

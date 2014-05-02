@@ -96,9 +96,6 @@ static float startMaxRangeVal;
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (self.chart.chartData.count == 0)
         return;
-
-    float scaleIndex = [self getScaleIndex];
-    float timePeriod = [self getXValuesGap];
     float rangesPeriod = [self getRangesPeriod];
     
     float offsetForRanges = scrollView.contentOffset.x;
@@ -107,10 +104,14 @@ static float startMaxRangeVal;
     if (offsetForRanges > (scrollView.contentSize.width - scrollView.frame.size.width))
         offsetForRanges = scrollView.contentSize.width - scrollView.frame.size.width;
     
-    double newMinRange = [self.chart.chartData[0][0] doubleValue] +
-    timePeriod*(offsetForRanges/scrollView.frame.size.width/scaleIndex);
-    self.chart.minRangeVal = newMinRange;
-    self.chart.maxRangeVal = newMinRange + rangesPeriod;
+    double newMinRange = [self getArgumentByX:0];
+    if (self.chart.xAxis.nciAxisDecreasing){
+        self.chart.maxRangeVal = newMinRange;
+        self.chart.minRangeVal = newMinRange - rangesPeriod;
+    } else {
+        self.chart.minRangeVal = newMinRange;
+        self.chart.maxRangeVal = newMinRange + rangesPeriod;
+    }
     
     self.grid.frame = CGRectMake(gridScroll.contentOffset.x, 0, self.gridWidth, self.gridHeigth);
     
@@ -136,7 +137,14 @@ static float startMaxRangeVal;
         self.chart.minRangeVal = [self.chart.chartData[0][0] doubleValue];
         self.chart.maxRangeVal = [[self.chart.chartData lastObject][0] doubleValue];
     }
-    double timeOffest = self.chart.minRangeVal  -  [self.chart.chartData[0][0] doubleValue];
+    
+    double timeOffest;
+    if (self.chart.xAxis.nciAxisDecreasing){
+        timeOffest =  [[self.chart.chartData lastObject] [0] doubleValue] - self.chart.maxRangeVal;
+    } else {
+        timeOffest = self.chart.minRangeVal  -  [self.chart.chartData[0][0] doubleValue];
+    }
+
     if (timeOffest < 0 || timeOffest != timeOffest)
         timeOffest = 0;
     gridScroll.contentOffset = CGPointMake(timeOffest * stepX, 0);
@@ -247,12 +255,17 @@ static float startMaxRangeVal;
 
 - (double)getArgumentByX:(float) pointX{
     float scaleIndex = [self getScaleIndex];
-    return self.minXVal + (gridScroll.contentOffset.x + pointX)/scaleIndex/self.xStep;
+    
+    if (self.chart.xAxis.nciAxisDecreasing){
+        return self.maxXVal - (gridScroll.contentOffset.x + pointX)/scaleIndex/self.xStep;
+    } else {
+        return self.minXVal + (gridScroll.contentOffset.x + pointX)/scaleIndex/self.xStep;
+    }
 }
 
 - (float)getXByArgument:(double) arg{
     float scaleIndex = [self getScaleIndex];
-    return (arg - self.minXVal)*self.xStep * scaleIndex - gridScroll.contentOffset.x;
+    return [super getXByArgument:arg]* scaleIndex - gridScroll.contentOffset.x;
 }
 
 - (void)detectRanges{

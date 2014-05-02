@@ -182,7 +182,8 @@
     NCISimpleChartView *nciChartDecreasing =  [[NCISimpleChartView alloc] initWithFrame:
                                                CGRectMake(4*self.view.frame.size.height + 50, 30, 400, 250) andOptions:
                                                @{
-                                                 nciIsFill: @[@(NO)],
+                                                 nciGraphRenderer: [NCIZoomGraphView class],
+                                                // nciIsFill: @[@(NO)],
                                                  nciYAxis: @{
                                                          nciAxisDecreasing: @YES,
                                                          nciAxisShift : @320,
@@ -195,11 +196,11 @@
                                                          }
                                                  }];
     
-    nciChartDecreasing.topBottomGridSpace = 0;
+   // nciChartDecreasing.topBottomGridSpace = 0;
     
     [pages addSubview:nciChartDecreasing];
     
-    for (int ind = 0; ind < 50; ind ++){
+    for (int ind = 10; ind < 50; ind ++){
         [nciChartDecreasing addPoint:ind val:@[@(ind*ind)]];
     }
     

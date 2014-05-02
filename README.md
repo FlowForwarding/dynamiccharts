@@ -40,6 +40,9 @@ pod 'NCICharts'
 ![alt text][IllustrationZoom]
 [IllustrationZoom]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/zoom.gif 
 
+![alt text][IllustrationDecr]
+[IllustrationDecr]: https://raw.github.com/FlowForwarding/dynamiccharts/master/docs/decr.png 
+
 ```ObjectiveC
     NCISimpleChartView *zoomingChart =  [[NCISimpleChartView alloc] initWithFrame:
                                          CGRectMake(self.view.frame.size.height + 50, 30, 400, 250)
@@ -63,6 +66,34 @@ pod 'NCICharts'
     int numOfPoints = 10;
     for (int ind = 0; ind < numOfPoints; ind ++){
         [zoomingChart addPoint:ind val:@[@(arc4random() % 5)]];
+    }
+```
+
+```ObjectiveC
+    NCISimpleChartView *nciChartDecreasing =  [[NCISimpleChartView alloc] initWithFrame:
+                                               CGRectMake(self.view.frame.size.height + 50, 30, 400, 250) andOptions:
+                                               @{
+                                                 nciGraphRenderer: [NCIZoomGraphView class],
+                                                 nciLineWidths: @[@2],
+                                                 nciIsFill: @[@(NO)],
+                                                 nciYAxis: @{
+                                                         nciAxisDecreasing: @YES,
+                                                         nciAxisShift : @320,
+                                                         nciInvertedLabes: @YES
+                                                         },
+                                                 nciXAxis: @{
+                                                         nciAxisDecreasing: @YES,
+                                                         nciAxisShift : @0,
+                                                         nciInvertedLabes: @YES
+                                                         }
+                                                 }];
+    
+    nciChartDecreasing.topBottomGridSpace = 0;
+    
+    [pages addSubview:nciChartDecreasing];
+    
+    for (int ind = 10; ind < 50; ind ++){
+        [nciChartDecreasing addPoint:ind val:@[@(ind*ind)]];
     }
 ```
 

@@ -82,11 +82,19 @@
 }
 
 - (double)getArgumentByX:(float) pointX{
-    return (_minXVal + (pointX)/_xStep);
+    if (self.chart.xAxis.nciAxisDecreasing){
+        return (_maxXVal - (pointX)/_xStep);
+    } else {
+        return (_minXVal + (pointX)/_xStep);
+    }
 }
 
 - (float)getXByArgument:(double )arg{
-    return (arg  - _minXVal)*_xStep;
+    if (self.chart.xAxis.nciAxisDecreasing){
+        return (_maxXVal  - arg)*_xStep;
+    } else {
+        return (arg  - _minXVal)*_xStep;
+    }
 }
 
 - (float )getValByY:(float) pointY{

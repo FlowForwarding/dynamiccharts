@@ -108,9 +108,6 @@
     }
      [_labels removeAllObjects];
      _step = length/(max - min);
-    float leftScollOffset =  ([self.chart.graph getArgumentByX:0] - [self.chart.chartData[0][0] doubleValue])*length/
-    ([self.chart.graph getArgumentByX:length] - [self.chart.graph getArgumentByX:0]);
-    float startXPos = _labelsDistance/2 - (leftScollOffset - _labelsDistance *(int)(leftScollOffset /_labelsDistance));
     [self formatDateForDistance];
     
     if (self.vertical){
@@ -133,7 +130,7 @@
         }
     } else {
         for(int i = 0; i< length/_labelsDistance; i++){
-            float xPos = startXPos + self.chart.nciGridLeftMargin + _labelsDistance *i;
+            float xPos = self.chart.nciGridLeftMargin + _labelsDistance *i;
             if (xPos > (length + self.chart.nciGridLeftMargin - _labelsDistance/2))
                 continue;
             float yPos = (_nciAxisShift != _nciAxisShift) ?
@@ -147,7 +144,7 @@
                 label = [[UILabel alloc] initWithFrame:
                          CGRectMake(xPos, yPos, _labelWidth, _labelHeight)];
             }
-            double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance)];
+            double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelWidth/2)];
             label.textAlignment = NSTextAlignmentCenter;
             [self makeUpLabel:label val:curVal];
         }

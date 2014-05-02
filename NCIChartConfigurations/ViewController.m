@@ -181,8 +181,17 @@
     
     NCISimpleChartView *nciChartDecreasing =  [[NCISimpleChartView alloc] initWithFrame:
                                                CGRectMake(4*self.view.frame.size.height + 50, 30, 400, 250) andOptions:
-                                               @{nciYAxis: @{
-                                                         nciAxisDecreasing: @YES
+                                               @{
+                                                 nciIsFill: @[@(NO)],
+                                                 nciYAxis: @{
+                                                         nciAxisDecreasing: @YES,
+                                                         nciAxisShift : @320,
+                                                         nciInvertedLabes: @YES
+                                                         },
+                                                 nciXAxis: @{
+                                                         nciAxisDecreasing: @YES,
+                                                         nciAxisShift : @0,
+                                                         nciInvertedLabes: @YES
                                                          }
                                                  }];
     

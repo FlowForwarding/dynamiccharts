@@ -56,6 +56,7 @@ extern NSString *const nciAxisShift;
 extern NSString *const nciLabelsFont;
 extern NSString *const nciLabelsColor;
 extern NSString *const nciLabelsDistance;
+extern NSString *const nciAxisDecreasing;
 
 
 @end

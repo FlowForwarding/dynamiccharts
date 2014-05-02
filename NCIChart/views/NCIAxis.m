@@ -18,8 +18,8 @@
 @property(nonatomic)bool invertedLabes;
 @property(nonatomic, strong)UIFont* labelsFont;
 @property(nonatomic, strong)UIColor* labelsColor;
-@property (nonatomic, copy) NSString* (^labelRenderer)(double);
-@property (nonatomic)bool nciUseDateFormatter;
+@property(nonatomic, copy) NSString* (^labelRenderer)(double);
+@property(nonatomic)bool nciUseDateFormatter;
 @property(nonatomic)float labelsDistance;
 @property(nonatomic)float nciAxisShift;
 
@@ -48,6 +48,9 @@
         
         if ([options objectForKey:nciLabelRenderer])
             _labelRenderer = [options objectForKey:nciLabelRenderer] ;
+        
+        if ([options objectForKey:nciAxisDecreasing])
+            _nciAxisDecreasing = [[options objectForKey:nciAxisDecreasing] boolValue];
         
         if ([options objectForKey:nciLabelsFont]){
             _labelsFont = [options objectForKey:nciLabelsFont];
@@ -144,7 +147,7 @@
                 label = [[UILabel alloc] initWithFrame:
                          CGRectMake(xPos, yPos, _labelWidth, _labelHeight)];
             }
-            double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance/2)];
+            double curVal = [self.chart.graph getArgumentByX: (_labelsDistance *i + _labelsDistance)];
             label.textAlignment = NSTextAlignmentCenter;
             [self makeUpLabel:label val:curVal];
         }

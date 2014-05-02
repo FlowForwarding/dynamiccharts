@@ -39,7 +39,7 @@
     }
     
     UIScrollView *pages = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
-    pages.contentSize = CGSizeMake(self.view.frame.size.height * 4, self.view.frame.size.width);
+    pages.contentSize = CGSizeMake(self.view.frame.size.height * 5, self.view.frame.size.width);
     pages.pagingEnabled = YES;
     pages.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:pages];
@@ -178,6 +178,22 @@
     
     
     [self generateDemoData];
+    
+    NCISimpleChartView *nciChartDecreasing =  [[NCISimpleChartView alloc] initWithFrame:
+                                               CGRectMake(4*self.view.frame.size.height + 50, 30, 400, 250) andOptions:
+                                               @{nciYAxis: @{
+                                                         nciAxisDecreasing: @YES
+                                                         }
+                                                 }];
+    
+    nciChartDecreasing.topBottomGridSpace = 0;
+    
+    [pages addSubview:nciChartDecreasing];
+    
+    for (int ind = 0; ind < 50; ind ++){
+        [nciChartDecreasing addPoint:ind val:@[@(ind*ind)]];
+    }
+    
     
     
 }

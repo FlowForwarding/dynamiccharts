@@ -56,5 +56,6 @@ NSString *const nciLineColor = @"nciLineColor";
 NSString *const nciLineWidth = @"nciLineWidth";
 NSString *const nciLineDashes = @"nciLineDashes";
 NSString *const nciAxisShift = @"nciAxisShift";
+NSString *const nciAxisDecreasing = @"nciAxisDecreasing";
 
 @end

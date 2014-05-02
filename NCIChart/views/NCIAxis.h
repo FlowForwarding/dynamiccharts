@@ -18,8 +18,9 @@
 - (void)drawBoundary:(CGContextRef ) currentContext;
 
 @property(nonatomic)bool vertical;
-@property(nonatomic, strong) NSMutableArray *labels;
+@property(nonatomic, strong)NSMutableArray *labels;
 @property(nonatomic, strong)NCISimpleChartView* chart;
+@property(nonatomic)bool nciAxisDecreasing;
 
 
 @end

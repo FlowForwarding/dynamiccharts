@@ -62,7 +62,7 @@
 - (void)addSubviews;
 - (void)addPoint:(double)arg val:(NSArray *)values;
 - (NSArray *)getBoundaryValues;
-- (void)layoutSelectedPoint;
+- (void)layoutSelectedPointForFrame:(BOOL)forFrame;
 - (void)defaultSetup;
 
 - (void)simulateTapGrid:(double) xPos;

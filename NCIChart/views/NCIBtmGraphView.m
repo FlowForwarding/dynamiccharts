@@ -192,7 +192,7 @@ static float startRightRange = -1;
 
     [self.nciChart.topChart.graph setNeedsLayout];
     [self.nciChart.topChart.graph.grid setNeedsDisplay];
-    [self.nciChart.topChart layoutSelectedPoint];
+    [self.nciChart.topChart layoutSelectedPointForFrame:YES];
     if (self.nciChart.rangesMoved)
         self.nciChart.rangesMoved();
     [self redrawRanges];

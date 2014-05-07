@@ -198,7 +198,7 @@
 
 - (void)simulateTapGrid:(double) xPos{
     selectedPointArgument = [self.graph getArgumentByX:xPos];
-    [self refreshSelectedPoint];
+    [self layoutSelectedPointForFrame:NO];
 }
 
 - (void)gridTapped:(UITapGestureRecognizer *)recognizer{
@@ -207,45 +207,10 @@
     if (self.nciTapGridAction){
         self.nciTapGridAction([self.graph getArgumentByX:location.x], [self.graph getValByY:location.y], location.x, location.y);
     }
-    [self refreshSelectedPoint];
+    [self layoutSelectedPointForFrame:NO];
 }
 
-- (void)refreshSelectedPoint
-{
-  [self layoutSelectedPoint];
-  [self updatePointSelection];
-}
-
-- (void)updatePointSelection
-{
-  for (int i =0; i < _chartData.count; i++){
-    NSArray *currentPoint = _chartData[i];
-    if (self.nciSelPointTextRenderer){
-      NSObject *text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
-      if ([text isKindOfClass:[NSAttributedString class]]){
-        _selectedLabel.attributedText = (NSAttributedString *)text;
-      } else {
-        _selectedLabel.text = (NSString *)text;
-      }
-    } else {
-      NSMutableString *values = [[NSMutableString alloc] init];
-      for (id val in currentPoint[1]){
-        if (![val isKindOfClass:[NSNull class]]){
-          [values appendString:[val description]];
-          [values appendString:@","];
-        }
-      }
-      if (_nciUseDateFormatter){
-        _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:%@", values,
-                               [dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:[currentPoint[0] doubleValue]]]];
-      } else {
-        _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:% 0.1f", values, [currentPoint[0] doubleValue]];
-      }
-    }
-  }
-}
-
-- (void)layoutSelectedPoint{
+- (void)layoutSelectedPointForFrame:(BOOL)forFrame {
     if (selectedPointArgument != selectedPointArgument)
         return;
     NSArray *prevPoint;
@@ -299,7 +264,31 @@
                     selectedPoint.hidden = NO;
                 }
             }
-
+          
+            if (!forFrame) {
+              if (self.nciSelPointTextRenderer){
+                NSObject *text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
+                if ([text isKindOfClass:[NSAttributedString class]]){
+                  _selectedLabel.attributedText = (NSAttributedString *)text;
+                } else {
+                  _selectedLabel.text = (NSString *)text;
+                }
+              } else {
+                NSMutableString *values = [[NSMutableString alloc] init];
+                for (id val in currentPoint[1]){
+                  if (![val isKindOfClass:[NSNull class]]){
+                    [values appendString:[val description]];
+                    [values appendString:@","];
+                  }
+                }
+                if (_nciUseDateFormatter){
+                  _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:%@", values,
+                                         [dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:[currentPoint[0] doubleValue]]]];
+                } else {
+                  _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:% 0.1f", values, [currentPoint[0] doubleValue]];
+                }
+              }
+            }
             return;
         }
         prevPoint = point;
@@ -317,7 +306,7 @@
     [_graph layoutSubviews];
     if (_nciHasSelection){
         _selectedLabel.frame = CGRectMake(0, 0, self.bounds.size.width, _nciGridTopMargin);;
-        [self layoutSelectedPoint];
+        [self layoutSelectedPointForFrame:YES];
     }
 }
 

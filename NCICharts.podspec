@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'NCICharts'
-  s.version      = '2.0.3'
+  s.version      = '2.0.4'
   s.summary      = 'Simple, zoom, dynamic and charts with ranges for iOS'
 
   s.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.ios.deployment_target = '6.0'
   s.requires_arc = true
-  s.source       = { :git => 'https://github.com/ludoded/dynamiccharts.git', :tag => '2.0.1'}
+  s.source       = { :git => 'https://github.com/ludoded/dynamiccharts.git', :tag => '2.0.4'}
 
   s.source_files = 'NCIChart/**/*.{h,m}'
 

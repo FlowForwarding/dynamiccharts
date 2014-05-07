@@ -48,7 +48,8 @@
     _nciLineColors = [NSMutableArray arrayWithArray: @[[UIColor blueColor], [UIColor greenColor], [UIColor purpleColor]]];
     _nciSelPointColors = [NSMutableArray arrayWithArray: @[[UIColor blueColor], [UIColor greenColor], [UIColor purpleColor]]];
     selectedPointArgument = NAN;
-    
+  
+    _nciDimSize = @4;
     self.nciHasSelection = YES;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
@@ -73,7 +74,7 @@
         for (NSString* key in @[nciLineColors,
                                 nciGridColor, nciIsFill, nciIsSmooth,
                                 nciLeftRangeImageName, nciRightRangeImageName,
-                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
+                                nciLineWidths, nciDimSize, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
                                 nciSelPointTextRenderer,
                                 nciTapGridAction]){
             if ([opts objectForKey:key]){
@@ -197,7 +198,7 @@
 
 - (void)simulateTapGrid:(double) xPos{
     selectedPointArgument = [self.graph getArgumentByX:xPos];
-    [self layoutSelectedPoint];
+    [self layoutSelectedPointForFrame:NO];
 }
 
 - (void)gridTapped:(UITapGestureRecognizer *)recognizer{
@@ -206,10 +207,10 @@
     if (self.nciTapGridAction){
         self.nciTapGridAction([self.graph getArgumentByX:location.x], [self.graph getValByY:location.y], location.x, location.y);
     }
-    [self layoutSelectedPoint];
+    [self layoutSelectedPointForFrame:NO];
 }
 
-- (void)layoutSelectedPoint{
+- (void)layoutSelectedPointForFrame:(BOOL)forFrame {
     if (selectedPointArgument != selectedPointArgument)
         return;
     NSArray *prevPoint;
@@ -263,28 +264,30 @@
                     selectedPoint.hidden = NO;
                 }
             }
-            
-            if (self.nciSelPointTextRenderer){
+          
+            if (!forFrame) {
+              if (self.nciSelPointTextRenderer){
                 NSObject *text = self.nciSelPointTextRenderer([currentPoint[0] doubleValue], currentPoint[1]);
                 if ([text isKindOfClass:[NSAttributedString class]]){
-                    _selectedLabel.attributedText = (NSAttributedString *)text;
+                  _selectedLabel.attributedText = (NSAttributedString *)text;
                 } else {
-                    _selectedLabel.text = (NSString *)text;
+                  _selectedLabel.text = (NSString *)text;
                 }
-            } else {
+              } else {
                 NSMutableString *values = [[NSMutableString alloc] init];
                 for (id val in currentPoint[1]){
-                    if (![val isKindOfClass:[NSNull class]]){
-                        [values appendString:[val description]];
-                        [values appendString:@","];
-                    }
+                  if (![val isKindOfClass:[NSNull class]]){
+                    [values appendString:[val description]];
+                    [values appendString:@","];
+                  }
                 }
                 if (_nciUseDateFormatter){
-                    _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:%@", values,
-                                           [dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:[currentPoint[0] doubleValue]]]];
+                  _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:%@", values,
+                                         [dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:[currentPoint[0] doubleValue]]]];
                 } else {
-                    _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:% 0.1f", values, [currentPoint[0] doubleValue]];
+                  _selectedLabel.text = [NSString stringWithFormat:@"y: %@  x:% 0.1f", values, [currentPoint[0] doubleValue]];
                 }
+              }
             }
             return;
         }
@@ -300,10 +303,10 @@
 - (void)layoutSubviews{
     _graph.frame = CGRectMake(_nciGridLeftMargin, _nciGridTopMargin, self.bounds.size.width - _nciGridLeftMargin - _nciGridRightMargin,
                               self.bounds.size.height - _nciGridTopMargin - _nciGridBottomMargin);
-    //[_graph layoutSubviews];
+    [_graph layoutSubviews];
     if (_nciHasSelection){
         _selectedLabel.frame = CGRectMake(0, 0, self.bounds.size.width, _nciGridTopMargin);;
-        [self layoutSelectedPoint];
+        [self layoutSelectedPointForFrame:YES];
     }
 }
 

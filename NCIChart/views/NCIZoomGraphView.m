@@ -149,7 +149,7 @@ static float startMaxRangeVal;
         timeOffest = 0;
     gridScroll.contentOffset = CGPointMake(timeOffest * stepX, 0);
     self.grid.frame = CGRectMake(timeOffest * stepX, 0, self.gridWidth, self.gridHeigth);
-    [self.chart layoutSelectedPoint];
+    [self.chart layoutSelectedPointForFrame:YES];
 }
 
 - (NSArray *)getValsInRanges{

@@ -15,6 +15,7 @@ extern NSString *const nciIsSmooth;
 extern NSString *const nciLineColors;
 extern NSString *const nciLineWidths;
 
+extern NSString *const nciDimSize;
 extern NSString *const nciHasSelection;
 extern NSString *const nciSelPointTextRenderer;
 

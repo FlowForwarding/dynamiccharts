@@ -28,6 +28,7 @@
 @property (nonatomic)NSArray* nciLineWidths;
 @property (nonatomic, strong)NSMutableArray* nciLineColors;
 
+@property (nonatomic, strong) NSNumber* nciDimSize;
 @property (nonatomic)bool nciHasSelection;
 @property (nonatomic)bool nciHasHorizontalGrid;
 @property (nonatomic, strong)NSMutableArray* nciSelPointColors;
@@ -61,7 +62,7 @@
 - (void)addSubviews;
 - (void)addPoint:(double)arg val:(NSArray *)values;
 - (NSArray *)getBoundaryValues;
-- (void)layoutSelectedPoint;
+- (void)layoutSelectedPointForFrame:(BOOL)forFrame;
 - (void)defaultSetup;
 
 - (void)simulateTapGrid:(double) xPos;

@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.ios.deployment_target = '6.0'
   s.requires_arc = true
-  s.source       = { :git => 'https://github.com/FlowForwarding/dynamiccharts.git', :tag => '2.0.1'}
+  s.source       = { :git => 'https://github.com/ludoded/dynamiccharts.git', :tag => '2.0.1'}
 
   s.source_files = 'NCIChart/**/*.{h,m}'
 

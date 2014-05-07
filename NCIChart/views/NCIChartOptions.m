@@ -15,6 +15,7 @@ NSString *const nciIsSmooth = @"nciIsSmooth";
 NSString *const nciLineColors = @"nciLineColors";
 NSString *const nciLineWidths = @"nciLineWidths";
 
+NSString *const nciDimSize = @"nciDimSize";
 NSString *const nciHasSelection = @"nciHasSelection";
 NSString *const nciHasHorizontalGrid = @"nciHasHorizontalGrid";
 NSString *const nciSelPointColors = @"nciSelPointColors";

@@ -28,6 +28,7 @@
 @property (nonatomic)NSArray* nciLineWidths;
 @property (nonatomic, strong)NSMutableArray* nciLineColors;
 
+@property (nonatomic, strong) NSNumber* nciDimSize;
 @property (nonatomic)bool nciHasSelection;
 @property (nonatomic)bool nciHasHorizontalGrid;
 @property (nonatomic, strong)NSMutableArray* nciSelPointColors;

@@ -48,7 +48,8 @@
     _nciLineColors = [NSMutableArray arrayWithArray: @[[UIColor blueColor], [UIColor greenColor], [UIColor purpleColor]]];
     _nciSelPointColors = [NSMutableArray arrayWithArray: @[[UIColor blueColor], [UIColor greenColor], [UIColor purpleColor]]];
     selectedPointArgument = NAN;
-    
+  
+    _nciDimSize = @4;
     self.nciHasSelection = YES;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
@@ -73,7 +74,7 @@
         for (NSString* key in @[nciLineColors,
                                 nciGridColor, nciIsFill, nciIsSmooth,
                                 nciLeftRangeImageName, nciRightRangeImageName,
-                                nciLineWidths, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
+                                nciLineWidths, nciDimSize, nciSelPointColors, nciSelPointSizes, nciSelPointImages,
                                 nciSelPointTextRenderer,
                                 nciTapGridAction]){
             if ([opts objectForKey:key]){

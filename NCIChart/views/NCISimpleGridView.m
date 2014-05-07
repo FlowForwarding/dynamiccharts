@@ -180,7 +180,7 @@
 }
 
 - (void)createPoint:(CGPoint )point num:(int)num{
-    float dim = 4;
+    float dim = self.graph.chart.nciDimSize.floatValue;
     UIView *pointView = [[UIView alloc] initWithFrame:CGRectMake(point.x - dim/2, point.y - dim/2, dim, dim)];
     pointView.backgroundColor = [self getColor:num];
     [self addSubview:pointView];

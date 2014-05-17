@@ -100,13 +100,17 @@
     }
 }
 
-- (void)redrawLabels:(float)length min:(double)min max:(double)max{
-    
-    _dimention = length;
+- (void)resetLabels{
     for (UILabel *label in _labels){
         [label removeFromSuperview];
     }
-     [_labels removeAllObjects];
+    [_labels removeAllObjects];
+}
+
+- (void)redrawLabels:(float)length min:(double)min max:(double)max{
+    
+    _dimention = length;
+    [self resetLabels];
      _step = length/(max - min);
     [self formatDateForDistance];
     

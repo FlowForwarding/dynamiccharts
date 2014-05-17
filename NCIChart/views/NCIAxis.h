@@ -16,6 +16,7 @@
 - (id)initWithOptions:(NSDictionary *)options;
 - (void)redrawLabels:(float)length min:(double)min max:(double)max;
 - (void)drawBoundary:(CGContextRef ) currentContext;
+- (void)resetLabels;
 
 @property(nonatomic)bool vertical;
 @property(nonatomic, strong)NSMutableArray *labels;

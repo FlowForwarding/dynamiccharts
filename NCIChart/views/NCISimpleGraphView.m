@@ -54,6 +54,9 @@
         [self.chart.yAxis redrawLabels:_gridHeigth min:_minYVal max:_maxYVal];
         _xStep = _gridWidth/(_maxXVal - _minXVal);
         [self.chart.xAxis redrawLabels:_gridWidth min:_minXVal max:_maxXVal];
+    } else {
+        [self.chart.yAxis resetLabels];
+        [self.chart.xAxis resetLabels];
     }
     _grid.frame = CGRectMake(0, 0, _gridWidth, _gridHeigth);
    [_grid setNeedsDisplay];

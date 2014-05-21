@@ -21,7 +21,7 @@
         for (int i = 0; i< ((NSArray *)points[1]).count; i++){
             id val = points[1][i];
             CGPoint pointP = [self.graph pointByValueInGrid:@[points[0], val]];
-            UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(pointP.x - 10, selfHeight - pointP.y, 20, pointP.y)];
+            UIView *bar = [[UIView alloc] initWithFrame:CGRectMake(pointP.x - 10,  pointP.y, 20, selfHeight -pointP.y)];
             bar.backgroundColor = [self getColor:i];
             [self addSubview:bar];
         }
